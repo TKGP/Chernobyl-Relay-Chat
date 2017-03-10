@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Media;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chernobyl_Relay_Chat
@@ -75,6 +76,11 @@ namespace Chernobyl_Relay_Chat
         private void timerGameUpdate_Tick(object sender, EventArgs e)
         {
             client.GameUpdate();
+        }
+
+        private async void timerCheckUpdate_Tick(object sender, EventArgs e)
+        {
+            await CRCUpdate.CheckUpdate(this, client);
         }
 
 

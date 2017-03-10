@@ -127,6 +127,11 @@ namespace Chernobyl_Relay_Chat
             }
         }
 
+        public void OnUpdate(string message)
+        {
+            game.OnUpdate(message);
+        }
+
 
 
         private void OnChannelActiveSynced(object sender, IrcEventArgs e)

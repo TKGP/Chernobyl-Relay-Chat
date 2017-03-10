@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GitHubUpdate;
+using System;
 using System.Windows.Forms;
 
 namespace Chernobyl_Relay_Chat
@@ -11,6 +12,9 @@ namespace Chernobyl_Relay_Chat
         [STAThread]
         static void Main()
         {
+            if (CRCUpdate.CheckFirstUpdate())
+              return;
+
             CRCStrings.Populate();
             if (CRCOptions.Load())
             {

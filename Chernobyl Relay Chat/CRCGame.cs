@@ -144,6 +144,11 @@ namespace Chernobyl_Relay_Chat
             }
         }
 
+        public void OnUpdate(string message)
+        {
+            SendToGame("Information/" + message);
+        }
+
         public void OnConnected()
         {
             SendToGame("Information/You are now connected to the network");

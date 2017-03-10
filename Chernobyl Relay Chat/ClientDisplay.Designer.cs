@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientDisplay));
             this.richTextBoxMessages = new System.Windows.Forms.RichTextBox();
             this.textBoxInput = new System.Windows.Forms.TextBox();
             this.buttonSend = new System.Windows.Forms.Button();
@@ -36,6 +37,7 @@
             this.timerGameUpdate = new System.Windows.Forms.Timer(this.components);
             this.buttonOptions = new System.Windows.Forms.Button();
             this.textBoxUsers = new System.Windows.Forms.TextBox();
+            this.timerCheckUpdate = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // richTextBoxMessages
@@ -110,6 +112,12 @@
             this.textBoxUsers.Size = new System.Drawing.Size(156, 421);
             this.textBoxUsers.TabIndex = 4;
             // 
+            // timerCheckUpdate
+            // 
+            this.timerCheckUpdate.Enabled = true;
+            this.timerCheckUpdate.Interval = 20000;
+            this.timerCheckUpdate.Tick += new System.EventHandler(this.timerCheckUpdate_Tick);
+            // 
             // ClientDisplay
             // 
             this.AcceptButton = this.buttonSend;
@@ -121,6 +129,7 @@
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.richTextBoxMessages);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ClientDisplay";
             this.Text = "CRC Alpha As Fuck";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientDisplay_FormClosing);
@@ -139,6 +148,7 @@
         private System.Windows.Forms.Timer timerGameUpdate;
         private System.Windows.Forms.Button buttonOptions;
         private System.Windows.Forms.TextBox textBoxUsers;
+        private System.Windows.Forms.Timer timerCheckUpdate;
     }
 }
 
