@@ -66,7 +66,8 @@ namespace Chernobyl_Relay_Chat
                 client.RfcQuit();
                 client.Disconnect();
             }
-            debug.Close();
+            if (debug != null)
+                debug.Close();
         }
 
         public void GameCheck()

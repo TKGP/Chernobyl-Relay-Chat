@@ -21,10 +21,8 @@ namespace Chernobyl_Relay_Chat
         private void ClientDisplay_Load(object sender, EventArgs e)
         {
             Text = "Chernobyl Relay Chat " + Application.ProductVersion;
-            if (!Properties.Settings.Default.FirstRun)
+            if (CRCOptions.DisplaySize == new Size(-1, -1))
             {
-                if (CRCOptions.DisplayState != FormWindowState.Minimized)
-                    WindowState = CRCOptions.DisplayState;
                 Location = CRCOptions.DisplayLocation;
                 Size = CRCOptions.DisplaySize;
             }
@@ -35,7 +33,6 @@ namespace Chernobyl_Relay_Chat
 
         private void ClientDisplay_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CRCOptions.DisplayState = WindowState;
             if (WindowState == FormWindowState.Normal)
             {
                 CRCOptions.DisplayLocation = Location;
