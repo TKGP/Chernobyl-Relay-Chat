@@ -1,0 +1,29 @@
+
+<window>
+	<edit_box x="20" y="718" width="984" height="30">
+		<texture>ui_linetext_e</texture>
+		<text x="10" font="letterica18" r="240" g="217" b="182"/>
+	</edit_box>
+	
+	<button_send x="750" y="668" width="117" height="29">
+		<texture>ui_button_ordinary</texture>
+		<text font="letterica18" align="c">Send</text>
+		<text_color>
+			<e r="227" g="199" b="178"/>
+			<t r="180" g="153" b="155"/>
+			<d r="106" g=" 95" b=" 91"/>
+			<h r="  0" g="  0" b="  0"/>
+		</text_color>
+	</button_send>
+	
+	<button_close x="887" y="668" width="117" height="29">
+		<texture>ui_button_ordinary</texture>
+		<text font="letterica18" align="c">Close</text>
+		<text_color>
+			<e r="227" g="199" b="178"/>
+			<t r="180" g="153" b="155"/>
+			<d r="106" g=" 95" b=" 91"/>
+			<h r="  0" g="  0" b="  0"/>
+		</text_color>
+	</button_close>
+</window>

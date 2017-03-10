@@ -1,0 +1,155 @@
+
+--| lol
+
+local UPDATE_INTERVAL = 250
+local INPATH = getFS():update_path("$game_config$", "").."\\crc_input.txt"
+local OUTPATH = getFS():update_path("$game_config$", "").."\\crc_output.txt"
+
+local config = system_ini()
+local lastUpdate = 0
+local sendQueue = {}
+local chatBox
+
+local factionToText = {
+	actor_bandit = "Bandit",
+	actor_csky = "Clear Sky",
+	actor_dolg = "Duty",
+	actor_ecolog = "Ecologist",
+	actor_freedom = "Freedom",
+	actor_stalker = "Loner",
+	actor_killer = "Mercenary",
+	actor_army = "Military",
+	actor_monolith = "Monolith",
+	actor_zombied = "Zombie",
+	}
+
+function on_game_start()
+	AddUniqueCall(update)
+	RegisterScriptCallback("actor_on_before_death", death)
+end
+
+axr_keybind.keybinds["crc_chat"] = "DIK_RETURN"
+function axr_keybind.action.crc_chat(p)
+	if p == 1 and not chatBox then
+		chatBox = ChatBox()
+		chatBox:ShowDialog()
+	end
+end
+
+local function send(message, ...)
+	local line = message:format(...).."\n"
+	table.insert(sendQueue, line)
+end
+
+function update()
+	if chatBox and not chatBox.focus then
+		chatBox.editBox:CaptureFocus(true)
+		chatBox.focus = true
+	end
+	
+	if not db.actor or time_global() < lastUpdate + UPDATE_INTERVAL then return end
+	lastUpdate = time_global()
+	
+	if #sendQueue > 0 then
+		local output = io.open(OUTPATH, "a")
+		if output then
+			for _, line in ipairs(sendQueue) do
+				output:write(line)
+			end
+			output:close()
+			sendQueue = {}
+		end
+	end
+	
+	local input = io.open(INPATH, "r")
+	if input then
+		local receiveQueue = {}
+		for line in input:lines() do
+			table.insert(receiveQueue, line)
+		end
+		input:close()
+		input = io.open(INPATH, "w")
+		if input then
+			input:close()
+			for _, line in ipairs(receiveQueue) do
+				local title, text, icon
+				local type, body = line:match("([^/]+)/(.+)")
+				if type == "Information" then
+					title = "Information"
+					text = body
+					icon = crc_icons.info
+				elseif type == "Message" then
+					local faction, name, message = body:match("([^/]+)/([^/]+)/(.+)")
+					icon = crc_icons.getIcon(name, faction)
+					title = name..", "..(name == "TKGP" and "C-Consciousness" or factionToText[faction] or "Unknown")
+					text = message
+				elseif type == "Query" then
+					local faction, from, to, message = body:match("([^/]+)/([^/]+)/([^/]+)/(.+)")
+					icon = crc_icons.getIcon(from, faction)
+					title = "%c[255,128,128,255]"..from.." -> "..to
+					text = "%c[255,128,128,255]"..message
+				end
+				db.actor:give_game_news(title, text, icon, 0, 5000)
+			end
+		end
+	end
+end
+
+function death(whoID)
+	local section, class
+	local who = whoID and alife():object(whoID)
+	if not who then
+		section = "UNKNOWN"
+		class = "UNKNOWN"
+	else
+		section = who:section_name()
+		class = config:r_string(section, "class")
+		if class == "AI_STL_S" then
+			class = who:community()
+		end
+	end
+	send("Death/%s/%s/%s/%s", db.actor:character_community(), level.name(), class:upper(), section)
+end
+
+----------------------------------------------------------------------------------------------------
+
+class "ChatBox" (CUIScriptWnd)
+function ChatBox:__init() super()
+	self:SetWndRect(Frect():set(0, 0, 1024, 768))
+	local xml = CScriptXmlInit()
+	xml:ParseFile("crc_chatbox.xml")
+	
+	self.editBox = xml:InitEditBox("edit_box", self)
+	self:Register(xml:Init3tButton("button_send", self), "button_send")
+	self:Register(xml:Init3tButton("button_close", self), "button_close")
+	self:AddCallback("button_send", ui_events.BUTTON_CLICKED, self.Send, self)
+	self:AddCallback("button_close", ui_events.BUTTON_CLICKED, self.Cancel, self)
+	self.focus = false
+end
+
+function ChatBox:OnKeyboard(dik, keyboard_action)
+	CUIScriptWnd.OnKeyboard(self, dik, keyboard_action)
+	if keyboard_action == ui_events.WINDOW_KEY_PRESSED then
+		if dik == DIK_keys.DIK_RETURN or dik == DIK_keys.DIK_NUMPADENTER then
+			self:Send()
+		elseif dik == DIK_keys.DIK_ESCAPE then
+			self:Cancel()
+		end
+	end
+	return true
+end
+
+function ChatBox:Send()
+	local input = self.editBox:GetText()
+	if input and input ~= "" then
+		self.editBox:SetText("")
+		send("Message/%s/%s", db.actor:character_community(), input)
+		self:Cancel()
+		--self.editBox:CaptureFocus(true)
+	end
+end
+
+function ChatBox:Cancel()
+	chatBox:HideDialog()
+	chatBox = nil
+end
