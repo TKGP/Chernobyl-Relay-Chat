@@ -15,8 +15,8 @@ namespace Chernobyl_Relay_Chat
     {
         private const char META_DELIM = '☺'; // Separates metadata
         private const char FAKE_DELIM = '☻'; // Separates fake nick for death messages
-        private Regex metaRx = new Regex("^(.+?)" + META_DELIM + "(.+)$");
-        private Regex deathRx = new Regex("^(.+?)" + FAKE_DELIM + "(.+)$");
+        private Regex metaRx = new Regex("^(.*?)" + META_DELIM + "(.*)$");
+        private Regex deathRx = new Regex("^(.*?)" + FAKE_DELIM + "(.*)$");
 
         private ClientDisplay display;
         private CRCGame game;
@@ -147,20 +147,25 @@ namespace Chernobyl_Relay_Chat
         {
             string fakeNick, faction;
             string message = GetMetadata(e.Data.Message, out fakeNick, out faction);
-            string nick;
-            if (fakeNick == null)
-                nick = e.Data.Nick.Replace('_', ' ');
-            else if (CRCOptions.ReceiveDeath && (DateTime.Now - lastDeath).TotalSeconds > CRCOptions.DeathInterval)
+            // If some cheeky m8 just sends delimiters, ignore it
+            if (message.Length > 0)
             {
-                lastDeath = DateTime.Now;
-                nick = fakeNick;
+                string nick;
+                if (fakeNick == null)
+                    nick = e.Data.Nick.Replace('_', ' ');
+                else if (CRCOptions.ReceiveDeath && (DateTime.Now - lastDeath).TotalSeconds > CRCOptions.DeathInterval)
+                {
+                    lastDeath = DateTime.Now;
+                    nick = fakeNick;
+                }
+                else
+                    return;
+                display.OnChannelMessage(nick, message);
+                game.OnChannelMessage(nick, faction, message);
             }
-            else
-                return;
-            display.OnChannelMessage(nick, message);
-            game.OnChannelMessage(nick, faction, message);
         }
 
+        // Queries not supported currently
         private void OnQueryMessage(object sender, IrcEventArgs e)
         {
             string fakeNick, faction;
