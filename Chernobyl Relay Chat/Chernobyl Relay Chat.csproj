@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Tpdkdesign.net-Refresh-Cl-Hardware-My-PDA-01.ico</ApplicationIcon>
+    <ApplicationIcon>PDA.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GitHubUpdate, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -132,6 +132,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PDA.ico" />
     <Content Include="Tpdkdesign.net-Refresh-Cl-Hardware-My-PDA-01.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

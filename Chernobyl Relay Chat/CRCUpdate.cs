@@ -1,4 +1,5 @@
 ﻿using GitHubUpdate;
+using System.Media;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +14,7 @@ namespace Chernobyl_Relay_Chat
             // Note to self: prereleases are ignored
             if(updateType != UpdateType.None)
             {
+                SystemSounds.Asterisk.Play();
                 DialogResult dialogResult = MessageBox.Show("A mandatory update for CRC is available.\r\n"
                     + "Click Yes to be taken to the download page, or No if you wish to navigate there manually."
                     + ((updateType == UpdateType.Major || updateType == UpdateType.Minor) ? "After downloading, this update requires re-installing the gamedata folder." : ""),
@@ -31,6 +33,7 @@ namespace Chernobyl_Relay_Chat
             // Note to self: prereleases are ignored
             if (updateType != UpdateType.None)
             {
+                SystemSounds.Asterisk.Play();
                 client.OnUpdate("A mandatory update for CRC is available. Please check the external client to download it.");
                 DialogResult dialogResult = MessageBox.Show("A mandatory update for CRC is available.\r\n"
                     + "Click Yes to be taken to the download page, or No if you wish to navigate there manually."
