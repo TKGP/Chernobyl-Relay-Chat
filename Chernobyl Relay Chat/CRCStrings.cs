@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Chernobyl_Relay_Chat
 {
@@ -72,6 +73,7 @@ namespace Chernobyl_Relay_Chat
             "actor_killer",
             "actor_army",
             "actor_monolith",
+            "actor_zombied",
         };
 
         private static List<string> formats = new List<string>()

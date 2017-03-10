@@ -12,12 +12,13 @@ namespace Chernobyl_Relay_Chat
         static void Main()
         {
             CRCStrings.Populate();
-            CRCOptions.Init();
-            CRCOptions.Save();            
+            CRCOptions.Load();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ClientDisplay());
+
+            CRCOptions.Save();
         }
     }
 }

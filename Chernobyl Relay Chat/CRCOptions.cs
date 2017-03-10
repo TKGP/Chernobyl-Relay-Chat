@@ -1,10 +1,12 @@
-﻿using Microsoft.Win32;
+﻿using Chernobyl_Relay_Chat.Properties;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Chernobyl_Relay_Chat
 {
     class CRCOptions
     {
-        private static RegistryKey registry = Registry.CurrentUser.CreateSubKey(@"Software\CRC");
+        private static Settings settings = Settings.Default;
 
         public const string Server = "irc.slashnet.org";
 #if DEBUG
@@ -15,58 +17,65 @@ namespace Chernobyl_Relay_Chat
         public const string InPath = @"\..\gamedata\configs\crc_input.txt";
         public const string OutPath = @"\..\gamedata\configs\crc_output.txt";
 
+        public static FormWindowState DisplayState;
+        public static Point DisplayLocation;
+        public static Size DisplaySize;
         public static bool AutoFaction;
-        private static string faction;
-        public static string Faction
-        {
-            get { return faction; }
-            set
-            {
-                faction = CRCStrings.ValidateFaction(value);
-            }
-        }
+        public static string GameFaction;
+        public static string ManualFaction;
         public static string Name;
         public static bool SendDeath;
         public static bool ReceiveDeath;
-        private static int deathInterval;
-        public static int DeathInterval
+        public static int DeathInterval;
+
+        public static string GetIrcName()
         {
-            get { return deathInterval; }
-            set
-            {
-                if (value >= 0 && value <= 3600)
-                    deathInterval = value;
-                else
-                    deathInterval = 60;
-            }
+            return Name.Replace(' ', '_');
         }
 
-        public static string IrcName
+        public static string GetFaction()
         {
-            get
-            {
-                return Name.Replace(' ', '_');
-            }
+            if (AutoFaction)
+                return GameFaction;
+            else
+                return ManualFaction;
         }
 
-        public static void Init()
+        public static void Load()
         {
-            AutoFaction = (string)registry.GetValue("AutoFaction", "True") == "True";
-            Faction = (string)registry.GetValue("Faction", "stalker");
-            Name = (string)registry.GetValue("Name", CRCStrings.RandomName(Faction));
-            SendDeath = (string)registry.GetValue("SendDeath", "True") == "True";
-            ReceiveDeath = (string)registry.GetValue("ReceiveDeath", "True") == "True";
-            DeathInterval = (int)registry.GetValue("DeathInterval", 60);
+            if (settings.FirstRun)
+                settings.Upgrade();
+
+            DisplayState = settings.DisplayState;
+            DisplayLocation = settings.DisplayLocation;
+            DisplaySize = settings.DisplaySize;
+            AutoFaction = settings.AutoFaction;
+            GameFaction = settings.GameFaction;
+            ManualFaction = settings.ManualFaction;
+            SendDeath = settings.SendDeath;
+            ReceiveDeath = settings.ReceiveDeath;
+            DeathInterval = settings.DeathInterval;
+
+            if (settings.FirstRun)
+                Name = CRCStrings.RandomName(GetFaction());
+            else
+                Name = settings.Name;
         }
 
         public static void Save()
         {
-            registry.SetValue("AutoFaction", AutoFaction);
-            registry.SetValue("Faction", Faction);
-            registry.SetValue("Name", Name);
-            registry.SetValue("SendDeath", SendDeath);
-            registry.SetValue("ReceiveDeath", ReceiveDeath);
-            registry.SetValue("DeathInterval", DeathInterval);
+            settings.FirstRun = false;
+            settings.DisplayState = DisplayState;
+            settings.DisplayLocation = DisplayLocation;
+            settings.DisplaySize = DisplaySize;
+            settings.AutoFaction = AutoFaction;
+            settings.GameFaction = GameFaction;
+            settings.ManualFaction = ManualFaction;
+            settings.Name = Name;
+            settings.SendDeath = SendDeath;
+            settings.ReceiveDeath = ReceiveDeath;
+            settings.DeathInterval = DeathInterval;
+            settings.Save();
         }
     }
 }

@@ -35,30 +35,36 @@
             this.timerGameCheck = new System.Windows.Forms.Timer(this.components);
             this.timerGameUpdate = new System.Windows.Forms.Timer(this.components);
             this.buttonOptions = new System.Windows.Forms.Button();
+            this.textBoxUsers = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // richTextBoxMessages
             // 
+            this.richTextBoxMessages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxMessages.HideSelection = false;
             this.richTextBoxMessages.Location = new System.Drawing.Point(12, 12);
             this.richTextBoxMessages.Name = "richTextBoxMessages";
             this.richTextBoxMessages.ReadOnly = true;
             this.richTextBoxMessages.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBoxMessages.Size = new System.Drawing.Size(984, 421);
+            this.richTextBoxMessages.Size = new System.Drawing.Size(822, 421);
             this.richTextBoxMessages.TabIndex = 3;
             this.richTextBoxMessages.TabStop = false;
             this.richTextBoxMessages.Text = "";
             // 
             // textBoxInput
             // 
+            this.textBoxInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxInput.Location = new System.Drawing.Point(12, 441);
             this.textBoxInput.Name = "textBoxInput";
             this.textBoxInput.Size = new System.Drawing.Size(822, 20);
             this.textBoxInput.TabIndex = 0;
-            this.textBoxInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxInput_KeyPress);
             // 
             // buttonSend
             // 
+            this.buttonSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSend.Enabled = false;
             this.buttonSend.Location = new System.Drawing.Point(840, 439);
             this.buttonSend.Name = "buttonSend";
@@ -82,6 +88,7 @@
             // 
             // buttonOptions
             // 
+            this.buttonOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOptions.Enabled = false;
             this.buttonOptions.Location = new System.Drawing.Point(921, 439);
             this.buttonOptions.Name = "buttonOptions";
@@ -91,11 +98,25 @@
             this.buttonOptions.UseVisualStyleBackColor = true;
             this.buttonOptions.Click += new System.EventHandler(this.buttonOptions_Click);
             // 
+            // textBoxUsers
+            // 
+            this.textBoxUsers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxUsers.Location = new System.Drawing.Point(840, 12);
+            this.textBoxUsers.Multiline = true;
+            this.textBoxUsers.Name = "textBoxUsers";
+            this.textBoxUsers.ReadOnly = true;
+            this.textBoxUsers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxUsers.Size = new System.Drawing.Size(156, 421);
+            this.textBoxUsers.TabIndex = 4;
+            // 
             // ClientDisplay
             // 
+            this.AcceptButton = this.buttonSend;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 474);
+            this.Controls.Add(this.textBoxUsers);
             this.Controls.Add(this.buttonOptions);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.textBoxInput);
@@ -117,6 +138,7 @@
         private System.Windows.Forms.Timer timerGameCheck;
         private System.Windows.Forms.Timer timerGameUpdate;
         private System.Windows.Forms.Button buttonOptions;
+        private System.Windows.Forms.TextBox textBoxUsers;
     }
 }
 

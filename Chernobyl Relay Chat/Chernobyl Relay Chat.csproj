@@ -68,6 +68,13 @@
     <Compile Include="CRCGame.cs" />
     <Compile Include="CRCOptions.cs" />
     <Compile Include="CRCStrings.cs" />
+    <Compile Include="CRCZombie.cs" />
+    <Compile Include="DebugDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugDisplay.Designer.cs">
+      <DependentUpon>DebugDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +85,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ClientDisplay.resx">
       <DependentUpon>ClientDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DebugDisplay.resx">
+      <DependentUpon>DebugDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>

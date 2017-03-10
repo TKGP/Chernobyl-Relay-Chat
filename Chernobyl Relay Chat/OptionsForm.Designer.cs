@@ -57,6 +57,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(153, 207);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -205,8 +206,10 @@
             // 
             // OptionsForm
             // 
+            this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(240, 242);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -224,6 +227,7 @@
             this.Controls.Add(this.buttonOK);
             this.Name = "OptionsForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Options";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeath)).EndInit();
             this.ResumeLayout(false);

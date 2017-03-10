@@ -20,28 +20,39 @@ namespace Chernobyl_Relay_Chat
 
         private ClientDisplay display;
         private CRCGame game;
+        private DebugDisplay debug;
 
         private IrcClient client;
         private Thread listener;
+        private DateTime lastDeath = new DateTime();
 
         public CRCClient(ClientDisplay clientDisplay)
         {
             display = clientDisplay;
             game = new CRCGame(display, this);
+#if DEBUG
+            debug = new DebugDisplay();
+            debug.Show();
+#endif
 
             client = new IrcClient();
             client.Encoding = Encoding.UTF8;
             client.SendDelay = 200;
             client.ActiveChannelSyncing = true;
 
+            client.OnChannelActiveSynced += new IrcEventHandler(OnChannelActiveSynced);
+            client.OnRawMessage += new IrcEventHandler(OnRawMessage);
             client.OnChannelMessage += new IrcEventHandler(OnChannelMessage);
-            client.OnQueryMessage += new IrcEventHandler(OnChannelMessage);
+            //client.OnQueryMessage += new IrcEventHandler(OnQueryMessage);
             client.OnJoin += new JoinEventHandler(OnJoin);
             client.OnPart += new PartEventHandler(OnPart);
+            client.OnQuit += new QuitEventHandler(OnQuit);
             client.OnNickChange += new NickChangeEventHandler(OnNickChange);
+            client.OnErrorMessage += new IrcEventHandler(OnErrorMessage);
+            client.OnKick += new KickEventHandler(OnKick);
 
             client.Connect(CRCOptions.Server, 6667);
-            client.Login(CRCOptions.IrcName, "Chernobyl Relay Chat " + Application.ProductVersion);
+            client.Login(CRCOptions.GetIrcName(), "Chernobyl Relay Chat " + Application.ProductVersion);
             client.RfcJoin(CRCOptions.Channel);
             listener = new Thread(client.Listen);
             listener.IsBackground = true;
@@ -55,6 +66,7 @@ namespace Chernobyl_Relay_Chat
                 client.RfcQuit();
                 client.Disconnect();
             }
+            debug.Close();
         }
 
         public void GameCheck()
@@ -69,22 +81,22 @@ namespace Chernobyl_Relay_Chat
 
         public void UpdateNick()
         {
-            client.RfcNick(CRCOptions.IrcName);
+            client.RfcNick(CRCOptions.GetIrcName());
         }
 
         public void Send(string message)
         {
-            client.SendMessage(SendType.Message, CRCOptions.Channel, CRCOptions.Faction + META_DELIM + message);
+            client.SendMessage(SendType.Message, CRCOptions.Channel, CRCOptions.GetFaction() + META_DELIM + message);
             display.OnChannelMessage(CRCOptions.Name, message);
-            game.OnChannelMessage(CRCOptions.Name, CRCOptions.Faction, message);
+            game.OnChannelMessage(CRCOptions.Name, CRCOptions.GetFaction(), message);
         }
 
-        public void SendDeath(string message, string faction)
+        public void SendDeath(string message)
         {
-            string nick = CRCStrings.RandomName(faction);
-            client.SendMessage(SendType.Message, CRCOptions.Channel, nick + FAKE_DELIM + CRCOptions.Faction + META_DELIM + message);
+            string nick = CRCStrings.RandomName(CRCOptions.GameFaction);
+            client.SendMessage(SendType.Message, CRCOptions.Channel, nick + FAKE_DELIM + CRCOptions.GetFaction() + META_DELIM + message);
             display.OnChannelMessage(nick, message);
-            game.OnChannelMessage(nick, faction, message);
+            game.OnChannelMessage(nick, CRCOptions.GameFaction, message);
         }
 
         private string GetMetadata(string message, out string fakeNick, out string faction)
@@ -114,6 +126,22 @@ namespace Chernobyl_Relay_Chat
             }
         }
 
+
+
+        private void OnChannelActiveSynced(object sender, IrcEventArgs e)
+        {
+            List<string> users = new List<string>();
+            foreach (ChannelUser user in client.GetChannel(CRCOptions.Channel).Users.Values)
+                users.Add(user.Nick.Replace('_', ' '));
+            display.OnChannelActiveSynced(users);
+        }
+
+        private void OnRawMessage(object sender, IrcEventArgs e)
+        {
+            if (debug != null)
+                debug.AddRaw(e.Data.RawMessage);
+        }
+
         private void OnChannelMessage(object sender, IrcEventArgs e)
         {
             string fakeNick, faction;
@@ -121,8 +149,11 @@ namespace Chernobyl_Relay_Chat
             string nick;
             if (fakeNick == null)
                 nick = e.Data.Nick.Replace('_', ' ');
-            else if (CRCOptions.ReceiveDeath)
+            else if (CRCOptions.ReceiveDeath && (DateTime.Now - lastDeath).TotalSeconds > CRCOptions.DeathInterval)
+            {
+                lastDeath = DateTime.Now;
                 nick = fakeNick;
+            }
             else
                 return;
             display.OnChannelMessage(nick, message);
@@ -133,11 +164,8 @@ namespace Chernobyl_Relay_Chat
         {
             string fakeNick, faction;
             string message = GetMetadata(e.Data.Message, out fakeNick, out faction);
-            string nick;
-            if (fakeNick == null)
-                nick = e.Data.Nick.Replace('_', ' ');
-            else
-                nick = fakeNick;
+            // Never use fakeNick for query
+            string nick = e.Data.Nick.Replace('_', ' ');
             display.OnQueryMessage(nick, CRCOptions.Name, message);
             game.OnQueryMessage(nick, CRCOptions.Name, faction, message);
         }
@@ -164,6 +192,28 @@ namespace Chernobyl_Relay_Chat
             game.OnPart(nick);
         }
 
+        private void OnQuit(object sender, QuitEventArgs e)
+        {
+            string nick = e.Who.Replace('_', ' ');
+            display.OnPart(nick);
+            game.OnPart(nick);
+        }
+
+        private void OnKick(object sender, KickEventArgs e)
+        {
+            string victim = e.Whom.Replace('_', ' ');
+            if (victim == CRCOptions.Name)
+            {
+                display.OnGotKicked(e.KickReason);
+                game.OnGotKicked(e.KickReason);
+            }
+            else
+            {
+                display.OnKick(victim, e.KickReason);
+                game.OnKick(victim, e.KickReason);
+            }
+        }
+
         private void OnNickChange(object sender, NickChangeEventArgs e)
         {
             string oldNick = e.OldNickname.Replace('_', ' ');
@@ -175,9 +225,15 @@ namespace Chernobyl_Relay_Chat
             }
             else
             {
-                display.OnOwnNickChange(newNick);
+                display.OnOwnNickChange(oldNick, newNick);
                 game.OnOwnNickChange(newNick);
             }
+        }
+
+        private void OnErrorMessage(object sender, IrcEventArgs e)
+        {
+            if (e.Data.ReplyCode == ReplyCode.ErrorBannedFromChannel)
+                display.OnBanned();
         }
     }
 }

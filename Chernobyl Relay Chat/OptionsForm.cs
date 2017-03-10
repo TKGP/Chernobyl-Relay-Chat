@@ -44,7 +44,7 @@ namespace Chernobyl_Relay_Chat
             radioButtonFactionAuto.Checked = CRCOptions.AutoFaction;
             radioButtonFactionManual.Checked = !CRCOptions.AutoFaction;
             textBoxName.Text = CRCOptions.Name;
-            int index = factionToIndex[CRCOptions.Faction];
+            int index = factionToIndex[CRCOptions.ManualFaction];
             comboBoxFaction.SelectedIndex = index;
             checkBoxDeathSend.Checked = CRCOptions.SendDeath;
             checkBoxDeathReceive.Checked = CRCOptions.ReceiveDeath;
@@ -66,8 +66,7 @@ namespace Chernobyl_Relay_Chat
             }
 
             CRCOptions.AutoFaction = radioButtonFactionAuto.Checked;
-            if (!CRCOptions.AutoFaction)
-                CRCOptions.Faction = indexToFaction[comboBoxFaction.SelectedIndex];
+            CRCOptions.ManualFaction = indexToFaction[comboBoxFaction.SelectedIndex];
             CRCOptions.Name = name;
             CRCOptions.SendDeath = checkBoxDeathSend.Checked;
             CRCOptions.ReceiveDeath = checkBoxDeathReceive.Checked;
