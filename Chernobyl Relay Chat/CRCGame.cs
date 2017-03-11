@@ -19,6 +19,7 @@ namespace Chernobyl_Relay_Chat
         private bool disable = false;
         private int processID = -1;
         private string gamePath;
+        private bool firstClear = false;
         private StringBuilder sendQueue = new StringBuilder();
         private object queueLock = new object();
         private Regex outputRx = new Regex("^(.+?)/(.+?)/(.+)$");
@@ -67,8 +68,9 @@ namespace Chernobyl_Relay_Chat
                         string path = Path.GetDirectoryName(process.GetProcessPath());
                         if (File.Exists(path + CRCOptions.InPath))
                         {
-                            processID = process.Id;
                             gamePath = path;
+                            firstClear = false;
+                            processID = process.Id;
                             break;
                         }
                     }
@@ -78,71 +80,88 @@ namespace Chernobyl_Relay_Chat
 
         public void GameUpdate()
         {
-            if (disable) return;
-
-            if (processID != -1)
+            if (disable || processID == -1) return;
+            
+            // Wipe game output when first discovered
+            if(!firstClear)
             {
-                // Get messages from game
                 try
                 {
-                    string[] lines = File.ReadAllLines(gamePath + CRCOptions.OutPath, encoding);
                     File.WriteAllText(gamePath + CRCOptions.OutPath, "", encoding);
-                    foreach (string line in lines)
+                    firstClear = true;
+                }
+                catch(IOException)
+                {
+                    return;
+                }
+                catch (Exception ex) when (ex is SecurityException || ex is UnauthorizedAccessException)
+                {
+                    Disable();
+                    return;
+                }
+            }
+
+            // Get messages from game
+            try
+            {
+                string[] lines = File.ReadAllLines(gamePath + CRCOptions.OutPath, encoding);
+                File.WriteAllText(gamePath + CRCOptions.OutPath, "", encoding);
+                foreach (string line in lines)
+                {
+                    Match typeMatch = outputRx.Match(line);
+                    string type = typeMatch.Groups[1].Value;
+                    CRCOptions.GameFaction = CRCStrings.ValidateFaction(typeMatch.Groups[2].Value);
+                    string body = typeMatch.Groups[3].Value;
+                    if (type == "Message")
                     {
-                        Match typeMatch = outputRx.Match(line);
-                        string type = typeMatch.Groups[1].Value;
-                        CRCOptions.GameFaction = CRCStrings.ValidateFaction(typeMatch.Groups[2].Value);
-                        string body = typeMatch.Groups[3].Value;
-                        if (type == "Message")
-                        {
-                            if (CRCOptions.GameFaction == "actor_zombied")
-                                client.Send(CRCZombie.Generate());
-                            else
-                                client.Send(body);
-                        }
-                        else if (type == "Death" && CRCOptions.SendDeath && CRCOptions.GameFaction != "actor_zombied")
-                        {
-                            Match deathMatch = deathRx.Match(body);
-                            string message = CRCStrings.DeathMessage(CRCOptions.Name, deathMatch.Groups[1].Value, deathMatch.Groups[2].Value, deathMatch.Groups[3].Value);
-                            client.SendDeath(message);
-                        }
+                        if (CRCOptions.GameFaction == "actor_zombied")
+                            client.Send(CRCZombie.Generate());
+                        else
+                            client.Send(body);
                     }
+                    else if (type == "Death" && CRCOptions.SendDeath && CRCOptions.GameFaction != "actor_zombied")
+                    {
+                        Match deathMatch = deathRx.Match(body);
+                        string message = CRCStrings.DeathMessage(CRCOptions.Name, deathMatch.Groups[1].Value, deathMatch.Groups[2].Value, deathMatch.Groups[3].Value);
+                        client.SendDeath(message);
+                    }
+                }
+            }
+            catch (IOException) { }
+            catch (Exception ex) when (ex is SecurityException || ex is UnauthorizedAccessException)
+            {
+                Disable();
+                return;
+            }
+
+            // Send messages to game
+            lock (sendQueue)
+            {
+                try
+                {
+                    File.AppendAllText(gamePath + CRCOptions.InPath, sendQueue.ToString(), encoding);
+                    sendQueue.Clear();
                 }
                 catch (IOException) { }
                 catch (Exception ex) when (ex is SecurityException || ex is UnauthorizedAccessException)
                 {
                     Disable();
-                }
-
-                // Send messages to game
-                lock (sendQueue)
-                {
-                    try
-                    {
-                        File.AppendAllText(gamePath + CRCOptions.InPath, sendQueue.ToString(), encoding);
-                        sendQueue.Clear();
-                    }
-                    catch (IOException) { }
-                    catch (Exception ex) when (ex is SecurityException || ex is UnauthorizedAccessException)
-                    {
-                        Disable();
-                    }
+                    return;
                 }
             }
         }
 
         private void SendToGame(string line)
         {
-            if (disable) return;
+            if (disable || processID == -1) return;
 
-            if (processID != -1)
+            lock (sendQueue)
             {
-                lock (sendQueue)
-                {
-                    sendQueue.AppendLine(line);
-                }
+                sendQueue.AppendLine(line);
             }
         }
+
+
 
         public void OnUpdate(string message)
         {
