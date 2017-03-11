@@ -16,8 +16,9 @@ namespace Chernobyl_Relay_Chat
             {
                 SystemSounds.Asterisk.Play();
                 DialogResult dialogResult = MessageBox.Show("A mandatory update for CRC is available.\r\n"
-                    + "Click Yes to be taken to the download page, or No if you wish to navigate there manually."
-                    + ((updateType == UpdateType.Major || updateType == UpdateType.Minor) ? "After downloading, this update requires re-installing the gamedata folder." : ""),
+                    + "Extract the new version to a separate folder; don't merge it with the old copy."
+                    + ((updateType == UpdateType.Major || updateType == UpdateType.Minor) ? "After downloading, this update requires re-installing the gamedata folder." : "")
+                    + "Click Yes to be taken to the download page, or No if you wish to navigate there manually.",
                     "Chernobyl Relay Chat", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                     updateChecker.DownloadAsset("Chernobyl-Relay-Chat.zip");
@@ -36,8 +37,9 @@ namespace Chernobyl_Relay_Chat
                 SystemSounds.Asterisk.Play();
                 client.OnUpdate("A mandatory update for CRC is available. Please check the external client to download it.");
                 DialogResult dialogResult = MessageBox.Show("A mandatory update for CRC is available.\r\n"
-                    + "Click Yes to be taken to the download page, or No if you wish to navigate there manually."
-                    + ((updateType == UpdateType.Major || updateType == UpdateType.Minor) ? "After downloading, this update requires re-installing the gamedata folder." : ""),
+                    + "Extract the new version to a separate folder; don't merge it with the old copy."
+                    + ((updateType == UpdateType.Major || updateType == UpdateType.Minor) ? "After downloading, this update requires re-installing the gamedata folder." : "")
+                    + "Click Yes to be taken to the download page, or No if you wish to navigate there manually.",
                     "Chernobyl Relay Chat", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                     updateChecker.DownloadAsset("Chernobyl-Relay-Chat.zip");
