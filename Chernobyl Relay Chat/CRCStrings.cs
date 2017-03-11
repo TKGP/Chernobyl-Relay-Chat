@@ -352,7 +352,7 @@ namespace Chernobyl_Relay_Chat
                 "Mark",
                 "Matvei",
                 "Max",
-                "Misha ",
+                "Misha",
                 "Mishka",
                 "Mitya",
                 "Nik",
