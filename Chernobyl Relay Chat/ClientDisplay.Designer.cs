@@ -54,6 +54,7 @@
             this.richTextBoxMessages.TabIndex = 3;
             this.richTextBoxMessages.TabStop = false;
             this.richTextBoxMessages.Text = "";
+            this.richTextBoxMessages.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBoxMessages_LinkClicked);
             // 
             // textBoxInput
             // 
@@ -131,7 +132,7 @@
             this.Controls.Add(this.richTextBoxMessages);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ClientDisplay";
-            this.Text = "CRC Alpha As Fuck";
+            this.Text = "Chernobyl Relay Chat <Unknown>";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientDisplay_FormClosing);
             this.Load += new System.EventHandler(this.ClientDisplay_Load);
             this.ResumeLayout(false);
