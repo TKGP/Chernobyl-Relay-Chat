@@ -64,7 +64,7 @@ namespace Chernobyl_Relay_Chat
                 {
                     if (process.ProcessName == "xrEngine")
                     {
-                        string path = Path.GetDirectoryName(process.Modules[0].FileName);
+                        string path = Path.GetDirectoryName(process.GetProcessPath());
                         if (File.Exists(path + CRCOptions.InPath))
                         {
                             processID = process.Id;

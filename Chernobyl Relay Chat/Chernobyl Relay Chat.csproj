@@ -80,6 +80,7 @@
       <DependentUpon>ClientDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="CRCClient.cs" />
+    <Compile Include="ProcessExtension.cs" />
     <Compile Include="CRCGame.cs" />
     <Compile Include="CRCOptions.cs" />
     <Compile Include="CRCStrings.cs" />
@@ -133,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PDA.ico" />
-    <Content Include="Tpdkdesign.net-Refresh-Cl-Hardware-My-PDA-01.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
