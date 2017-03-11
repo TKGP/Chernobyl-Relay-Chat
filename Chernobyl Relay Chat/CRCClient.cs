@@ -20,7 +20,9 @@ namespace Chernobyl_Relay_Chat
 
         private ClientDisplay display;
         private CRCGame game;
+#if DEBUG
         private DebugDisplay debug;
+#endif
 
         private IrcClient client;
         private Thread listener;
@@ -66,8 +68,9 @@ namespace Chernobyl_Relay_Chat
                 client.RfcQuit();
                 client.Disconnect();
             }
-            if (debug != null)
-                debug.Close();
+#if DEBUG
+            debug.Close();
+#endif
         }
 
         public void GameCheck()
@@ -144,8 +147,9 @@ namespace Chernobyl_Relay_Chat
 
         private void OnRawMessage(object sender, IrcEventArgs e)
         {
-            if (debug != null)
-                debug.AddRaw(e.Data.RawMessage);
+#if DEBUG
+            debug.AddRaw(e.Data.RawMessage);
+#endif
         }
 
         private void OnChannelMessage(object sender, IrcEventArgs e)
