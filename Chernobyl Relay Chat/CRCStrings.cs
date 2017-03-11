@@ -1181,7 +1181,7 @@ namespace Chernobyl_Relay_Chat
                 "Trap",
                 "Trigger",
                 "Trombone",
-                "Trooper ",
+                "Trooper",
                 "Trump",
                 "Tuner",
                 "Turd",
