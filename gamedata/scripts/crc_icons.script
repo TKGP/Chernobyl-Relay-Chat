@@ -1,4 +1,8 @@
 
+--| Chernobyl Relay Chat
+--| Texture ID-getting utility for chernobyl_relay_chat.script
+--| By TKGP
+
 tkgp = "crc_icon_tkgp"
 info = "crc_icon_info"
 error = "crc_icon_error"

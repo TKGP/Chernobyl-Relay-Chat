@@ -1,10 +1,13 @@
 
---| lol
+--| Chernobyl Relay Chat
+--| Interface for external application
+--| By TKGP
 
 local UPDATE_INTERVAL = 250
 local INPATH = getFS():update_path("$game_config$", "").."\\crc_input.txt"
 local OUTPATH = getFS():update_path("$game_config$", "").."\\crc_output.txt"
 local NEWS_DURATION = 10000
+local QUERY_COLOR = "%c[255,128,128,255]"
 
 local config = system_ini()
 local lastUpdate = 0
@@ -24,25 +27,12 @@ local factionToText = {
 	actor_zombied = "Zombie",
 	}
 
-function on_game_start()
-	AddUniqueCall(update)
-	RegisterScriptCallback("actor_on_before_death", death)
-end
-
-axr_keybind.keybinds["crc_chat"] = "DIK_RETURN"
-function axr_keybind.action.crc_chat(p)
-	if p == 1 and not chatBox then
-		chatBox = ChatBox()
-		chatBox:ShowDialog()
-	end
-end
-
 local function send(message, ...)
 	local line = message:format(...).."\n"
 	table.insert(sendQueue, line)
 end
 
-function update()
+local function update()
 	if chatBox and not chatBox.focus then
 		chatBox.editBox:CaptureFocus(true)
 		chatBox.focus = true
@@ -87,8 +77,8 @@ function update()
 				elseif type == "Query" then
 					local faction, from, to, message = body:match("([^/]+)/([^/]+)/([^/]+)/(.+)")
 					icon = crc_icons.getIcon(from, faction)
-					title = "%c[255,128,128,255]"..from.." -> "..to
-					text = "%c[255,128,128,255]"..message
+					title = QUERY_COLOR..from.." -> "..to
+					text = QUERY_COLOR..message
 				end
 				db.actor:give_game_news(title, text, icon, 0, NEWS_DURATION)
 			end
@@ -96,7 +86,7 @@ function update()
 	end
 end
 
-function death(whoID)
+local function onDeath(whoID)
 	local section, class
 	local who = whoID and alife():object(whoID)
 	if not who then
@@ -110,6 +100,28 @@ function death(whoID)
 		end
 	end
 	send("Death/%s/%s/%s/%s", db.actor:character_community(), level.name(), class:upper(), section)
+end
+
+-- Works in 1.4.22 but not 1.4.16 (CoM)
+--[[axr_keybind.keybinds["crc_chat"] = "DIK_RETURN"
+function axr_keybind.action.crc_chat(p)
+	if p == 1 and not chatBox then
+		chatBox = ChatBox()
+		chatBox:ShowDialog()
+	end
+end]]
+
+local function onKeyPress(dik)
+	if dik == DIK_keys.DIK_RETURN and not chatBox then
+		chatBox = ChatBox()
+		chatBox:ShowDialog()
+	end
+end
+
+function on_game_start()
+	AddUniqueCall(update)
+	RegisterScriptCallback("actor_on_before_death", onDeath)
+	RegisterScriptCallback("on_key_press", onKeyPress)
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -146,7 +158,6 @@ function ChatBox:Send()
 		self.editBox:SetText("")
 		send("Message/%s/%s", db.actor:character_community(), input)
 		self:Cancel()
-		--self.editBox:CaptureFocus(true)
 	end
 end
 
