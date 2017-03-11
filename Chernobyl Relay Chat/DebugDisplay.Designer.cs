@@ -40,14 +40,14 @@
             this.textBoxRaw.Name = "textBoxRaw";
             this.textBoxRaw.ReadOnly = true;
             this.textBoxRaw.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxRaw.Size = new System.Drawing.Size(1169, 339);
+            this.textBoxRaw.Size = new System.Drawing.Size(1169, 359);
             this.textBoxRaw.TabIndex = 0;
             // 
             // DebugDisplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1169, 339);
+            this.ClientSize = new System.Drawing.Size(1169, 359);
             this.ControlBox = false;
             this.Controls.Add(this.textBoxRaw);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;

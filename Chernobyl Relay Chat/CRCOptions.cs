@@ -1,9 +1,7 @@
-﻿using Chernobyl_Relay_Chat.Properties;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Drawing;
 using System.Security;
-using System.Windows.Forms;
 
 namespace Chernobyl_Relay_Chat
 {
@@ -29,6 +27,7 @@ namespace Chernobyl_Relay_Chat
         public static bool SendDeath;
         public static bool ReceiveDeath;
         public static int DeathInterval;
+        public static bool ShowTimestamps;
 
         public static string GetIrcName()
         {
@@ -58,11 +57,12 @@ namespace Chernobyl_Relay_Chat
                 SendDeath = Convert.ToBoolean((string)registry.GetValue("SendDeath", "True"));
                 ReceiveDeath = Convert.ToBoolean((string)registry.GetValue("ReceiveDeath", "True"));
                 DeathInterval = (int)registry.GetValue("DeathInterval", 0);
+                ShowTimestamps = Convert.ToBoolean((string)registry.GetValue("ShowTimestamps", "True"));
 
                 Save();
                 return true;
             }
-            catch(Exception ex) when (ex is SecurityException || ex is UnauthorizedAccessException)
+            catch (Exception ex) when (ex is SecurityException || ex is UnauthorizedAccessException)
             {
                 return false;
             }
@@ -81,6 +81,7 @@ namespace Chernobyl_Relay_Chat
             registry.SetValue("SendDeath", SendDeath);
             registry.SetValue("ReceiveDeath", ReceiveDeath);
             registry.SetValue("DeathInterval", DeathInterval);
+            registry.SetValue("ShowTimestamps", ShowTimestamps);
         }
     }
 }

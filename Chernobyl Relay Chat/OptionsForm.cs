@@ -46,6 +46,7 @@ namespace Chernobyl_Relay_Chat
             textBoxName.Text = CRCOptions.Name;
             int index = factionToIndex[CRCOptions.ManualFaction];
             comboBoxFaction.SelectedIndex = index;
+            checkBoxTimestamps.Checked = CRCOptions.ShowTimestamps;
             checkBoxDeathSend.Checked = CRCOptions.SendDeath;
             checkBoxDeathReceive.Checked = CRCOptions.ReceiveDeath;
             numericUpDownDeath.Value = CRCOptions.DeathInterval;
@@ -68,6 +69,7 @@ namespace Chernobyl_Relay_Chat
             CRCOptions.AutoFaction = radioButtonFactionAuto.Checked;
             CRCOptions.ManualFaction = indexToFaction[comboBoxFaction.SelectedIndex];
             CRCOptions.Name = name;
+            CRCOptions.ShowTimestamps = checkBoxTimestamps.Checked;
             CRCOptions.SendDeath = checkBoxDeathSend.Checked;
             CRCOptions.ReceiveDeath = checkBoxDeathReceive.Checked;
             CRCOptions.DeathInterval = (int)numericUpDownDeath.Value;
