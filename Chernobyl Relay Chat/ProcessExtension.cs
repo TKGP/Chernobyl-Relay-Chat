@@ -7,7 +7,8 @@ using System.Text;
 namespace Chernobyl_Relay_Chat
 {
     // Add method to retrieve process path without going through Process.MainModule,
-    // because that fails for certain permissions
+    // because that fails for certain permissions. Basically copypasted from:
+    // http://www.aboutmycode.com/net-framework/how-to-get-elevated-process-path-in-net/
     static class ProcessExtension
     {
         [Flags]
