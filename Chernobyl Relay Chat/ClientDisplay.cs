@@ -96,6 +96,24 @@ namespace Chernobyl_Relay_Chat
             }));
         }
 
+        private void AddMessage(string nick, string message, Color nickColor)
+        {
+            Invoke(new Action(() =>
+            {
+                if (richTextBoxMessages.Lines.Length != 0)
+                    richTextBoxMessages.AppendText("\r\n");
+                
+                Font unboldFont = richTextBoxMessages.Font;
+                Font boldFont = new Font(unboldFont, FontStyle.Bold);
+                richTextBoxMessages.SelectionFont = boldFont;
+                richTextBoxMessages.SelectionColor = nickColor;
+                richTextBoxMessages.AppendText(nick + ": ");
+                richTextBoxMessages.SelectionFont = unboldFont;
+                richTextBoxMessages.SelectionColor = Color.Black;
+                richTextBoxMessages.AppendText(message);
+            }));
+        }
+
         private void UpdateUsers()
         {
             users.Sort();
@@ -125,7 +143,12 @@ namespace Chernobyl_Relay_Chat
 
         public void OnChannelMessage(string nick, string message)
         {
-            AddLine(nick + ": " + message, Color.Black);
+            AddMessage(nick, message, Color.Black);
+        }
+
+        public void OnOwnChannelMessage(string nick, string message)
+        {
+            AddMessage(nick, message, Color.Gray);
         }
 
         public void OnQueryMessage(string from, string to, string message)

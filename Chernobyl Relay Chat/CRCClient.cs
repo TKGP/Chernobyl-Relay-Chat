@@ -88,7 +88,7 @@ namespace Chernobyl_Relay_Chat
         public void Send(string message)
         {
             client.SendMessage(SendType.Message, CRCOptions.Channel, CRCOptions.GetFaction() + META_DELIM + message);
-            display.OnChannelMessage(CRCOptions.Name, message);
+            display.OnOwnChannelMessage(CRCOptions.Name, message);
             game.OnChannelMessage(CRCOptions.Name, CRCOptions.GetFaction(), message);
         }
 
