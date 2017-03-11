@@ -22,7 +22,7 @@ namespace Chernobyl_Relay_Chat
         private void ClientDisplay_Load(object sender, EventArgs e)
         {
             Text = "Chernobyl Relay Chat " + Application.ProductVersion;
-            if (CRCOptions.DisplaySize == new Size(-1, -1))
+            if (CRCOptions.DisplaySize != new Size(-1, -1))
             {
                 Location = CRCOptions.DisplayLocation;
                 Size = CRCOptions.DisplaySize;
