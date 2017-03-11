@@ -57,7 +57,7 @@ namespace Chernobyl_Relay_Chat
                 Name = (string)registry.GetValue("Name", CRCStrings.RandomName(GetFaction()));
                 SendDeath = Convert.ToBoolean((string)registry.GetValue("SendDeath", "True"));
                 ReceiveDeath = Convert.ToBoolean((string)registry.GetValue("ReceiveDeath", "True"));
-                DeathInterval = (int)registry.GetValue("DeathInterval", 60);
+                DeathInterval = (int)registry.GetValue("DeathInterval", 0);
 
                 Save();
                 return true;
