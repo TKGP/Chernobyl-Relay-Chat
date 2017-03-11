@@ -4,6 +4,7 @@
 local UPDATE_INTERVAL = 250
 local INPATH = getFS():update_path("$game_config$", "").."\\crc_input.txt"
 local OUTPATH = getFS():update_path("$game_config$", "").."\\crc_output.txt"
+local NEWS_DURATION = 10000
 
 local config = system_ini()
 local lastUpdate = 0
@@ -89,7 +90,7 @@ function update()
 					title = "%c[255,128,128,255]"..from.." -> "..to
 					text = "%c[255,128,128,255]"..message
 				end
-				db.actor:give_game_news(title, text, icon, 0, 5000)
+				db.actor:give_game_news(title, text, icon, 0, NEWS_DURATION)
 			end
 		end
 	end
