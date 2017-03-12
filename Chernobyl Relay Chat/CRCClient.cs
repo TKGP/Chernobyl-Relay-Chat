@@ -247,8 +247,20 @@ namespace Chernobyl_Relay_Chat
 
         private void OnErrorMessage(object sender, IrcEventArgs e)
         {
-            if (e.Data.ReplyCode == ReplyCode.ErrorBannedFromChannel)
-                display.OnBanned();
+            switch (e.Data.ReplyCode)
+            {
+                case ReplyCode.ErrorBannedFromChannel:
+                    display.OnBanned();
+                    game.OnBanned();
+                    break;
+                case ReplyCode.ErrorNoMotd:
+                case ReplyCode.ErrorNotRegistered:
+                    break;
+                default:
+                    display.OnError(e.Data.Message);
+                    game.OnError(e.Data.Message);
+                    break;
+            }
         }
     }
 }

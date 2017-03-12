@@ -228,5 +228,10 @@ namespace Chernobyl_Relay_Chat
         {
             AddInformation("Woops, you're banned!", Color.Red);
         }
+
+        public void OnError(string message)
+        {
+            AddInformation("Error: " + message, Color.Red);
+        }
     }
 }

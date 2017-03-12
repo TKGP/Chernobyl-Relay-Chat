@@ -1,9 +1,9 @@
 <w>
 	<file name="ui\crc_icons">
 		<texture id="crc_icon_tkgp" x="0" y="0" width="123" height="87"/>
-		<texture id="crc_icon_info" x="123" y="0" width="123" height="87"/>
-		<texture id="crc_icon_error" x="123" y="0" width="123" height="87"/>
-		<texture id="crc_icon_unknown" x="123" y="0" width="123" height="87"/>
+		<texture id="crc_icon_info" x="123" y="0" width="83" height="47"/>
+		<texture id="crc_icon_error" x="246" y="0" width="83" height="47"/>
+		<texture id="crc_icon_unknown" x="369" y="0" width="83" height="47"/>
 		
 		<texture id="crc_icon_actor_bandit_1" x="0" y="87" width="123" height="87"/>
 		<texture id="crc_icon_actor_bandit_2" x="123" y="87" width="123" height="87"/>

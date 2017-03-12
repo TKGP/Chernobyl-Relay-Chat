@@ -162,6 +162,15 @@ namespace Chernobyl_Relay_Chat
         }
 
 
+        public void OnBanned()
+        {
+            SendToGame("Error/Woops, you're banned!");
+        }
+
+        public void OnError(string message)
+        {
+            SendToGame("Error/" + message);
+        }
 
         public void OnUpdate(string message)
         {

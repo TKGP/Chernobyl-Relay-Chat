@@ -8,11 +8,13 @@ local INPATH = getFS():update_path("$game_config$", "").."\\crc_input.txt"
 local OUTPATH = getFS():update_path("$game_config$", "").."\\crc_output.txt"
 local NEWS_DURATION = 10000
 local QUERY_COLOR = "%c[255,128,128,255]"
+local ERROR_COLOR = "%c[255,255,128,128]"
 
 local config = system_ini()
 local lastUpdate = 0
 local sendQueue = {}
 local chatBox
+local showChatBox = false
 
 local factionToText = {
 	actor_bandit = "Bandit",
@@ -36,6 +38,12 @@ local function update()
 	if chatBox and not chatBox.focus then
 		chatBox.editBox:CaptureFocus(true)
 		chatBox.focus = true
+	end
+	
+	if showChatBox then
+		showChatBox = false
+		chatBox = ChatBox()
+		chatBox:ShowDialog()
 	end
 	
 	if not db.actor or time_global() < lastUpdate + UPDATE_INTERVAL then return end
@@ -69,6 +77,10 @@ local function update()
 					title = "Information"
 					text = body
 					icon = crc_icons.info
+				elseif type == "Error" then
+					title = "Error"
+					text = ERROR_COLOR..body
+					icon = crc_icons.error
 				elseif type == "Message" then
 					local faction, name, message = body:match("([^/]+)/([^/]+)/(.+)")
 					icon = crc_icons.getIcon(name, faction)
@@ -102,25 +114,17 @@ local function onDeath(whoID)
 	send("Death/%s/%s/%s/%s", db.actor:character_community(), level.name(), class:upper(), section)
 end
 
--- Works in 1.4.22 but not 1.4.16 (CoM)
---[[axr_keybind.keybinds["crc_chat"] = "DIK_RETURN"
-function axr_keybind.action.crc_chat(p)
-	if p == 1 and not chatBox then
-		chatBox = ChatBox()
-		chatBox:ShowDialog()
-	end
-end]]
-
 local function onKeyPress(dik)
 	if dik == DIK_keys.DIK_RETURN and not chatBox then
-		chatBox = ChatBox()
-		chatBox:ShowDialog()
+		-- Defer to next update to avoid this keypress being sent to the UI as well
+		showChatBox = true
 	end
 end
 
 function on_game_start()
 	AddUniqueCall(update)
 	RegisterScriptCallback("actor_on_before_death", onDeath)
+	-- Not using axr_keybind for old version compatibility
 	RegisterScriptCallback("on_key_press", onKeyPress)
 end
 
@@ -128,6 +132,9 @@ end
 
 class "ChatBox" (CUIScriptWnd)
 function ChatBox:__init() super()
+	-- Disable keypress callback so other scripts don't fire while typing
+	db.actor:set_callback(callback.key_press)
+	
 	self:SetWndRect(Frect():set(0, 0, 1024, 768))
 	local xml = CScriptXmlInit()
 	xml:ParseFile("crc_chatbox.xml")
@@ -157,11 +164,13 @@ function ChatBox:Send()
 	if input and input ~= "" then
 		self.editBox:SetText("")
 		send("Message/%s/%s", db.actor:character_community(), input)
-		self:Cancel()
 	end
+	self:Cancel()
 end
 
 function ChatBox:Cancel()
 	chatBox:HideDialog()
 	chatBox = nil
+	-- Re-enable keypress callback when done
+	db.actor:set_callback(callback.key_press, bind_stalker_ext.on_key_press, db.actor_binder)
 end
