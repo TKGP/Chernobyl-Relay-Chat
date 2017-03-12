@@ -42,6 +42,7 @@ namespace Chernobyl_Relay_Chat
             client.SendDelay = 200;
             client.ActiveChannelSyncing = true;
 
+            client.OnConnected += new EventHandler(OnConnection);
             client.OnChannelActiveSynced += new IrcEventHandler(OnChannelActiveSynced);
             client.OnRawMessage += new IrcEventHandler(OnRawMessage);
             client.OnChannelMessage += new IrcEventHandler(OnChannelMessage);
@@ -54,8 +55,6 @@ namespace Chernobyl_Relay_Chat
             client.OnKick += new KickEventHandler(OnKick);
 
             client.Connect(CRCOptions.Server, 6667);
-            client.Login(CRCOptions.GetIrcName(), "Chernobyl Relay Chat " + Application.ProductVersion);
-            client.RfcJoin(CRCOptions.Channel);
             listener = new Thread(client.Listen);
             listener.IsBackground = true;
             listener.Start();
@@ -83,9 +82,10 @@ namespace Chernobyl_Relay_Chat
             game.GameUpdate();
         }
 
-        public void UpdateNick()
+        public void UpdateSettings()
         {
             client.RfcNick(CRCOptions.GetIrcName());
+            game.UpdateSettings();
         }
 
         public void Send(string message)
@@ -136,6 +136,12 @@ namespace Chernobyl_Relay_Chat
         }
 
 
+
+        private void OnConnection(object sender, EventArgs e)
+        {
+            client.Login(CRCOptions.GetIrcName(), "Chernobyl Relay Chat " + Application.ProductVersion);
+            client.RfcJoin(CRCOptions.Channel);
+        }
 
         private void OnChannelActiveSynced(object sender, IrcEventArgs e)
         {

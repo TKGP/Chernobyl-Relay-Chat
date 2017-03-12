@@ -52,6 +52,7 @@
             this.Controls.Add(this.textBoxRaw);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "DebugDisplay";
+            this.ShowInTaskbar = false;
             this.Text = "Raw Messages";
             this.ResumeLayout(false);
             this.PerformLayout();

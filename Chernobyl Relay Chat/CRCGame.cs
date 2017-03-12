@@ -22,8 +22,9 @@ namespace Chernobyl_Relay_Chat
         private bool firstClear = false;
         private StringBuilder sendQueue = new StringBuilder();
         private object queueLock = new object();
-        private Regex outputRx = new Regex("^(.+?)/(.+?)/(.+)$");
-        private Regex deathRx = new Regex("^(.+?)/(.+?)/(.+)$");
+        private Regex outputRx = new Regex("^(.+?)(?:/(.+))?$");
+        private Regex messageRx = new Regex("^(.+?)/(.+)$");
+        private Regex deathRx = new Regex("^(.+?)/(.+?)/(.+?)/(.+)$");
 
         public CRCGame(ClientDisplay clientDisplay, CRCClient crcClient)
         {
@@ -71,6 +72,7 @@ namespace Chernobyl_Relay_Chat
                             gamePath = path;
                             firstClear = false;
                             processID = process.Id;
+                            UpdateSettings();
                             break;
                         }
                     }
@@ -81,16 +83,16 @@ namespace Chernobyl_Relay_Chat
         public void GameUpdate()
         {
             if (disable || processID == -1) return;
-            
+
             // Wipe game output when first discovered
-            if(!firstClear)
+            if (!firstClear)
             {
                 try
                 {
                     File.WriteAllText(gamePath + CRCOptions.OutPath, "", encoding);
                     firstClear = true;
                 }
-                catch(IOException)
+                catch (IOException)
                 {
                     return;
                 }
@@ -110,20 +112,34 @@ namespace Chernobyl_Relay_Chat
                 {
                     Match typeMatch = outputRx.Match(line);
                     string type = typeMatch.Groups[1].Value;
-                    CRCOptions.GameFaction = CRCStrings.ValidateFaction(typeMatch.Groups[2].Value);
-                    string body = typeMatch.Groups[3].Value;
-                    if (type == "Message")
+                    if (type == "Settings")
                     {
+                        UpdateSettings();
+                    }
+                    else if (type == "Message")
+                    {
+                        Match messageMatch = messageRx.Match(typeMatch.Groups[2].Value);
+                        string faction = messageMatch.Groups[1].Value;
+                        string message = messageMatch.Groups[2].Value;
+                        CRCOptions.GameFaction = CRCStrings.ValidateFaction(faction);
                         if (CRCOptions.GameFaction == "actor_zombied")
                             client.Send(CRCZombie.Generate());
                         else
-                            client.Send(body);
+                            client.Send(message);
                     }
-                    else if (type == "Death" && CRCOptions.SendDeath && CRCOptions.GameFaction != "actor_zombied")
+                    else if (type == "Death" && CRCOptions.SendDeath)
                     {
-                        Match deathMatch = deathRx.Match(body);
-                        string message = CRCStrings.DeathMessage(CRCOptions.Name, deathMatch.Groups[1].Value, deathMatch.Groups[2].Value, deathMatch.Groups[3].Value);
-                        client.SendDeath(message);
+                        Match deathMatch = deathRx.Match(typeMatch.Groups[2].Value);
+                        string faction = deathMatch.Groups[1].Value;
+                        string level = deathMatch.Groups[2].Value;
+                        string xrClass = deathMatch.Groups[3].Value;
+                        string section = deathMatch.Groups[4].Value;
+                        CRCOptions.GameFaction = CRCStrings.ValidateFaction(faction);
+                        if (CRCOptions.GameFaction != "actor_zombied")
+                        {
+                            string message = CRCStrings.DeathMessage(CRCOptions.Name, level, xrClass, section);
+                            client.SendDeath(message);
+                        }
                     }
                 }
             }
@@ -149,6 +165,12 @@ namespace Chernobyl_Relay_Chat
                     return;
                 }
             }
+        }
+
+        public void UpdateSettings()
+        {
+            SendToGame("Setting/NewsDuration/" + (CRCOptions.NewsDuration * 1000));
+            SendToGame("Setting/ChatKey/DIK_" + CRCOptions.ChatKey);
         }
 
         private void SendToGame(string line)

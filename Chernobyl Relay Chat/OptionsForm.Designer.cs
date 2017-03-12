@@ -46,12 +46,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.checkBoxTimestamps = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDownNewsDuration = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxChatKey = new System.Windows.Forms.TextBox();
+            this.buttonChatKey = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeath)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNewsDuration)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(72, 230);
+            this.buttonOK.Location = new System.Drawing.Point(72, 329);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 0;
@@ -62,7 +70,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(153, 230);
+            this.buttonCancel.Location = new System.Drawing.Point(153, 329);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 1;
@@ -119,8 +127,6 @@
             // checkBoxDeathSend
             // 
             this.checkBoxDeathSend.AutoSize = true;
-            this.checkBoxDeathSend.Checked = true;
-            this.checkBoxDeathSend.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxDeathSend.Location = new System.Drawing.Point(12, 145);
             this.checkBoxDeathSend.Name = "checkBoxDeathSend";
             this.checkBoxDeathSend.Size = new System.Drawing.Size(131, 17);
@@ -131,8 +137,6 @@
             // checkBoxDeathReceive
             // 
             this.checkBoxDeathReceive.AutoSize = true;
-            this.checkBoxDeathReceive.Checked = true;
-            this.checkBoxDeathReceive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxDeathReceive.Location = new System.Drawing.Point(12, 168);
             this.checkBoxDeathReceive.Name = "checkBoxDeathReceive";
             this.checkBoxDeathReceive.Size = new System.Drawing.Size(146, 17);
@@ -144,12 +148,10 @@
             // radioButtonFactionAuto
             // 
             this.radioButtonFactionAuto.AutoSize = true;
-            this.radioButtonFactionAuto.Checked = true;
             this.radioButtonFactionAuto.Location = new System.Drawing.Point(12, 12);
             this.radioButtonFactionAuto.Name = "radioButtonFactionAuto";
             this.radioButtonFactionAuto.Size = new System.Drawing.Size(113, 17);
             this.radioButtonFactionAuto.TabIndex = 9;
-            this.radioButtonFactionAuto.TabStop = true;
             this.radioButtonFactionAuto.Text = "Sync game faction";
             this.toolTip1.SetToolTip(this.radioButtonFactionAuto, "Other users will see your faction as whichever one you played as last");
             this.radioButtonFactionAuto.UseVisualStyleBackColor = true;
@@ -178,11 +180,6 @@
             this.numericUpDownDeath.Size = new System.Drawing.Size(46, 20);
             this.numericUpDownDeath.TabIndex = 11;
             this.numericUpDownDeath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDownDeath.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
             // 
             // label2
             // 
@@ -213,8 +210,6 @@
             // checkBoxTimestamps
             // 
             this.checkBoxTimestamps.AutoSize = true;
-            this.checkBoxTimestamps.Checked = true;
-            this.checkBoxTimestamps.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxTimestamps.Location = new System.Drawing.Point(12, 122);
             this.checkBoxTimestamps.Name = "checkBoxTimestamps";
             this.checkBoxTimestamps.Size = new System.Drawing.Size(108, 17);
@@ -222,13 +217,97 @@
             this.checkBoxTimestamps.Text = "Show timestamps";
             this.checkBoxTimestamps.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Location = new System.Drawing.Point(12, 236);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(216, 2);
+            this.label5.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 247);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(177, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Duration of news messages in-game";
+            // 
+            // numericUpDownNewsDuration
+            // 
+            this.numericUpDownNewsDuration.Location = new System.Drawing.Point(12, 263);
+            this.numericUpDownNewsDuration.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.numericUpDownNewsDuration.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownNewsDuration.Name = "numericUpDownNewsDuration";
+            this.numericUpDownNewsDuration.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.numericUpDownNewsDuration.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDownNewsDuration.TabIndex = 18;
+            this.numericUpDownNewsDuration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownNewsDuration.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(64, 265);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "seconds";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 286);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "In-game chat key";
+            // 
+            // textBoxChatKey
+            // 
+            this.textBoxChatKey.Location = new System.Drawing.Point(12, 302);
+            this.textBoxChatKey.Name = "textBoxChatKey";
+            this.textBoxChatKey.ReadOnly = true;
+            this.textBoxChatKey.Size = new System.Drawing.Size(135, 20);
+            this.textBoxChatKey.TabIndex = 23;
+            // 
+            // buttonChatKey
+            // 
+            this.buttonChatKey.Location = new System.Drawing.Point(153, 300);
+            this.buttonChatKey.Name = "buttonChatKey";
+            this.buttonChatKey.Size = new System.Drawing.Size(75, 23);
+            this.buttonChatKey.TabIndex = 24;
+            this.buttonChatKey.Text = "Change";
+            this.buttonChatKey.UseVisualStyleBackColor = true;
+            this.buttonChatKey.Click += new System.EventHandler(this.buttonChatKey_Click);
+            // 
             // OptionsForm
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(240, 267);
+            this.ClientSize = new System.Drawing.Size(240, 365);
+            this.Controls.Add(this.buttonChatKey);
+            this.Controls.Add(this.textBoxChatKey);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.numericUpDownNewsDuration);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.checkBoxTimestamps);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -250,6 +329,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CRC Options";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeath)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNewsDuration)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,5 +353,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.CheckBox checkBoxTimestamps;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDownNewsDuration;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBoxChatKey;
+        private System.Windows.Forms.Button buttonChatKey;
     }
 }

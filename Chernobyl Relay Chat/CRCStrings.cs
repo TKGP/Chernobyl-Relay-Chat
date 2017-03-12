@@ -13,6 +13,21 @@ namespace Chernobyl_Relay_Chat
             return list[rand.Next(list.Count)];
         }
 
+        public static void Populate()
+        {
+            fNames["actor_csky"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_ecolog"]));
+            fNames["actor_dolg"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_army"]));
+            fNames["actor_freedom"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]));
+            fNames["actor_killer"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]).Concat(fNames["actor_ecolog"]));
+            fNames["actor_monolith"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]).Concat(fNames["actor_ecolog"]));
+
+            sNames["actor_csky"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_ecolog"]));
+            sNames["actor_dolg"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_army"]));
+            sNames["actor_freedom"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]));
+            sNames["actor_killer"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]).Concat(sNames["actor_ecolog"]));
+            sNames["actor_monolith"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]).Concat(sNames["actor_ecolog"]));
+        }
+
         public static string RandomName(string faction)
         {
             faction = ValidateFaction(faction);
@@ -45,21 +60,6 @@ namespace Chernobyl_Relay_Chat
             if (rand.Next(100) >= 75)
                 message += ' ' + PickRandom(suffixes);
             return message;
-        }
-
-        public static void Populate()
-        {
-            fNames["actor_csky"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_ecolog"]));
-            fNames["actor_dolg"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_army"]));
-            fNames["actor_freedom"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]));
-            fNames["actor_killer"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]).Concat(fNames["actor_ecolog"]));
-            fNames["actor_monolith"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]).Concat(fNames["actor_ecolog"]));
-
-            sNames["actor_csky"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_ecolog"]));
-            sNames["actor_dolg"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_army"]));
-            sNames["actor_freedom"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]));
-            sNames["actor_killer"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]).Concat(sNames["actor_ecolog"]));
-            sNames["actor_monolith"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]).Concat(sNames["actor_ecolog"]));
         }
 
         private static List<string> validFactions = new List<string>()

@@ -9,6 +9,7 @@ namespace Chernobyl_Relay_Chat
     {
         private CRCClient client;
         private Regex nickCheckRx = new Regex(@"^\w[\w\d ]*$");
+        public static string KeyPromptResult;
 
         private readonly Dictionary<string, int> factionToIndex = new Dictionary<string, int>()
         {
@@ -50,6 +51,8 @@ namespace Chernobyl_Relay_Chat
             checkBoxDeathSend.Checked = CRCOptions.SendDeath;
             checkBoxDeathReceive.Checked = CRCOptions.ReceiveDeath;
             numericUpDownDeath.Value = CRCOptions.DeathInterval;
+            numericUpDownNewsDuration.Value = CRCOptions.NewsDuration;
+            textBoxChatKey.Text = CRCOptions.ChatKey;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -73,8 +76,10 @@ namespace Chernobyl_Relay_Chat
             CRCOptions.SendDeath = checkBoxDeathSend.Checked;
             CRCOptions.ReceiveDeath = checkBoxDeathReceive.Checked;
             CRCOptions.DeathInterval = (int)numericUpDownDeath.Value;
+            CRCOptions.NewsDuration = (int)numericUpDownNewsDuration.Value;
+            CRCOptions.ChatKey = textBoxChatKey.Text;
             CRCOptions.Save();
-            client.UpdateNick();
+            client.UpdateSettings();
             this.Close();
         }
 
@@ -96,6 +101,14 @@ namespace Chernobyl_Relay_Chat
         private void checkBoxDeathReceive_CheckedChanged(object sender, EventArgs e)
         {
             numericUpDownDeath.Enabled = checkBoxDeathReceive.Checked;
+        }
+
+        private void buttonChatKey_Click(object sender, EventArgs e)
+        {
+            KeyPromptResult = null;
+            new KeyPromptForm().ShowDialog();
+            if (KeyPromptResult != null)
+                textBoxChatKey.Text = KeyPromptResult;
         }
     }
 }
