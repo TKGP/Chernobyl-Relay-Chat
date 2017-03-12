@@ -28,7 +28,7 @@ namespace Chernobyl_Relay_Chat
             return false;
         }
 
-        public static async Task<bool> CheckUpdate(ClientDisplay display, CRCClient client)
+        public static async Task CheckUpdate(ClientDisplay display, CRCClient client)
         {
             UpdateChecker updateChecker = new UpdateChecker("TKGP", "Chernobyl-Relay-Chat");
             UpdateType updateType = await updateChecker.CheckUpdate();
@@ -45,8 +45,6 @@ namespace Chernobyl_Relay_Chat
                 }
                 display.Close();
             }
-            // Unimportant
-            return true;
         }
     }
 }
