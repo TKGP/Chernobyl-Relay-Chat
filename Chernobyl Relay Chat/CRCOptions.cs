@@ -32,11 +32,6 @@ namespace Chernobyl_Relay_Chat
         public static int NewsDuration;
         public static string ChatKey;
 
-        public static string GetIrcName()
-        {
-            return Name.Replace(' ', '_');
-        }
-
         public static string GetFaction()
         {
             if (AutoFaction)
@@ -56,7 +51,7 @@ namespace Chernobyl_Relay_Chat
                 AutoFaction = Convert.ToBoolean((string)registry.GetValue("AutoFaction", "True"));
                 GameFaction = (string)registry.GetValue("GameFaction", "actor_stalker");
                 ManualFaction = (string)registry.GetValue("ManualFaction", "actor_stalker");
-                Name = (string)registry.GetValue("Name", CRCStrings.RandomName(GetFaction()));
+                Name = ((string)registry.GetValue("Name", CRCStrings.RandomName(GetFaction()))).Replace(' ', '_');
                 SendDeath = Convert.ToBoolean((string)registry.GetValue("SendDeath", "True"));
                 ReceiveDeath = Convert.ToBoolean((string)registry.GetValue("ReceiveDeath", "True"));
                 DeathInterval = (int)registry.GetValue("DeathInterval", 0);

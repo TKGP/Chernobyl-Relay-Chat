@@ -84,7 +84,7 @@ namespace Chernobyl_Relay_Chat
 
         public void UpdateSettings()
         {
-            client.RfcNick(CRCOptions.GetIrcName());
+            client.RfcNick(CRCOptions.Name);
             game.UpdateSettings();
         }
 
@@ -139,7 +139,7 @@ namespace Chernobyl_Relay_Chat
 
         private void OnConnection(object sender, EventArgs e)
         {
-            client.Login(CRCOptions.GetIrcName(), "Chernobyl Relay Chat " + Application.ProductVersion);
+            client.Login(CRCOptions.Name, "Chernobyl Relay Chat " + Application.ProductVersion);
             client.RfcJoin(CRCOptions.Channel);
         }
 
@@ -147,7 +147,7 @@ namespace Chernobyl_Relay_Chat
         {
             List<string> users = new List<string>();
             foreach (ChannelUser user in client.GetChannel(CRCOptions.Channel).Users.Values)
-                users.Add(user.Nick.Replace('_', ' '));
+                users.Add(user.Nick);
             display.OnChannelActiveSynced(users);
         }
 
@@ -167,7 +167,7 @@ namespace Chernobyl_Relay_Chat
             {
                 string nick;
                 if (fakeNick == null)
-                    nick = e.Data.Nick.Replace('_', ' ');
+                    nick = e.Data.Nick;
                 else if (CRCOptions.ReceiveDeath && (DateTime.Now - lastDeath).TotalSeconds > CRCOptions.DeathInterval)
                 {
                     lastDeath = DateTime.Now;
@@ -186,14 +186,14 @@ namespace Chernobyl_Relay_Chat
             string fakeNick, faction;
             string message = GetMetadata(e.Data.Message, out fakeNick, out faction);
             // Never use fakeNick for query
-            string nick = e.Data.Nick.Replace('_', ' ');
+            string nick = e.Data.Nick;
             display.OnQueryMessage(nick, CRCOptions.Name, message);
             game.OnQueryMessage(nick, CRCOptions.Name, faction, message);
         }
 
         private void OnJoin(object sender, JoinEventArgs e)
         {
-            string nick = e.Who.Replace('_', ' ');
+            string nick = e.Who;
             if (nick != CRCOptions.Name)
             {
                 display.OnJoin(nick);
@@ -208,21 +208,21 @@ namespace Chernobyl_Relay_Chat
 
         private void OnPart(object sender, PartEventArgs e)
         {
-            string nick = e.Who.Replace('_', ' ');
+            string nick = e.Who;
             display.OnPart(nick);
             game.OnPart(nick);
         }
 
         private void OnQuit(object sender, QuitEventArgs e)
         {
-            string nick = e.Who.Replace('_', ' ');
+            string nick = e.Who;
             display.OnPart(nick);
             game.OnPart(nick);
         }
 
         private void OnKick(object sender, KickEventArgs e)
         {
-            string victim = e.Whom.Replace('_', ' ');
+            string victim = e.Whom;
             if (victim == CRCOptions.Name)
             {
                 display.OnGotKicked(e.KickReason);
@@ -237,8 +237,8 @@ namespace Chernobyl_Relay_Chat
 
         private void OnNickChange(object sender, NickChangeEventArgs e)
         {
-            string oldNick = e.OldNickname.Replace('_', ' ');
-            string newNick = e.NewNickname.Replace('_', ' ');
+            string oldNick = e.OldNickname;
+            string newNick = e.NewNickname;
             if (newNick != CRCOptions.Name)
             {
                 display.OnNickChange(oldNick, newNick);

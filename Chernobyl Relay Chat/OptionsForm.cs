@@ -8,7 +8,7 @@ namespace Chernobyl_Relay_Chat
     public partial class OptionsForm : Form
     {
         private CRCClient client;
-        private Regex nickCheckRx = new Regex(@"^\w[\w\d ]*$");
+        private Regex nickCheckRx = new Regex(@"^\w[\w\d_]*$");
         public static string KeyPromptResult;
 
         private readonly Dictionary<string, int> factionToIndex = new Dictionary<string, int>()
@@ -57,7 +57,7 @@ namespace Chernobyl_Relay_Chat
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            string name = textBoxName.Text;
+            string name = textBoxName.Text.Replace(' ', '_');
             if (name.Length < 1 || name.Length > 30)
             {
                 MessageBox.Show("Nickname must be between 1 and 30 characters in length.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -65,7 +65,7 @@ namespace Chernobyl_Relay_Chat
             }
             if (!nickCheckRx.Match(name).Success)
             {
-                MessageBox.Show("Nicknames must start with a letter and only use letters, numbers, and spaces.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Nicknames must start with a letter and only use letters, numbers, and underscores.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -90,7 +90,8 @@ namespace Chernobyl_Relay_Chat
 
         private void buttonRandom_Click(object sender, EventArgs e)
         {
-            textBoxName.Text = CRCStrings.RandomName(comboBoxFaction.SelectedItem.ToString());
+            string faction = radioButtonFactionAuto.Checked ? CRCOptions.GameFaction : indexToFaction[comboBoxFaction.SelectedIndex];
+            textBoxName.Text = CRCStrings.RandomName(faction).Replace(' ', '_');
         }
 
         private void radioButtonFactionManual_CheckedChanged(object sender, EventArgs e)

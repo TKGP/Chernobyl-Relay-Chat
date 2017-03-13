@@ -20,12 +20,14 @@ namespace Chernobyl_Relay_Chat
             fNames["actor_freedom"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]));
             fNames["actor_killer"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]).Concat(fNames["actor_ecolog"]));
             fNames["actor_monolith"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]).Concat(fNames["actor_ecolog"]));
+            fNames["actor_zombied"] = new List<string>(fNames["actor_stalker"].Concat(fNames["actor_bandit"]).Concat(fNames["actor_ecolog"]).Concat(fNames["actor_army"]));
 
             sNames["actor_csky"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_ecolog"]));
             sNames["actor_dolg"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_army"]));
             sNames["actor_freedom"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]));
             sNames["actor_killer"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]).Concat(sNames["actor_ecolog"]));
             sNames["actor_monolith"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]).Concat(sNames["actor_ecolog"]));
+            sNames["actor_zombied"] = new List<string>(sNames["actor_stalker"].Concat(sNames["actor_bandit"]).Concat(sNames["actor_ecolog"]).Concat(sNames["actor_army"]));
         }
 
         public static string RandomName(string faction)
