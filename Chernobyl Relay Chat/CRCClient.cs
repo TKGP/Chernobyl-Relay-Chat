@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -175,8 +176,17 @@ namespace Chernobyl_Relay_Chat
                 }
                 else
                     return;
-                display.OnChannelMessage(nick, message);
-                game.OnChannelMessage(nick, faction, message);
+                if(message.Contains(CRCOptions.Name))
+                {
+                    SystemSounds.Asterisk.Play();
+                    display.OnHighlightMessage(nick, message);
+                    game.OnHighlightMessage(nick, faction, message);
+                }
+                else
+                {
+                    display.OnChannelMessage(nick, message);
+                    game.OnChannelMessage(nick, faction, message);
+                }
             }
         }
 

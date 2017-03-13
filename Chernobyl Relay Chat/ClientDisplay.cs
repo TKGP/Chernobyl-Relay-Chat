@@ -159,6 +159,21 @@ namespace Chernobyl_Relay_Chat
             UpdateUsers();
         }
 
+        public void OnHighlightMessage(string nick, string message)
+        {
+            Invoke(new Action(() =>
+            {
+                AddMessage(nick, message, Color.Black);
+                int start = richTextBoxMessages.GetFirstCharIndexOfCurrentLine();
+                int length = richTextBoxMessages.TextLength - start;
+                richTextBoxMessages.Select(start, length);
+                richTextBoxMessages.SelectionBackColor = Color.Yellow;
+                richTextBoxMessages.Select(0, 0);
+                richTextBoxMessages.SelectionBackColor = Color.White;
+            }));
+            
+        }
+
         public void OnChannelMessage(string nick, string message)
         {
             AddMessage(nick, message, Color.Black);

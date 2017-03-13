@@ -204,6 +204,11 @@ namespace Chernobyl_Relay_Chat
             SendToGame("Information/You are now connected to the network");
         }
 
+        public void OnHighlightMessage(string nick, string faction, string message)
+        {
+            SendToGame("Highlight/" + faction + "/" + nick + "/" + message);
+        }
+
         public void OnChannelMessage(string nick, string faction, string message)
         {
             SendToGame("Message/" + faction + "/" + nick + "/" + message);
