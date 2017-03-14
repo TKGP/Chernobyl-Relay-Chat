@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Chernobyl_Relay_Chat
 {
-    class CRCGame
+    class CRCGame : ICRCSendable
     {
         private static readonly Encoding encoding = Encoding.GetEncoding(1251);
 
@@ -121,11 +121,16 @@ namespace Chernobyl_Relay_Chat
                         Match messageMatch = messageRx.Match(typeMatch.Groups[2].Value);
                         string faction = messageMatch.Groups[1].Value;
                         string message = messageMatch.Groups[2].Value;
-                        CRCOptions.GameFaction = CRCStrings.ValidateFaction(faction);
-                        if (CRCOptions.GameFaction == "actor_zombied")
-                            client.Send(CRCZombie.Generate());
+                        if (message[0] == '/')
+                            CRCCommands.ProcessCommand(message, this);
                         else
-                            client.Send(message);
+                        {
+                            CRCOptions.GameFaction = CRCStrings.ValidateFaction(faction);
+                            if (CRCOptions.GameFaction == "actor_zombied")
+                                client.Send(CRCZombie.Generate());
+                            else
+                                client.Send(message);
+                        }
                     }
                     else if (type == "Death" && CRCOptions.SendDeath)
                     {
@@ -181,6 +186,16 @@ namespace Chernobyl_Relay_Chat
             {
                 sendQueue.AppendLine(line);
             }
+        }
+
+        public void AddInformation(string message)
+        {
+            SendToGame("Information/" + message);
+        }
+
+        public void AddError(string message)
+        {
+            SendToGame("Error/" + message);
         }
 
 

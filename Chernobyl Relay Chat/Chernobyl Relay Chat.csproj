@@ -80,6 +80,9 @@
       <DependentUpon>ClientDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="CRCClient.cs" />
+    <Compile Include="CRCCommand.cs" />
+    <Compile Include="CRCCommands.cs" />
+    <Compile Include="ICRCSendable.cs" />
     <Compile Include="KeyPromptForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -13,7 +13,7 @@ namespace Chernobyl_Relay_Chat
         {
             UpdateChecker updateChecker = new UpdateChecker("TKGP", "Chernobyl-Relay-Chat");
             UpdateType updateType = updateChecker.CheckUpdate().Result;
-            if(updateType != UpdateType.None)
+            if (updateType != UpdateType.None)
             {
                 string releaseNotes = updateChecker.RenderReleaseNotes().Result;
                 SystemSounds.Asterisk.Play();

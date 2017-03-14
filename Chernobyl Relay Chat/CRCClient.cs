@@ -1,13 +1,10 @@
 ﻿using Meebey.SmartIrc4net;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chernobyl_Relay_Chat
@@ -16,8 +13,10 @@ namespace Chernobyl_Relay_Chat
     {
         private const char META_DELIM = '☺'; // Separates metadata
         private const char FAKE_DELIM = '☻'; // Separates fake nick for death messages
-        private Regex metaRx = new Regex("^(.*?)" + META_DELIM + "(.*)$");
-        private Regex deathRx = new Regex("^(.*?)" + FAKE_DELIM + "(.*)$");
+        private static readonly Regex metaRx = new Regex("^(.*?)" + META_DELIM + "(.*)$");
+        private static readonly Regex deathRx = new Regex("^(.*?)" + FAKE_DELIM + "(.*)$");
+        private static readonly Regex commandArgsRx = new Regex(@"\S+");
+        private string lastQuery;
 
         private ClientDisplay display;
         private CRCGame game;
@@ -31,6 +30,7 @@ namespace Chernobyl_Relay_Chat
 
         public CRCClient(ClientDisplay clientDisplay)
         {
+            CRCCommands.client = this;
             display = clientDisplay;
             game = new CRCGame(display, this);
 #if DEBUG
@@ -47,7 +47,7 @@ namespace Chernobyl_Relay_Chat
             client.OnChannelActiveSynced += new IrcEventHandler(OnChannelActiveSynced);
             client.OnRawMessage += new IrcEventHandler(OnRawMessage);
             client.OnChannelMessage += new IrcEventHandler(OnChannelMessage);
-            //client.OnQueryMessage += new IrcEventHandler(OnQueryMessage);
+            client.OnQueryMessage += new IrcEventHandler(OnQueryMessage);
             client.OnJoin += new JoinEventHandler(OnJoin);
             client.OnPart += new PartEventHandler(OnPart);
             client.OnQuit += new QuitEventHandler(OnQuit);
@@ -89,6 +89,12 @@ namespace Chernobyl_Relay_Chat
             game.UpdateSettings();
         }
 
+        public void ChangeNick(string nick)
+        {
+            CRCOptions.Name = nick;
+            client.RfcNick(nick);
+        }
+
         public void Send(string message)
         {
             client.SendMessage(SendType.Message, CRCOptions.Channel, CRCOptions.GetFaction() + META_DELIM + message);
@@ -102,6 +108,23 @@ namespace Chernobyl_Relay_Chat
             client.SendMessage(SendType.Message, CRCOptions.Channel, nick + FAKE_DELIM + CRCOptions.GetFaction() + META_DELIM + message);
             display.OnChannelMessage(nick, message);
             game.OnChannelMessage(nick, CRCOptions.GameFaction, message);
+        }
+
+        public void SendQuery(string nick, string message)
+        {
+            client.SendMessage(SendType.Message, nick, CRCOptions.GetFaction() + META_DELIM + message);
+            display.OnQueryMessage(CRCOptions.Name, nick, message);
+            game.OnQueryMessage(CRCOptions.Name, nick, CRCOptions.GetFaction(), message);
+        }
+
+        public bool SendReply(string message)
+        {
+            if (lastQuery != null)
+            {
+                SendQuery(lastQuery, message);
+                return true;
+            }
+            return false;
         }
 
         private string GetMetadata(string message, out string fakeNick, out string faction)
@@ -176,7 +199,7 @@ namespace Chernobyl_Relay_Chat
                 }
                 else
                     return;
-                if(message.Contains(CRCOptions.Name))
+                if (message.Contains(CRCOptions.Name))
                 {
                     SystemSounds.Asterisk.Play();
                     display.OnHighlightMessage(nick, message);
@@ -190,9 +213,9 @@ namespace Chernobyl_Relay_Chat
             }
         }
 
-        // Queries not supported currently
         private void OnQueryMessage(object sender, IrcEventArgs e)
         {
+            lastQuery = e.Data.Nick;
             string fakeNick, faction;
             string message = GetMetadata(e.Data.Message, out fakeNick, out faction);
             // Never use fakeNick for query
