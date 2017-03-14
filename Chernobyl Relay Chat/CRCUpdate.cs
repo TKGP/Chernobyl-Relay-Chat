@@ -1,4 +1,5 @@
 ﻿using GitHubUpdate;
+using Octokit;
 using System.Media;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,7 +13,15 @@ namespace Chernobyl_Relay_Chat
         public static bool CheckFirstUpdate()
         {
             UpdateChecker updateChecker = new UpdateChecker("TKGP", "Chernobyl-Relay-Chat");
-            UpdateType updateType = updateChecker.CheckUpdate().Result;
+            UpdateType updateType;
+            try
+            {
+                updateType = updateChecker.CheckUpdate().Result;
+            }
+            catch (RateLimitExceededException)
+            {
+                return false;
+            }
             if (updateType != UpdateType.None)
             {
                 string releaseNotes = updateChecker.RenderReleaseNotes().Result;
@@ -31,7 +40,15 @@ namespace Chernobyl_Relay_Chat
         public static async Task CheckUpdate(ClientDisplay display, CRCClient client)
         {
             UpdateChecker updateChecker = new UpdateChecker("TKGP", "Chernobyl-Relay-Chat");
-            UpdateType updateType = await updateChecker.CheckUpdate();
+            UpdateType updateType;
+            try
+            {
+                updateType = await updateChecker.CheckUpdate();
+            }
+            catch (RateLimitExceededException)
+            {
+                return;
+            }
             if (updateType != UpdateType.None)
             {
                 string releaseNotes = await updateChecker.RenderReleaseNotes();

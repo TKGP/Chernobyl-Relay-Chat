@@ -116,7 +116,7 @@
             // timerCheckUpdate
             // 
             this.timerCheckUpdate.Enabled = true;
-            this.timerCheckUpdate.Interval = 60000;
+            this.timerCheckUpdate.Interval = 600000;
             this.timerCheckUpdate.Tick += new System.EventHandler(this.timerCheckUpdate_Tick);
             // 
             // ClientDisplay

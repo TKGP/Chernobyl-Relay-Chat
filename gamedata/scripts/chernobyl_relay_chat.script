@@ -13,6 +13,7 @@ local HIGHLIGHT_COLOR = "%c[255,255,255,128]"
 local config = system_ini()
 local lastUpdate = 0
 local sendQueue = {}
+local messageLog = {}
 local chatBox
 local showChatBox = false
 
@@ -106,6 +107,7 @@ local function update()
 						chatKey = DIK_keys[value]
 					end
 				else
+					table.insert(messageLog, {title = title, text = text, icon = icon})
 					db.actor:give_game_news(title, text, icon, 0, newsDuration)
 				end
 			end
@@ -161,6 +163,14 @@ function ChatBox:__init() super()
 	self:AddCallback("button_send", ui_events.BUTTON_CLICKED, self.Send, self)
 	self:AddCallback("button_close", ui_events.BUTTON_CLICKED, self.Cancel, self)
 	self.focus = false
+	
+	for index, logEntry in ipairs(messageLog) do
+		local message = xml:InitStatic("log_entry", self)
+		message:SetWndPos(vector2():set(20, 768 - 100 - (#messageLog - index) * 50))
+		xml:InitStatic("log_entry:log_icon", message):InitTexture(logEntry.icon)
+		xml:InitStatic("log_entry:log_title", message):TextControl():SetText(logEntry.title)
+		xml:InitStatic("log_entry:log_message", message):TextControl():SetText(logEntry.text)
+	end
 end
 
 function ChatBox:OnKeyboard(dik, keyboard_action)
