@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<O_ACTOR>
+		<string>committed suicide</string>
+	</O_ACTOR>
+	<S_ACTOR>
+		<string>committed suicide</string>
+	</S_ACTOR>
+	<AI_STL_S>
+		<string>was gunned down by a stalker</string>
+	</AI_STL_S>
+	<AI_STL>
+		<string>was gunned down by a stalker</string>
+	</AI_STL>
+	<SM_BLOOD>
+		<string>was sucked dry by a bloodsucker</string>
+	</SM_BLOOD>
+	<SM_BOARW>
+		<string>was goared by a boar</string>
+	</SM_BOARW>
+	<SM_BURER>
+		<string>met their fate at the hands of a burer</string>
+	</SM_BURER>
+	<SM_CAT_S>
+		<string>was scratched to death by a cat</string>
+	</SM_CAT_S>
+	<SM_CHIMS>
+		<string>was leapt on by a chimera</string>
+	</SM_CHIMS>
+	<SM_CONTR>
+		<string>was zombified by a controller</string>
+	</SM_CONTR>
+	<SM_DOG_S>
+		<string>was mauled by a blind dog</string>
+	</SM_DOG_S>
+	<SM_FLESH>
+		<string>somehow died to a pig</string>
+	</SM_FLESH>
+	<SM_IZLOM>
+		<string>was smashed by an izlom</string>
+	</SM_IZLOM>
+	<SM_GIANT>
+		<string>was crushed by a pseudogiant</string>
+	</SM_GIANT>
+	<AI_PHANT>
+		<string>succumbed to brain damage</string>
+	</AI_PHANT>
+	<SM_POLTR>
+		<string>was killed by some invisible thing</string>
+	</SM_POLTR>
+	<SM_P_DOG>
+		<string>was hunted down by a pseudodog</string>
+	</SM_P_DOG>
+	<SM_DOG_P>
+		<string>was overwhelmed by a psy dog</string>
+	</SM_DOG_P>
+	<SM_DOG_F>
+		<string>was overwhelmed by a psy dog</string>
+	</SM_DOG_F>
+	<AI_RAT>
+		<string>was eaten alive by rats</string>
+	</AI_RAT>
+	<SM_SNORK>
+		<string>was kicked to death by a snork</string>
+	</SM_SNORK>
+	<SM_TUSHK>
+		<string>was gnawed to the bone by a tushkano</string>
+	</SM_TUSHK>
+	<SM_ZOMBI>
+		<string>had their brains eaten by a zombie</string>
+	</SM_ZOMBI>
+	<C_HLCP_S>
+		<string>was shot down by a helicopter</string>
+	</C_HLCP_S>
+	<SCRPTCAR>
+		<string>became roadkill</string>
+	</SCRPTCAR>
+	<ZS_MBALD>
+		<string>walked right into an anomaly</string>
+	</ZS_MBALD>
+	<ZS_GALAN>
+		<string>was sucked into a vortex</string>
+	</ZS_GALAN>
+	<ZS_MINCE>
+		<string>was sucked into a vortex</string>
+	</ZS_MINCE>
+	<ZS_RADIO>
+		<string>stepped into an anomalous field</string>
+	</ZS_RADIO>
+	<ZS_TORRD>
+		<string>couldn't outrun a comet</string>
+	</ZS_TORRD>
+	<ZS_BFUZZ>
+		<string>got tangled up in a burnt fuzz</string>
+	</ZS_BFUZZ>
+	<Z_MBALD>
+		<string>triggered a land mine</string>
+	</Z_MBALD>
+	<Z_RADIO>
+		<string>stepped into an anomalous field</string>
+	</Z_RADIO>
+	<Z_CFIRE>
+		<string>tripped and fell into a campfire</string>
+	</Z_CFIRE>
+	<Z_TORRID>
+		<string>got burned up by a comet</string>
+	</Z_TORRID>
+	<Z_AMEBA>
+		<string>got tangled up in a burnt fuzz</string>
+	</Z_AMEBA>
+	<S_EXPLO>
+		<string>was blown apart by an explosion</string>
+	</S_EXPLO>
+	<II_EXPLO>
+		<string>was blown apart by an explosion</string>
+	</II_EXPLO>
+	<STALKER>
+		<string>was gunned down by a loner</string>
+	</STALKER>
+	<BANDIT>
+		<string>was looted by a bandit</string>
+	</BANDIT>
+	<DOLG>
+		<string>was removed by a Dutyer</string>
+	</DOLG>
+	<FREEDOM>
+		<string>was blazed by a Freedomer</string>
+	</FREEDOM>
+	<ECOLOG>
+		<string>was blind-sided by a scientist</string>
+	</ECOLOG>
+	<KILLER>
+		<string>was taken out by a mercenary</string>
+	</KILLER>
+	<MONOLITH>
+		<string>was purged by a cultist</string>
+	</MONOLITH>
+	<ZOMBIED>
+		<string>was blown away by a zombified stalker</string>
+	</ZOMBIED>
+	<ARENA_ENEMY>
+		<string>lost in the Arena</string>
+	</ARENA_ENEMY>
+	<CSKY>
+		<string>was killed by the best faction</string>
+	</CSKY>
+	<ARMY>
+		<string>was shot down by the military</string>
+	</ARMY>
+</root>

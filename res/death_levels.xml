@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<k00_marsh>
+		<string>at the Swamps</string>
+	</k00_marsh>
+	<k01_darkscape>
+		<string>in Darkscape</string>
+	</k01_darkscape>
+	<k02_trucks_cemetery>
+		<string>in the Truck Cemetery</string>
+	</k02_trucks_cemetery>
+	<l01_escape>
+		<string>at the Cordon</string>
+	</l01_escape>
+	<l02_garbage>
+		<string>at the Garbage</string>
+	</l02_garbage>
+	<l03_agroprom>
+		<string>at Agroprom</string>
+	</l03_agroprom>
+	<l03u_agr_underground>
+		<string>in Agroprom Underground</string>
+	</l03u_agr_underground>
+	<l04_darkvalley>
+		<string>in Dark Valley</string>
+	</l04_darkvalley>
+	<l04u_labx18>
+		<string>in Lab X-18</string>
+	</l04u_labx18>
+	<l05_bar>
+		<string>at the Bar</string>
+	</l05_bar>
+	<l06_rostok>
+		<string>at Wild Territory</string>
+	</l06_rostok>
+	<l07_military>
+		<string>at the Army Warehouses</string>
+	</l07_military>
+	<l08_yantar>
+		<string>at Lake Yantar</string>
+	</l08_yantar>
+	<l08u_brainlab>
+		<string>in Lab X-16</string>
+	</l08u_brainlab>
+	<l09_deadcity>
+		<string>in Dead City</string>
+	</l09_deadcity>
+	<l10_limansk>
+		<string>in Limansk</string>
+	</l10_limansk>
+	<l10_radar>
+		<string>at Radar</string>
+	</l10_radar>
+	<l10_red_forest>
+		<string>in Red Forest</string>
+	</l10_red_forest>
+	<l10u_bunker>
+		<string>in the Brain Scorcher</string>
+	</l10u_bunker>
+	<l11_hospital>
+		<string>in the Hospital</string>
+	</l11_hospital>
+	<l11_pripyat>
+		<string>in Eastern Pripyat</string>
+	</l11_pripyat>
+	<l12_stancia>
+		<string>outside the CNPP</string>
+	</l12_stancia>
+	<l12_stancia_2>
+		<string>outside the CNPP</string>
+	</l12_stancia_2>
+	<l12u_control_monolith>
+		<string>inside the CNPP</string>
+	</l12u_control_monolith>
+	<l12u_sarcofag>
+		<string>inside the CNPP</string>
+	</l12u_sarcofag>
+	<l13_generators>
+		<string>at the Generators</string>
+	</l13_generators>
+	<l13u_warlab>
+		<string>in Warlab</string>
+	</l13u_warlab>
+	<jupiter>
+		<string>around Jupiter</string>
+	</jupiter>
+	<jupiter_underground>
+		<string>in the Pripyat Underpass</string>
+	</jupiter_underground>
+	<labx8>
+		<string>in Lab X-8</string>
+	</labx8>
+	<pripyat>
+		<string>in Western Pripyat</string>
+	</pripyat>
+	<zaton>
+		<string>at Zaton</string>
+	</zaton>
+</root>
