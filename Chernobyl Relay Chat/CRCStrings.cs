@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace Chernobyl_Relay_Chat
@@ -10,6 +11,9 @@ namespace Chernobyl_Relay_Chat
         private static Random rand = new Random();
         private static List<string> deathFormats, deathTimes, deathObservances, deathRemarks;
         private static Dictionary<string, List<string>> deathLevels, deathSections, deathClasses, fNames, sNames;
+
+        private static readonly Regex invalidNickRx = new Regex(@"[^a-zA-Z0-9_\-\\^{}|]");
+        private static readonly Regex invalidNickFirstCharRx = new Regex(@"[^a-zA-Z_\\^{}|]");
 
         public static void Init()
         {
@@ -67,7 +71,15 @@ namespace Chernobyl_Relay_Chat
 
         public static string ValidateNick(string nick)
         {
-            return nick;
+            if (nick.Length < 1)
+                return "Nicks must be at least 1 character long.";
+            if (nick.Length > 30)
+                return "Nicks must be at most 30 characters long.";
+            if (invalidNickRx.Match(nick).Success)
+                return @"Nicks may only contain letters, numbers, and these characters: _-\^{}|";
+            if (invalidNickFirstCharRx.Match(nick).Success)
+                return "Nicks may not begin with a number or -";
+            return null;
         }
 
         public static string DeathMessage(string name, string level, string xrClass, string section)

@@ -63,7 +63,11 @@ namespace Chernobyl_Relay_Chat
 
         private static void ChangeNick(List<string> args, ICRCSendable output)
         {
-            client.ChangeNick(args[0]);
+            string result = CRCStrings.ValidateNick(args[0]);
+            if (result != null)
+                client.ChangeNick(args[0]);
+            else
+                output.AddError(result);
         }
 
         private static void SendReply(List<string> args, ICRCSendable output)

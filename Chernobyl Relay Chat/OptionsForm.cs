@@ -8,8 +8,6 @@ namespace Chernobyl_Relay_Chat
     public partial class OptionsForm : Form
     {
         private CRCClient client;
-        private Regex nickCheckRx = new Regex(@"^\w[\w\d_]*$");
-        public static string KeyPromptResult;
 
         private readonly Dictionary<string, int> factionToIndex = new Dictionary<string, int>()
         {
@@ -58,14 +56,10 @@ namespace Chernobyl_Relay_Chat
         private void buttonOK_Click(object sender, EventArgs e)
         {
             string name = textBoxName.Text.Replace(' ', '_');
-            if (name.Length < 1 || name.Length > 30)
+            string result = CRCStrings.ValidateNick(name);
+            if (result == null)
             {
-                MessageBox.Show("Nickname must be between 1 and 30 characters in length.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (!nickCheckRx.Match(name).Success)
-            {
-                MessageBox.Show("Nicknames must start with a letter and only use letters, numbers, and underscores.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(result, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -106,10 +100,12 @@ namespace Chernobyl_Relay_Chat
 
         private void buttonChatKey_Click(object sender, EventArgs e)
         {
-            KeyPromptResult = null;
-            new KeyPromptForm().ShowDialog();
-            if (KeyPromptResult != null)
-                textBoxChatKey.Text = KeyPromptResult;
+            using (KeyPromptForm keyPromptForm = new KeyPromptForm())
+            {
+                keyPromptForm.ShowDialog();
+                if (keyPromptForm.Result != null)
+                    textBoxChatKey.Text = keyPromptForm.Result;
+            }
         }
     }
 }

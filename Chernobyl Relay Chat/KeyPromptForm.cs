@@ -5,6 +5,8 @@ namespace Chernobyl_Relay_Chat
 {
     public partial class KeyPromptForm : Form
     {
+        public string Result;
+
         public KeyPromptForm()
         {
             InitializeComponent();
@@ -17,12 +19,12 @@ namespace Chernobyl_Relay_Chat
             if(keyCode >= Keys.A && keyCode <= Keys.Z
                 || keyCode >= Keys.F1 && keyCode <= Keys.F15)
             {
-                OptionsForm.KeyPromptResult = keyCode.ToString();
+                Result = keyCode.ToString();
                 Close();
             }
             else if (keyToDik.ContainsKey(keyCode))
             {
-                OptionsForm.KeyPromptResult = keyToDik[keyCode];
+                Result = keyToDik[keyCode];
                 Close();
             }
             else
