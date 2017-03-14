@@ -39,7 +39,7 @@ namespace Chernobyl_Relay_Chat
             }
             for (int index = 0; index < argCount; index++)
             {
-                if (index == argCount && longArg)
+                if (index == (argCount - 1) && longArg)
                     args.Add(input.Substring(argMatches[index].Index));
                 else
                     args.Add(argMatches[index].Value);

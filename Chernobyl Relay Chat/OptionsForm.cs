@@ -57,7 +57,7 @@ namespace Chernobyl_Relay_Chat
         {
             string name = textBoxName.Text.Replace(' ', '_');
             string result = CRCStrings.ValidateNick(name);
-            if (result == null)
+            if (result != null)
             {
                 MessageBox.Show(result, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

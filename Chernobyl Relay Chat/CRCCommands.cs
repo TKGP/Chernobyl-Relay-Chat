@@ -18,7 +18,7 @@ namespace Chernobyl_Relay_Chat
             new CRCCommand("commands", "/commands", "Displays all available commands.", 0, false, ShowCommands),
             new CRCCommand("help", "/help [command] Use /commands to see all available commands.", "Displays information about the given command.", 1, false, ShowHelp),
             new CRCCommand("msg", "/msg [nick] [message]", "Sends a private message to another user.", 2, true, SendQuery),
-            new CRCCommand("nick", "/nick [nick]", "Changes your nickname.", 1, false, ChangeNick),
+            new CRCCommand("nick", "/nick [nick]", "Changes your nickname.", 1, true, ChangeNick),
             new CRCCommand("reply", "/reply [message]", "Sends a private message to the last user who sent you one.", 1, true, SendReply),
         };
 
@@ -63,11 +63,12 @@ namespace Chernobyl_Relay_Chat
 
         private static void ChangeNick(List<string> args, ICRCSendable output)
         {
-            string result = CRCStrings.ValidateNick(args[0]);
+            string nick = args[0].Replace(' ', '_');
+            string result = CRCStrings.ValidateNick(nick);
             if (result != null)
-                client.ChangeNick(args[0]);
-            else
                 output.AddError(result);
+            else
+                client.ChangeNick(nick);
         }
 
         private static void SendReply(List<string> args, ICRCSendable output)
