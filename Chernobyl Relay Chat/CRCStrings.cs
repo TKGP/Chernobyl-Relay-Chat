@@ -154,10 +154,10 @@ namespace Chernobyl_Relay_Chat
                 {
                     string key = keyNode.Name;
                     listDict[key] = new List<string>();
-                    string clone = keyNode.Attributes["clone"].Value;
+                    XmlNode clone = keyNode.Attributes["clone"];
                     if (clone != null)
                     {
-                        listDict[key] = listDict[clone];
+                        listDict[key] = listDict[clone.Value];
                     }
                     else
                     {
