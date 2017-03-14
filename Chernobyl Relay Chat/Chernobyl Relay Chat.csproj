@@ -161,7 +161,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(SolutionDir)res" "$(TargetDir)res"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y "$(SolutionDir)res" "$(TargetDir)res"
+move /Y "$(TargetDir)*.dll" "$(TargetDir)lib"
+move /Y "$(TargetDir)*.xml" "$(TargetDir)lib"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
