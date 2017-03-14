@@ -1,88 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
 	<k00_marsh>
-		<string>at the Swamps</string>
+		<string>in the marshes</string>
+		<string>at the marshes</string>
+		<string>on the marshes</string>
+		<string>at the swamps</string>
+		<string>in the swamps</string>
+		<string>in the Great Swamp</string>
+		<string>at the Great Swamp</string>
 	</k00_marsh>
 	<k01_darkscape>
+		<string>around Darkscape</string>
+		<string>at Darkscape</string>
 		<string>in Darkscape</string>
 	</k01_darkscape>
 	<k02_trucks_cemetery>
+		<string>around the Truck Cemetery</string>
+		<string>at the Truck Cemetery</string>
 		<string>in the Truck Cemetery</string>
 	</k02_trucks_cemetery>
 	<l01_escape>
+		<string>around Cordon</string>
+		<string>in Cordon</string>
 		<string>at the Cordon</string>
 	</l01_escape>
 	<l02_garbage>
+		<string>around Garbage</string>
+		<string>in the Garbage</string>
 		<string>at the Garbage</string>
 	</l02_garbage>
 	<l03_agroprom>
+		<string>near the Agroprom Institute</string>
+		<string>around the Agroprom Institute</string>
+		<string>around Agroprom</string>
 		<string>at Agroprom</string>
 	</l03_agroprom>
 	<l03u_agr_underground>
+		<string>under Agroprom</string>
 		<string>in Agroprom Underground</string>
 	</l03u_agr_underground>
 	<l04_darkvalley>
+		<string>around the Dark Valley</string>
+		<string>around Dark Valley</string>
+		<string>in the Dark Valley</string>
 		<string>in Dark Valley</string>
 	</l04_darkvalley>
 	<l04u_labx18>
 		<string>in Lab X-18</string>
 	</l04u_labx18>
 	<l05_bar>
+		<string>around Rostok</string>
+		<string>at Rostok</string>
+		<string>around the Bar</string>
+		<string>near 100 Rads Bar</string>
+		<string>near the Bar</string>
 		<string>at the Bar</string>
 	</l05_bar>
 	<l06_rostok>
+		<string>around Wild Territory</string>
 		<string>at Wild Territory</string>
 	</l06_rostok>
 	<l07_military>
+		<string>near the Army Warehouses</string>
+		<string>around the Army Warehouses</string>
 		<string>at the Army Warehouses</string>
 	</l07_military>
 	<l08_yantar>
+		<string>at Yantar</string>
+		<string>around Yantar</string>
+		<string>near Yantar</string>
+		<string>around Lake Yantar</string>
+		<string>near Lake Yantar</string>
 		<string>at Lake Yantar</string>
 	</l08_yantar>
 	<l08u_brainlab>
 		<string>in Lab X-16</string>
 	</l08u_brainlab>
 	<l09_deadcity>
+		<string>near Dead City</string>
+		<string>around Dead City</string>
+		<string>at Dead City</string>
 		<string>in Dead City</string>
+		<string>near the Dead City</string>
+		<string>around the Dead City</string>
+		<string>in the Dead City</string>
 	</l09_deadcity>
 	<l10_limansk>
+		<string>near Limansk</string>
+		<string>around Limansk</string>
+		<string>at Limansk</string>
 		<string>in Limansk</string>
 	</l10_limansk>
 	<l10_radar>
+		<string>around Radar</string>
 		<string>at Radar</string>
 	</l10_radar>
 	<l10_red_forest>
+		<string>near Red Forest</string>
+		<string>at Red Forest</string>
+		<string>around Red Forest</string>
 		<string>in Red Forest</string>
+		<string>near the Red Forest</string>
+		<string>at the Red Forest</string>
+		<string>around the Red Forest</string>
+		<string>in the Red Forest</string>
 	</l10_red_forest>
 	<l10u_bunker>
 		<string>in the Brain Scorcher</string>
 	</l10u_bunker>
 	<l11_hospital>
+		<string>at the Hospital</string>
 		<string>in the Hospital</string>
 	</l11_hospital>
 	<l11_pripyat>
+		<string>near Pripyat</string>
+		<string>in Pripyat</string>
+		<string>near Eastern Pripyat</string>
 		<string>in Eastern Pripyat</string>
+		<string>near East Pripyat</string>
+		<string>in East Pripyat</string>
 	</l11_pripyat>
 	<l12_stancia>
+		<string>near the CNPP</string>
+		<string>around the CNPP</string>
 		<string>outside the CNPP</string>
+		<string>South of the CNPP</string>
 	</l12_stancia>
 	<l12_stancia_2>
+		<string>near the CNPP</string>
+		<string>around the CNPP</string>
 		<string>outside the CNPP</string>
+		<string>North of the CNPP</string>
 	</l12_stancia_2>
 	<l12u_control_monolith>
+		<string>in the CNPP</string>
 		<string>inside the CNPP</string>
 	</l12u_control_monolith>
 	<l12u_sarcofag>
+		<string>in the CNPP</string>
 		<string>inside the CNPP</string>
 	</l12u_sarcofag>
 	<l13_generators>
+		<string>by the Generators</string>
+		<string>near the Generators</string>
+		<string>around the Generators</string>
 		<string>at the Generators</string>
 	</l13_generators>
 	<l13u_warlab>
 		<string>in Warlab</string>
 	</l13u_warlab>
 	<jupiter>
+		<string>near Jupiter</string>
 		<string>around Jupiter</string>
+		<string>near Jupiter Station</string>
+		<string>around Jupiter Station</string>
 	</jupiter>
 	<jupiter_underground>
 		<string>in the Pripyat Underpass</string>
@@ -91,9 +162,18 @@
 		<string>in Lab X-8</string>
 	</labx8>
 	<pripyat>
+		<string>in Pripyat Outskirts</string>
+		<string>in the Pripyat Outskirts</string>
+		<string>near West Pripyat</string>
+		<string>around West Pripyat</string>
+		<string>in West Pripyat</string>
+		<string>near Western Pripyat</string>
+		<string>around Western Pripyat</string>
 		<string>in Western Pripyat</string>
 	</pripyat>
 	<zaton>
+		<string>around Zaton</string>
 		<string>at Zaton</string>
+		<string>in Zaton</string>
 	</zaton>
 </root>

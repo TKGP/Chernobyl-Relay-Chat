@@ -8,14 +8,17 @@ namespace Chernobyl_Relay_Chat
 {
     public class CRCStrings
     {
-        private static Random rand = new Random();
-        private static List<string> deathFormats, deathTimes, deathObservances, deathRemarks;
-        private static Dictionary<string, List<string>> deathLevels, deathSections, deathClasses, fNames, sNames;
+        private const int GENERIC_CHANCE = 10;
+        private const int REMARK_CHANCE = 25;
+
+        private static readonly Random rand = new Random();
+        private static readonly List<string> deathFormats, deathTimes, deathObservances, deathRemarks, deathGeneric;
+        private static readonly Dictionary<string, List<string>> deathLevels, deathSections, deathClasses, fNames, sNames;
 
         private static readonly Regex invalidNickRx = new Regex(@"[^a-zA-Z0-9_\-\\^{}|]");
         private static readonly Regex invalidNickFirstCharRx = new Regex(@"[^a-zA-Z_\\^{}|]");
 
-        public static void Init()
+        static CRCStrings()
         {
             deathFormats = loadXmlList(@"res\death_formats.xml");
             deathTimes = loadXmlList(@"res\death_times.xml");
@@ -24,6 +27,7 @@ namespace Chernobyl_Relay_Chat
             deathLevels = loadXmlListDict(@"res\death_levels.xml");
             deathSections = loadXmlListDict(@"res\death_sections.xml");
             deathClasses = loadXmlListDict(@"res\death_classes.xml");
+            deathGeneric = loadXmlList(@"res\death_generic.xml");
 
             fNames = loadXmlListDict(@"res\fnames.xml");
             sNames = loadXmlListDict(@"res\snames.xml");
@@ -86,7 +90,9 @@ namespace Chernobyl_Relay_Chat
         {
             string levelText = deathLevels.ContainsKey(level) ? PickRandom(deathLevels[level]) : ("somewhere in the Zone (" + level + ")");
             string deathText;
-            if (deathSections.ContainsKey(section))
+            if (rand.Next(101) < GENERIC_CHANCE)
+                deathText = PickRandom(deathGeneric);
+            else if (deathSections.ContainsKey(section))
                 deathText = PickRandom(deathSections[section]);
             else if (deathClasses.ContainsKey(xrClass))
                 deathText = PickRandom(deathClasses[xrClass]);
@@ -100,7 +106,7 @@ namespace Chernobyl_Relay_Chat
             message = message.Replace("$name", name);
             message = message.Replace("$death", deathText);
             message = message[0].ToString().ToUpper() + message.Substring(1);
-            if (rand.Next(100) >= 75)
+            if (rand.Next(101) < REMARK_CHANCE)
                 message += ' ' + PickRandom(deathRemarks);
             return message;
         }
@@ -140,9 +146,17 @@ namespace Chernobyl_Relay_Chat
             {
                 string key = keyNode.Name;
                 listDict[key] = new List<string>();
-                foreach (XmlNode stringNode in keyNode.ChildNodes)
+                string clone = keyNode.Attributes["clone"].Value;
+                if (clone != null)
                 {
-                    listDict[key].Add(stringNode.InnerText);
+                    listDict[key] = listDict[clone];
+                }
+                else
+                {
+                    foreach (XmlNode stringNode in keyNode.ChildNodes)
+                    {
+                        listDict[key].Add(stringNode.InnerText);
+                    }
                 }
             }
             return listDict;

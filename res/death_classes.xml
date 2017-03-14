@@ -2,16 +2,14 @@
 <root>
 	<O_ACTOR>
 		<string>committed suicide</string>
+		<string>killed themselves</string>
+		<string>ended their own life</string>
 	</O_ACTOR>
-	<S_ACTOR>
-		<string>committed suicide</string>
-	</S_ACTOR>
+	<S_ACTOR clone="O_ACTOR"/>
 	<AI_STL_S>
 		<string>was gunned down by a stalker</string>
 	</AI_STL_S>
-	<AI_STL>
-		<string>was gunned down by a stalker</string>
-	</AI_STL>
+	<AI_STL clone="AI_STL_S"/>
 	<SM_BLOOD>
 		<string>was sucked dry by a bloodsucker</string>
 	</SM_BLOOD>
@@ -54,9 +52,7 @@
 	<SM_DOG_P>
 		<string>was overwhelmed by a psy dog</string>
 	</SM_DOG_P>
-	<SM_DOG_F>
-		<string>was overwhelmed by a psy dog</string>
-	</SM_DOG_F>
+	<SM_DOG_F clone="SM_DOG_P"/>
 	<AI_RAT>
 		<string>was eaten alive by rats</string>
 	</AI_RAT>
@@ -81,9 +77,7 @@
 	<ZS_GALAN>
 		<string>was sucked into a vortex</string>
 	</ZS_GALAN>
-	<ZS_MINCE>
-		<string>was sucked into a vortex</string>
-	</ZS_MINCE>
+	<ZS_MINCE clone="ZS_GALAN"/>
 	<ZS_RADIO>
 		<string>stepped into an anomalous field</string>
 	</ZS_RADIO>
@@ -96,9 +90,7 @@
 	<Z_MBALD>
 		<string>triggered a land mine</string>
 	</Z_MBALD>
-	<Z_RADIO>
-		<string>stepped into an anomalous field</string>
-	</Z_RADIO>
+	<Z_RADIO clone="ZS_RADIO"/>
 	<Z_CFIRE>
 		<string>tripped and fell into a campfire</string>
 	</Z_CFIRE>
@@ -111,9 +103,8 @@
 	<S_EXPLO>
 		<string>was blown apart by an explosion</string>
 	</S_EXPLO>
-	<II_EXPLO>
-		<string>was blown apart by an explosion</string>
-	</II_EXPLO>
+	<II_EXPLO clone="II_EXPLO"/>
+	
 	<STALKER>
 		<string>was gunned down by a loner</string>
 	</STALKER>
@@ -142,7 +133,7 @@
 		<string>lost in the Arena</string>
 	</ARENA_ENEMY>
 	<CSKY>
-		<string>was killed by the best faction</string>
+		<string>was snuck up on by Clear Sky</string>
 	</CSKY>
 	<ARMY>
 		<string>was shot down by the military</string>
