@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -127,13 +128,18 @@ namespace Chernobyl_Relay_Chat
 
         private static List<string> loadXmlList(string path)
         {
+
             List<string> list = new List<string>();
             XmlDocument xml = new XmlDocument();
-            xml.Load(path);
-            foreach (XmlNode stringNode in xml.DocumentElement.ChildNodes)
+            try
             {
-                list.Add(stringNode.InnerText);
+                xml.Load(path);
+                foreach (XmlNode stringNode in xml.DocumentElement.ChildNodes)
+                {
+                    list.Add(stringNode.InnerText);
+                }
             }
+            catch (Exception ex) when (ex is XmlException || ex is FileNotFoundException) { }
             return list;
         }
 
@@ -141,24 +147,28 @@ namespace Chernobyl_Relay_Chat
         {
             Dictionary<string, List<string>> listDict = new Dictionary<string, List<string>>();
             XmlDocument xml = new XmlDocument();
-            xml.Load(path);
-            foreach (XmlNode keyNode in xml.DocumentElement.ChildNodes)
+            try
             {
-                string key = keyNode.Name;
-                listDict[key] = new List<string>();
-                string clone = keyNode.Attributes["clone"].Value;
-                if (clone != null)
+                xml.Load(path);
+                foreach (XmlNode keyNode in xml.DocumentElement.ChildNodes)
                 {
-                    listDict[key] = listDict[clone];
-                }
-                else
-                {
-                    foreach (XmlNode stringNode in keyNode.ChildNodes)
+                    string key = keyNode.Name;
+                    listDict[key] = new List<string>();
+                    string clone = keyNode.Attributes["clone"].Value;
+                    if (clone != null)
                     {
-                        listDict[key].Add(stringNode.InnerText);
+                        listDict[key] = listDict[clone];
+                    }
+                    else
+                    {
+                        foreach (XmlNode stringNode in keyNode.ChildNodes)
+                        {
+                            listDict[key].Add(stringNode.InnerText);
+                        }
                     }
                 }
             }
+            catch (Exception ex) when (ex is XmlException || ex is FileNotFoundException) { }
             return listDict;
         }
     }

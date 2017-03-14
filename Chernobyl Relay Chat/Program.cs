@@ -18,8 +18,7 @@ namespace Chernobyl_Relay_Chat
 
             if (CRCUpdate.CheckFirstUpdate())
               return;
-
-            CRCStrings.Init();
+            
             if (CRCOptions.Load())
             {
                 Application.EnableVisualStyles();
