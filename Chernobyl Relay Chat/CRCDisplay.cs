@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
@@ -18,7 +19,9 @@ namespace Chernobyl_Relay_Chat
 
         public static void Stop()
         {
-            clientDisplay.Close();
+            clientDisplay?.Invoke(new Action(() =>
+                clientDisplay.Close())
+                );
         }
 
         public static void OnConnected()
@@ -107,6 +110,11 @@ namespace Chernobyl_Relay_Chat
         public static void OnError(string message)
         {
             clientDisplay?.AddError("Error: " + message);
+        }
+
+        public static void OnReconnecting()
+        {
+            clientDisplay?.AddInformation("Reconnecting...");
         }
     }
 }

@@ -2,31 +2,17 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Media;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Chernobyl_Relay_Chat
 {
     public partial class ClientDisplay : Form, ICRCSendable
     {
-        private static ClientDisplay clientDisplay;
-
-        private List<string> users = new List<string>();
         private Font mainFont, boldFont, timeFont;
 
         public ClientDisplay()
         {
             InitializeComponent();
-            if (clientDisplay == null)
-                clientDisplay = this;
-            else
-                clientDisplay.AddError("FUCK");
-        }
-
-        ~ClientDisplay()
-        {
-            clientDisplay = null;
         }
 
         private void ClientDisplay_Load(object sender, EventArgs e)

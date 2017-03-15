@@ -200,9 +200,15 @@ namespace Chernobyl_Relay_Chat
         }
 
 
+
         public static void OnBanned()
         {
             AddError("Woops, you're banned!");
+        }
+
+        public static void OnReconnecting()
+        {
+            AddInformation("Reconnecting...");
         }
 
         public static void OnError(string message)

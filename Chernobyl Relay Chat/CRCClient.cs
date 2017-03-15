@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
+#if DEBUG
+using System.Threading;
+#endif
 
 namespace Chernobyl_Relay_Chat
 {
@@ -20,7 +22,7 @@ namespace Chernobyl_Relay_Chat
         private static readonly IrcClient client = new IrcClient();
         private static DateTime lastDeath = new DateTime();
         private static string lastQuery;
-        private static Thread listenThread;
+        private static bool retry = false;
 
 #if DEBUG
         private static DebugDisplay debug = new DebugDisplay();
@@ -48,9 +50,20 @@ namespace Chernobyl_Relay_Chat
             client.OnNickChange += new NickChangeEventHandler(OnNickChange);
             client.OnErrorMessage += new IrcEventHandler(OnErrorMessage);
             client.OnKick += new KickEventHandler(OnKick);
+            client.OnDisconnected += new EventHandler(OnDisconnected);
 
-            client.Connect(CRCOptions.Server, 6667);
-            client.Listen();
+            try
+            {
+                client.Connect(CRCOptions.Server, 6667);
+                client.Listen();
+            }
+            catch(CouldNotConnectException)
+            {
+                MessageBox.Show("Could not connect to the IRC server; CRC will now shut down.\r\n"
+                    + "Try running As Administrator or allowing CRC in your firewall.",
+                    "Chernobyl Relay Chat", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CRCDisplay.Stop();
+            }
 #if DEBUG
             debug.Invoke(new Action(() => debug.Close()));
             debugThread.Join();
@@ -62,7 +75,6 @@ namespace Chernobyl_Relay_Chat
             if (client.IsConnected)
             {
                 client.RfcQuit("Safe");
-                client.Disconnect();
             }
         }
 
@@ -151,6 +163,16 @@ namespace Chernobyl_Relay_Chat
             foreach (ChannelUser user in client.GetChannel(CRCOptions.Channel).Users.Values)
                 users.Add(user.Nick);
             CRCDisplay.OnChannelActiveSynced(users);
+        }
+
+        private static void OnDisconnected(object sender, EventArgs e)
+        {
+            if(retry)
+            {
+                CRCDisplay.OnReconnecting();
+                CRCGame.OnReconnecting();
+                client.Connect(CRCOptions.Server, 6667);
+            }
         }
 
         private static void OnRawMessage(object sender, IrcEventArgs e)

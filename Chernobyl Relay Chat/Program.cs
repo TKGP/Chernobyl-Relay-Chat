@@ -22,7 +22,7 @@ namespace Chernobyl_Relay_Chat
                 return;
 
             if (CRCUpdate.CheckFirstUpdate())
-              return;
+                return;
 
             CRCStrings.Load();
             bool optionsLoaded = CRCOptions.Load();

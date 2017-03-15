@@ -1,6 +1,8 @@
 ﻿using GitHubUpdate;
 using Octokit;
+using System;
 using System.Media;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,6 +23,17 @@ namespace Chernobyl_Relay_Chat
             catch (RateLimitExceededException)
             {
                 return false;
+            }
+            catch (AggregateException ae)
+            {
+                ae.Handle(ex =>
+                {
+                    return (ex is HttpRequestException);
+                });
+                MessageBox.Show("Internet connection failed; CRC will now shut down.\r\n"
+                    + "Try running As Administrator or allowing CRC in your firewall settings.",
+                    "Chernobyl Relay Chat", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
             }
             if (updateType != UpdateType.None)
             {
@@ -47,6 +60,15 @@ namespace Chernobyl_Relay_Chat
             }
             catch (RateLimitExceededException)
             {
+                return false;
+            }
+            // If it got past the first one this is probably just a temporary issue
+            catch (AggregateException ae)
+            {
+                ae.Handle(ex =>
+                {
+                    return (ex is HttpRequestException);
+                });
                 return false;
             }
             if (updateType != UpdateType.None)
