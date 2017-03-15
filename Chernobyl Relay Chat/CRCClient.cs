@@ -57,7 +57,7 @@ namespace Chernobyl_Relay_Chat
                 client.Connect(CRCOptions.Server, 6667);
                 client.Listen();
             }
-            catch(CouldNotConnectException)
+            catch (CouldNotConnectException)
             {
                 MessageBox.Show("Could not connect to the IRC server; CRC will now shut down.\r\n"
                     + "Try running As Administrator or allowing CRC in your firewall.",
@@ -167,7 +167,7 @@ namespace Chernobyl_Relay_Chat
 
         private static void OnDisconnected(object sender, EventArgs e)
         {
-            if(retry)
+            if (retry)
             {
                 CRCDisplay.OnReconnecting();
                 CRCGame.OnReconnecting();
