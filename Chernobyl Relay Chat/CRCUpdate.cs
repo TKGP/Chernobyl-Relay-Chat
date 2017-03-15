@@ -37,7 +37,7 @@ namespace Chernobyl_Relay_Chat
             return false;
         }
 
-        public static async Task CheckUpdate(ClientDisplay display, CRCClient client)
+        public static async Task<bool> CheckUpdate()
         {
             UpdateChecker updateChecker = new UpdateChecker("TKGP", "Chernobyl-Relay-Chat");
             UpdateType updateType;
@@ -47,21 +47,22 @@ namespace Chernobyl_Relay_Chat
             }
             catch (RateLimitExceededException)
             {
-                return;
+                return false;
             }
             if (updateType != UpdateType.None)
             {
                 string releaseNotes = await updateChecker.RenderReleaseNotes();
                 SystemSounds.Asterisk.Play();
-                client.OnUpdate("A mandatory update for CRC is available. Please check the external client to download it.");
+                CRCGame.OnUpdate("A mandatory update for CRC is available. Please check the external client to download it.");
                 using (UpdateForm updateForm = new UpdateForm((updateType == UpdateType.Major || updateType == UpdateType.Minor), releaseNotes))
                 {
                     DialogResult dialogResult = updateForm.ShowDialog();
                     if (dialogResult == DialogResult.OK)
                         updateChecker.DownloadAsset("Chernobyl-Relay-Chat.zip");
                 }
-                display.Close();
+                return true;
             }
+            return false;
         }
     }
 }

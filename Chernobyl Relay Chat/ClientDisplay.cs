@@ -10,13 +10,23 @@ namespace Chernobyl_Relay_Chat
 {
     public partial class ClientDisplay : Form, ICRCSendable
     {
-        private CRCClient client;
+        private static ClientDisplay clientDisplay;
+
         private List<string> users = new List<string>();
         private Font mainFont, boldFont, timeFont;
 
         public ClientDisplay()
         {
             InitializeComponent();
+            if (clientDisplay == null)
+                clientDisplay = this;
+            else
+                clientDisplay.AddError("FUCK");
+        }
+
+        ~ClientDisplay()
+        {
+            clientDisplay = null;
         }
 
         private void ClientDisplay_Load(object sender, EventArgs e)
@@ -32,7 +42,6 @@ namespace Chernobyl_Relay_Chat
             }
 
             AddInformation("Connecting...");
-            client = new CRCClient(this);
         }
 
         private void ClientDisplay_FormClosing(object sender, FormClosingEventArgs e)
@@ -48,12 +57,12 @@ namespace Chernobyl_Relay_Chat
                 CRCOptions.DisplaySize = RestoreBounds.Size;
             }
 
-            client.Close();
+            CRCClient.Stop();
         }
 
         private void buttonOptions_Click(object sender, EventArgs e)
         {
-            new OptionsForm(client).Show();
+            new OptionsForm().Show();
         }
 
         private void buttonSend_Click(object sender, EventArgs e)
@@ -65,24 +74,24 @@ namespace Chernobyl_Relay_Chat
             }
             else if (trimmed.Length > 0)
             {
-                client.Send(trimmed);
+                CRCClient.Send(trimmed);
             }
             textBoxInput.Clear();
         }
 
         private void timerGameCheck_Tick(object sender, EventArgs e)
         {
-            client.GameCheck();
+            CRCGame.GameCheck();
         }
 
         private void timerGameUpdate_Tick(object sender, EventArgs e)
         {
-            client.GameUpdate();
+            CRCGame.GameUpdate();
         }
 
         private async void timerCheckUpdate_Tick(object sender, EventArgs e)
         {
-            await CRCUpdate.CheckUpdate(this, client);
+            bool result = await CRCUpdate.CheckUpdate();
         }
 
         private void richTextBoxMessages_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -92,6 +101,23 @@ namespace Chernobyl_Relay_Chat
         }
 
 
+        public void Enable()
+        {
+            Invoke(() =>
+            {
+                buttonSend.Enabled = true;
+                buttonOptions.Enabled = true;
+            });
+        }
+
+        public void Disable()
+        {
+            Invoke(() =>
+            {
+                buttonSend.Enabled = false;
+                buttonOptions.Enabled = false;
+            });
+        }
 
         private void AddLinePrefix()
         {
@@ -105,15 +131,15 @@ namespace Chernobyl_Relay_Chat
             }
         }
 
-        private void AddLine(string line, Color color)
+        public void AddLine(string line, Color color)
         {
-            Invoke(new Action(() =>
+            Invoke(() =>
             {
                 AddLinePrefix();
                 richTextBoxMessages.SelectionFont = mainFont;
                 richTextBoxMessages.SelectionColor = color;
                 richTextBoxMessages.AppendText(line);
-            }));
+            });
         }
 
         public void AddInformation(string line)
@@ -126,9 +152,9 @@ namespace Chernobyl_Relay_Chat
             AddLine(line, Color.Red);
         }
 
-        private void AddMessage(string nick, string message, Color nickColor)
+        public void AddMessage(string nick, string message, Color nickColor)
         {
-            Invoke(new Action(() =>
+            Invoke(() =>
             {
                 AddLinePrefix();
                 richTextBoxMessages.SelectionFont = boldFont;
@@ -137,39 +163,12 @@ namespace Chernobyl_Relay_Chat
                 richTextBoxMessages.SelectionFont = mainFont;
                 richTextBoxMessages.SelectionColor = Color.Black;
                 richTextBoxMessages.AppendText(message);
-            }));
+            });
         }
 
-        private void UpdateUsers()
+        public void AddHighlightMessage(string nick, string message)
         {
-            users.Sort();
-            Invoke(new Action(() =>
-            {
-                textBoxUsers.Text = string.Join("\r\n", users);
-            }));
-        }
-
-
-
-        public void OnConnected()
-        {
-            Invoke(new Action(() =>
-            {
-                buttonSend.Enabled = true;
-                buttonOptions.Enabled = true;
-            }));
-            AddInformation("You are now connected to the network");
-        }
-
-        public void OnChannelActiveSynced(List<string> usersOnJoin)
-        {
-            users = usersOnJoin;
-            UpdateUsers();
-        }
-
-        public void OnHighlightMessage(string nick, string message)
-        {
-            Invoke(new Action(() =>
+            Invoke(() =>
             {
                 AddMessage(nick, message, Color.Black);
                 int start = richTextBoxMessages.GetFirstCharIndexOfCurrentLine();
@@ -178,82 +177,20 @@ namespace Chernobyl_Relay_Chat
                 richTextBoxMessages.SelectionBackColor = Color.Yellow;
                 richTextBoxMessages.Select(0, 0);
                 richTextBoxMessages.SelectionBackColor = Color.White;
-            }));
+            });
         }
 
-        public void OnChannelMessage(string nick, string message)
+        public void UpdateUsers(List<string> users)
         {
-            AddMessage(nick, message, Color.Black);
+            users.Sort();
+            Invoke(() =>
+                textBoxUsers.Text = string.Join("\r\n", users
+                ));
         }
 
-        public void OnOwnChannelMessage(string nick, string message)
+        private void Invoke(Action action)
         {
-            AddMessage(nick, message, Color.Gray);
-        }
-
-        public void OnQueryMessage(string from, string to, string message)
-        {
-            SystemSounds.Asterisk.Play();
-            AddMessage(from + " -> " + to, message, Color.DeepPink);
-        }
-
-        public void OnJoin(string nick)
-        {
-            users.Add(nick);
-            UpdateUsers();
-            AddInformation(nick + " has logged on");
-        }
-
-        public void OnPart(string nick)
-        {
-            users.Remove(nick);
-            UpdateUsers();
-            AddInformation(nick + " has logged off");
-        }
-
-        public void OnKick(string victim, string reason)
-        {
-            users.Remove(victim);
-            UpdateUsers();
-            AddInformation(victim + " has been kicked for: " + reason);
-        }
-
-        public void OnGotKicked(string reason)
-        {
-            users.Clear();
-            UpdateUsers();
-            Invoke(new Action(() =>
-            {
-                buttonSend.Enabled = false;
-                buttonOptions.Enabled = false;
-            }));
-            AddError("You have been kicked for: " + reason);
-        }
-
-        public void OnNickChange(string oldNick, string newNick)
-        {
-            users.Remove(oldNick);
-            users.Add(newNick);
-            UpdateUsers();
-            AddInformation(oldNick + " is now known as " + newNick);
-        }
-
-        public void OnOwnNickChange(string oldNick, string newNick)
-        {
-            users.Remove(oldNick);
-            users.Add(newNick);
-            UpdateUsers();
-            AddInformation("You are now known as " + newNick);
-        }
-
-        public void OnBanned()
-        {
-            AddError("Woops, you're banned!");
-        }
-
-        public void OnError(string message)
-        {
-            AddError("Error: " + message);
+            base.Invoke(action);
         }
     }
 }

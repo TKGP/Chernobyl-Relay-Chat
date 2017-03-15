@@ -85,6 +85,8 @@
     <Compile Include="CRCClient.cs" />
     <Compile Include="CRCCommand.cs" />
     <Compile Include="CRCCommands.cs" />
+    <Compile Include="CRCDisplay.cs" />
+    <Compile Include="CRCGameWrapper.cs" />
     <Compile Include="ICRCSendable.cs" />
     <Compile Include="KeyPromptForm.cs">
       <SubType>Form</SubType>

@@ -13,13 +13,13 @@ namespace Chernobyl_Relay_Chat
         private const int REMARK_CHANCE = 25;
 
         private static readonly Random rand = new Random();
-        private static readonly List<string> deathFormats, deathTimes, deathObservances, deathRemarks, deathGeneric;
-        private static readonly Dictionary<string, List<string>> deathLevels, deathSections, deathClasses, fNames, sNames;
+        private static List<string> deathFormats, deathTimes, deathObservances, deathRemarks, deathGeneric;
+        private static Dictionary<string, List<string>> deathLevels, deathSections, deathClasses, fNames, sNames;
 
         private static readonly Regex invalidNickRx = new Regex(@"[^a-zA-Z0-9_\-\\^{}|]");
         private static readonly Regex invalidNickFirstCharRx = new Regex(@"[^a-zA-Z_\\^{}|]");
 
-        static CRCStrings()
+        public static void Load()
         {
             deathFormats = loadXmlList(@"res\death_formats.xml");
             deathTimes = loadXmlList(@"res\death_times.xml");

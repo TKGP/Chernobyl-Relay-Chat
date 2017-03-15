@@ -9,22 +9,23 @@ using System.Windows.Forms;
 
 namespace Chernobyl_Relay_Chat
 {
-    class CRCGame : ICRCSendable
+    class CRCGame
     {
+        private static readonly CRCGameWrapper wrapper = new CRCGameWrapper();
         private static readonly Encoding encoding = Encoding.GetEncoding(1251);
+        private static readonly Regex outputRx = new Regex("^(.+?)(?:/(.+))?$");
+        private static readonly Regex messageRx = new Regex("^(.+?)/(.+)$");
+        private static readonly Regex deathRx = new Regex("^(.+?)/(.+?)/(.+?)/(.+)$");
 
-        private ClientDisplay display;
-        private CRCClient client;
+        private static bool disable = false;
+        private static int processID = -1;
+        private static string gamePath;
+        private static bool firstClear = false;
+        private static StringBuilder sendQueue = new StringBuilder();
+        private static object queueLock = new object();
 
-        private bool disable = false;
-        private int processID = -1;
-        private string gamePath;
-        private bool firstClear = false;
-        private StringBuilder sendQueue = new StringBuilder();
-        private object queueLock = new object();
-        private Regex outputRx = new Regex("^(.+?)(?:/(.+))?$");
-        private Regex messageRx = new Regex("^(.+?)/(.+)$");
-        private Regex deathRx = new Regex("^(.+?)/(.+?)/(.+?)/(.+)$");
+        private static ClientDisplay display;
+        private static CRCClient client;
 
         public CRCGame(ClientDisplay clientDisplay, CRCClient crcClient)
         {
@@ -32,7 +33,7 @@ namespace Chernobyl_Relay_Chat
             client = crcClient;
         }
 
-        private void Disable()
+        private static void Disable()
         {
             disable = true;
             MessageBox.Show("CRC was unable to read or write files needed to communicate with the game.\r\n"
@@ -41,7 +42,7 @@ namespace Chernobyl_Relay_Chat
                 "Chernobyl Relay Chat", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public void GameCheck()
+        public static void GameCheck()
         {
             if (disable) return;
 
@@ -80,7 +81,7 @@ namespace Chernobyl_Relay_Chat
             }
         }
 
-        public void GameUpdate()
+        public static void GameUpdate()
         {
             if (disable || processID == -1) return;
 
@@ -122,14 +123,14 @@ namespace Chernobyl_Relay_Chat
                         string faction = messageMatch.Groups[1].Value;
                         string message = messageMatch.Groups[2].Value;
                         if (message[0] == '/')
-                            CRCCommands.ProcessCommand(message, this);
+                            CRCCommands.ProcessCommand(message, wrapper);
                         else
                         {
                             CRCOptions.GameFaction = CRCStrings.ValidateFaction(faction);
                             if (CRCOptions.GameFaction == "actor_zombied")
-                                client.Send(CRCZombie.Generate());
+                                CRCClient.Send(CRCZombie.Generate());
                             else
-                                client.Send(message);
+                                CRCClient.Send(message);
                         }
                     }
                     else if (type == "Death" && CRCOptions.SendDeath)
@@ -143,7 +144,7 @@ namespace Chernobyl_Relay_Chat
                         if (CRCOptions.GameFaction != "actor_zombied")
                         {
                             string message = CRCStrings.DeathMessage(CRCOptions.Name, level, xrClass, section);
-                            client.SendDeath(message);
+                            CRCClient.SendDeath(message);
                         }
                     }
                 }
@@ -172,13 +173,13 @@ namespace Chernobyl_Relay_Chat
             }
         }
 
-        public void UpdateSettings()
+        public static void UpdateSettings()
         {
             SendToGame("Setting/NewsDuration/" + (CRCOptions.NewsDuration * 1000));
             SendToGame("Setting/ChatKey/DIK_" + CRCOptions.ChatKey);
         }
 
-        private void SendToGame(string line)
+        private static void SendToGame(string line)
         {
             if (disable || processID == -1) return;
 
@@ -188,80 +189,80 @@ namespace Chernobyl_Relay_Chat
             }
         }
 
-        public void AddInformation(string message)
+        public static void AddInformation(string message)
         {
             SendToGame("Information/" + message);
         }
 
-        public void AddError(string message)
+        public static void AddError(string message)
         {
             SendToGame("Error/" + message);
         }
 
 
-        public void OnBanned()
+        public static void OnBanned()
         {
-            SendToGame("Error/Woops, you're banned!");
+            AddError("Woops, you're banned!");
         }
 
-        public void OnError(string message)
+        public static void OnError(string message)
         {
-            SendToGame("Error/" + message);
+            AddError(message);
         }
 
-        public void OnUpdate(string message)
+        public static void OnUpdate(string message)
         {
-            SendToGame("Information/" + message);
+            AddInformation(message);
         }
 
-        public void OnConnected()
+        public static void OnConnected()
         {
-            SendToGame("Information/You are now connected to the network");
+            AddInformation("You are now connected to the network");
         }
 
-        public void OnHighlightMessage(string nick, string faction, string message)
+        public static void OnHighlightMessage(string nick, string faction, string message)
         {
             SendToGame("Highlight/" + faction + "/" + nick + "/" + message);
         }
 
-        public void OnChannelMessage(string nick, string faction, string message)
+        public static void OnChannelMessage(string nick, string faction, string message)
         {
             SendToGame("Message/" + faction + "/" + nick + "/" + message);
         }
 
-        public void OnQueryMessage(string from, string to, string faction, string message)
+        public static void OnQueryMessage(string from, string to, string faction, string message)
         {
             SendToGame("Query/" + faction + "/" + from + "/" + to + "/" + message);
         }
 
-        public void OnJoin(string nick)
+        public static void OnJoin(string nick)
         {
-            SendToGame("Information/" + nick + " has logged on");
+            AddInformation(nick + " has logged on");
         }
 
-        public void OnPart(string nick)
+        public static void OnPart(string nick)
         {
-            SendToGame("Information/" + nick + " has logged off");
+            AddInformation(nick + " has logged off");
         }
 
-        public void OnKick(string victim, string reason)
+        public static void OnKick(string victim, string reason)
         {
-            SendToGame("Information/" + victim + " has been kicked for: " + reason);
+            AddInformation(victim + " has been kicked for: " + reason);
         }
 
-        public void OnGotKicked(string reason)
+        public static void OnGotKicked(string reason)
         {
-            SendToGame("Information/You have been kicked for: " + reason);
+            AddInformation("You have been kicked for: " + reason);
         }
 
-        public void OnNickChange(string oldNick, string newNick)
+        public static void OnNickChange(string oldNick, string newNick)
         {
-            SendToGame("Information/" + oldNick + " is now known as " + newNick);
+            AddInformation(oldNick + " is now known as " + newNick);
         }
 
-        public void OnOwnNickChange(string newNick)
+        public static void OnOwnNickChange(string newNick)
         {
-            SendToGame("Information/You are now known as " + newNick);
+            AddInformation("You are now known as " + newNick);
         }
     }
 }

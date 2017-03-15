@@ -7,8 +7,6 @@ namespace Chernobyl_Relay_Chat
 {
     public partial class OptionsForm : Form
     {
-        private CRCClient client;
-
         private readonly Dictionary<string, int> factionToIndex = new Dictionary<string, int>()
         {
             ["actor_bandit"] = 0,
@@ -35,10 +33,9 @@ namespace Chernobyl_Relay_Chat
             [8] = "actor_monolith",
         };
 
-        public OptionsForm(CRCClient crcClient)
+        public OptionsForm()
         {
             InitializeComponent();
-            client = crcClient;
 
             radioButtonFactionAuto.Checked = CRCOptions.AutoFaction;
             radioButtonFactionManual.Checked = !CRCOptions.AutoFaction;
@@ -73,7 +70,7 @@ namespace Chernobyl_Relay_Chat
             CRCOptions.NewsDuration = (int)numericUpDownNewsDuration.Value;
             CRCOptions.ChatKey = textBoxChatKey.Text;
             CRCOptions.Save();
-            client.UpdateSettings();
+            CRCClient.UpdateSettings();
             this.Close();
         }
 

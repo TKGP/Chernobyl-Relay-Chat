@@ -9,8 +9,6 @@ namespace Chernobyl_Relay_Chat
 {
     class CRCCommands
     {
-        public static CRCClient client;
-
         private static readonly Regex commandRx = new Regex(@"^/(\S+)\s*(.*)$");
 
         private static readonly List<CRCCommand> commands = new List<CRCCommand>()
@@ -58,7 +56,7 @@ namespace Chernobyl_Relay_Chat
 
         private static void SendQuery(List<string> args, ICRCSendable output)
         {
-            client.SendQuery(args[0], args[1]);
+            CRCClient.SendQuery(args[0], args[1]);
         }
 
         private static void ChangeNick(List<string> args, ICRCSendable output)
@@ -68,12 +66,12 @@ namespace Chernobyl_Relay_Chat
             if (result != null)
                 output.AddError(result);
             else
-                client.ChangeNick(nick);
+                CRCClient.ChangeNick(nick);
         }
 
         private static void SendReply(List<string> args, ICRCSendable output)
         {
-            if (!client.SendReply(args[0]))
+            if (!CRCClient.SendReply(args[0]))
                 output.AddError("You can't reply if you haven't been sent any messages yet.");
         }
     }
