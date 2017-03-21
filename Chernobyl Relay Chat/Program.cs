@@ -41,6 +41,7 @@ namespace Chernobyl_Relay_Chat
 
             clientThread.Join();
             displayThread.Join();
+            CRCOptions.Save();
         }
     }
 }
