@@ -21,7 +21,7 @@ namespace Chernobyl_Relay_Chat
             boldFont = new Font(mainFont, FontStyle.Bold);
             timeFont = new Font("Courier New", mainFont.SizeInPoints, FontStyle.Regular);
             Text = "Chernobyl Relay Chat " + Application.ProductVersion;
-            if (CRCOptions.DisplaySize != new Size(-1, -1))
+            if (CRCOptions.DisplaySize != new Size(0, 0))
             {
                 Location = CRCOptions.DisplayLocation;
                 Size = CRCOptions.DisplaySize;
