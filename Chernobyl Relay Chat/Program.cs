@@ -17,9 +17,11 @@ namespace Chernobyl_Relay_Chat
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+#if !DEBUG
             // Prevent multiple instances
             if (!mutex.WaitOne(TimeSpan.FromSeconds(0), false))
                 return;
+#endif
 
             if (CRCUpdate.CheckFirstUpdate())
                 return;
