@@ -12,6 +12,7 @@ namespace Chernobyl_Relay_Chat
 {
     class CRCGame
     {
+        private const int SCRIPT_VERSION = 1;
         private static readonly CRCGameWrapper wrapper = new CRCGameWrapper();
         private static readonly Encoding encoding = Encoding.GetEncoding(1251);
         private static readonly Regex outputRx = new Regex("^(.+?)(?:/(.+))?$");
@@ -114,8 +115,13 @@ namespace Chernobyl_Relay_Chat
                 {
                     Match typeMatch = outputRx.Match(line);
                     string type = typeMatch.Groups[1].Value;
-                    if (type == "Settings")
+                    if (type == "Handshake")
                     {
+                        if (Convert.ToInt16(typeMatch.Groups[2].Value) < SCRIPT_VERSION)
+                        {
+                            OnError("Script version out of date; please exit the game and install the latest CRC gamedata.");
+                            CRCDisplay.OnError("Script version out of date; please exit the game and install the latest CRC gamedata.");
+                        }
                         UpdateSettings();
                         UpdateUsers();
                     }

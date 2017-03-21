@@ -54,7 +54,7 @@ local function addMessage(icon, title, text)
 		chatBox:UpdateMessages()
 	end
 end
-	
+
 local inputActions = {
 	Information = function (body)
 		icon = crc_icons.info
@@ -200,7 +200,7 @@ function on_game_start()
 	RegisterScriptCallback("actor_on_before_death", onDeath)
 	-- Not using axr_keybind for old version compatibility
 	RegisterScriptCallback("on_key_press", onKeyPress)
-	send("Settings")
+	send("Handshake/%s", SCRIPT_VERSION)
 end
 
 ----------------------------------------------------------------------------------------------------
