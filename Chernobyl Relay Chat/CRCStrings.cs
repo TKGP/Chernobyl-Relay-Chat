@@ -17,7 +17,7 @@ namespace Chernobyl_Relay_Chat
         private static Dictionary<string, List<string>> deathLevels, deathSections, deathClasses, fNames, sNames;
 
         private static readonly Regex invalidNickRx = new Regex(@"[^a-zA-Z0-9_\-\\^{}|]");
-        private static readonly Regex invalidNickFirstCharRx = new Regex(@"[^a-zA-Z_\\^{}|]");
+        private static readonly Regex invalidNickFirstCharRx = new Regex(@"^[^a-zA-Z_\\^{}|]");
 
         public static void Load()
         {
