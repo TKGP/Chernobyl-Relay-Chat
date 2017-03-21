@@ -179,6 +179,8 @@ namespace Chernobyl_Relay_Chat
         {
             SendToGame("Setting/NewsDuration/" + (CRCOptions.NewsDuration * 1000));
             SendToGame("Setting/ChatKey/DIK_" + CRCOptions.ChatKey);
+            SendToGame("Setting/NewsSound/" + CRCOptions.NewsSound);
+            SendToGame("Setting/CloseChat/" + CRCOptions.CloseChat);
         }
 
         public static void UpdateUsers()

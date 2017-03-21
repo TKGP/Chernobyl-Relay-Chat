@@ -46,8 +46,11 @@ namespace Chernobyl_Relay_Chat
             checkBoxDeathSend.Checked = CRCOptions.SendDeath;
             checkBoxDeathReceive.Checked = CRCOptions.ReceiveDeath;
             numericUpDownDeath.Value = CRCOptions.DeathInterval;
+
             numericUpDownNewsDuration.Value = CRCOptions.NewsDuration;
             textBoxChatKey.Text = CRCOptions.ChatKey;
+            checkBoxCloseChat.Checked = CRCOptions.CloseChat;
+            checkBoxNewsSound.Checked = CRCOptions.NewsSound;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -67,8 +70,11 @@ namespace Chernobyl_Relay_Chat
             CRCOptions.SendDeath = checkBoxDeathSend.Checked;
             CRCOptions.ReceiveDeath = checkBoxDeathReceive.Checked;
             CRCOptions.DeathInterval = (int)numericUpDownDeath.Value;
+
             CRCOptions.NewsDuration = (int)numericUpDownNewsDuration.Value;
             CRCOptions.ChatKey = textBoxChatKey.Text;
+            CRCOptions.NewsSound = checkBoxNewsSound.Checked;
+            CRCOptions.CloseChat = checkBoxCloseChat.Checked;
             CRCOptions.Save();
             CRCClient.UpdateSettings();
             this.Close();

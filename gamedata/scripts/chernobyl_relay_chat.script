@@ -17,7 +17,7 @@ local HIGHLIGHT_COLOR = "%c[255,255,255,128]"
 local option = {
 	newsDuration = 10000,
 	chatKey = DIK_keys.DIK_RETURN,
-	messageSound = true,
+	newsSound = true,
 	closeChat = true,
 	}
 
@@ -47,6 +47,9 @@ local factionToText = {
 local function addMessage(icon, title, text)
 	table.insert(messageLog, {title = title, text = text, icon = icon})
 	db.actor:give_game_news(title, text, icon, 0, option.newsDuration)
+	if option.newsSound then
+		xr_sound.set_sound_play(db.actor:id(), "pda_tips")
+	end
 	if chatBox then
 		chatBox:UpdateMessages()
 	end
@@ -92,16 +95,14 @@ local inputActions = {
 		text = QUERY_COLOR..message
 		addMessage(icon, title, text)
 	end,
-	Settings = function (body)
+	Setting = function (body)
 		local setting, value = body:match("([^/]+)/(.+)")
 		if setting == "NewsDuration" then
 			option.newsDuration = tonumber(value)
 		elseif setting == "ChatKey" then
 			option.chatKey = DIK_keys[value]
-		elseif setting == "MessageSound" then
-			option.messageSound = value == "True"
-		elseif setting == "LogOpacity" then
-			option.logOpacity = 100 / tonumber(value) * 255
+		elseif setting == "NewsSound" then
+			option.newsSound = value == "True"
 		elseif setting == "CloseChat" then
 			option.closeChat = value == "True"
 		end
@@ -277,6 +278,8 @@ function ChatBox:Send()
 	end
 	if option.closeChat then
 		self:Cancel()
+	else
+		chatBox.editBox:CaptureFocus(true)
 	end
 end
 
