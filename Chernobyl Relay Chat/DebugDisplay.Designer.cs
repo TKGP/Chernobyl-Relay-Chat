@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DebugDisplay));
             this.textBoxRaw = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -51,6 +52,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.textBoxRaw);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DebugDisplay";
             this.Text = "Raw Messages";
             this.ResumeLayout(false);

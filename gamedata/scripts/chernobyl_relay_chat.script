@@ -3,6 +3,9 @@
 --| Interface for external application
 --| By TKGP
 
+local SCRIPT_VERSION = 1
+
+-- Constants
 local UPDATE_INTERVAL = 250
 local INPATH = getFS():update_path("$game_config$", "").."\\crc_input.txt"
 local OUTPATH = getFS():update_path("$game_config$", "").."\\crc_output.txt"
@@ -10,15 +13,23 @@ local QUERY_COLOR = "%c[255,255,192,192]"
 local ERROR_COLOR = "%c[255,255,128,128]"
 local HIGHLIGHT_COLOR = "%c[255,255,255,128]"
 
+-- Options
+local option = {
+	newsDuration = 10000,
+	chatKey = DIK_keys.DIK_RETURN,
+	messageSound = true,
+	closeChat = true,
+	}
+
+-- Etc
 local config = system_ini()
 local lastUpdate = 0
 local sendQueue = {}
 local messageLog = {}
 local chatBox
 local showChatBox = false
-
-local newsDuration = 10000
-local chatKey = DIK_keys.DIK_RETURN
+local users = {}
+local knownIcons = {}
 
 local factionToText = {
 	actor_bandit = "Bandit",
@@ -31,6 +42,79 @@ local factionToText = {
 	actor_army = "Military",
 	actor_monolith = "Monolith",
 	actor_zombied = "Zombie",
+	}
+	
+local function addMessage(icon, title, text)
+	table.insert(messageLog, {title = title, text = text, icon = icon})
+	db.actor:give_game_news(title, text, icon, 0, option.newsDuration)
+	if chatBox then
+		chatBox:UpdateMessages()
+	end
+end
+	
+local inputActions = {
+	Information = function (body)
+		icon = crc_icons.info
+		title = "Information"
+		text = body
+		addMessage(icon, title, text)
+	end,
+	Error = function (body)
+		icon = crc_icons.error
+		title = "Error"
+		text = ERROR_COLOR..body
+		addMessage(icon, title, text)
+	end,
+	Message = function (body)
+		local faction, name, highlight, message = body:match("([^/]+)/([^/]+)/([^/]+)/(.+)")
+		highlight = highlight == "True"
+		icon = crc_icons.getIcon(name, faction)
+		knownIcons[name] = icon
+		if chatBox then
+			chatBox:UpdateUsers()
+		end
+		title = name..", "..(name == "TKGP" and "C-Consciousness" or factionToText[faction] or "Unknown")
+		if highlight then
+			text = HIGHLIGHT_COLOR..message
+		else
+			text = message
+		end
+		addMessage(icon, title, text)
+	end,
+	Query = function (body)
+		local faction, from, to, message = body:match("([^/]+)/([^/]+)/([^/]+)/(.+)")
+		icon = crc_icons.getIcon(from, faction)
+		knownIcons[from] = icon
+		if chatBox then
+			chatBox:UpdateUsers()
+		end
+		title = from.." -> "..to
+		text = QUERY_COLOR..message
+		addMessage(icon, title, text)
+	end,
+	Settings = function (body)
+		local setting, value = body:match("([^/]+)/(.+)")
+		if setting == "NewsDuration" then
+			option.newsDuration = tonumber(value)
+		elseif setting == "ChatKey" then
+			option.chatKey = DIK_keys[value]
+		elseif setting == "MessageSound" then
+			option.messageSound = value == "True"
+		elseif setting == "LogOpacity" then
+			option.logOpacity = 100 / tonumber(value) * 255
+		elseif setting == "CloseChat" then
+			option.closeChat = value == "True"
+		end
+	end,
+	Users = function (body)
+		users = {}
+		for user in body:gmatch("[^/]+") do
+			table.insert(users, user)
+		end
+		if chatBox then
+			chatBox:UpdateUsers()
+		end
+	end,
 	}
 
 local function send(message, ...)
@@ -75,40 +159,12 @@ local function update()
 		if input then
 			input:close()
 			for _, line in ipairs(receiveQueue) do
-				local title, text, icon
 				local type, body = line:match("([^/]+)/(.+)")
-				if type == "Information" then
-					title = "Information"
-					text = body
-					icon = crc_icons.info
-				elseif type == "Error" then
-					title = "Error"
-					text = ERROR_COLOR..body
-					icon = crc_icons.error
-				elseif type == "Message" or type == "Highlight" then
-					local faction, name, message = body:match("([^/]+)/([^/]+)/(.+)")
-					icon = crc_icons.getIcon(name, faction)
-					title = name..", "..(name == "TKGP" and "C-Consciousness" or factionToText[faction] or "Unknown")
-					text = message
-					if type == "Highlight" then
-						text = HIGHLIGHT_COLOR..text
-					end
-				elseif type == "Query" then
-					local faction, from, to, message = body:match("([^/]+)/([^/]+)/([^/]+)/(.+)")
-					icon = crc_icons.getIcon(from, faction)
-					title = from.." -> "..to
-					text = QUERY_COLOR..message
-				end
-				if type == "Setting" then
-					local setting, value = body:match("([^/]+)/(.+)")
-					if setting == "NewsDuration" then
-						newsDuration = tonumber(value)
-					elseif setting == "ChatKey" then
-						chatKey = DIK_keys[value]
-					end
+				local action = inputActions[type]
+				if action then
+					action(body)
 				else
-					table.insert(messageLog, {title = title, text = text, icon = icon})
-					db.actor:give_game_news(title, text, icon, 0, newsDuration)
+					-- Whine about it
 				end
 			end
 		end
@@ -132,7 +188,7 @@ local function onDeath(whoID)
 end
 
 local function onKeyPress(dik)
-	if dik == chatKey and not chatBox then
+	if dik == option.chatKey and not chatBox then
 		-- Defer to next update to avoid this keypress being sent to the UI as well
 		showChatBox = true
 	end
@@ -154,23 +210,20 @@ function ChatBox:__init() super()
 	db.actor:set_callback(callback.key_press)
 	
 	self:SetWndRect(Frect():set(0, 0, 1024, 768))
-	local xml = CScriptXmlInit()
-	xml:ParseFile("crc_chatbox.xml")
+	self.xml = CScriptXmlInit()
+	self.xml:ParseFile("crc_chatbox.xml")
+	self.xml:InitStatic("background", self)
 	
-	self.editBox = xml:InitEditBox("edit_box", self)
-	self:Register(xml:Init3tButton("button_send", self), "button_send")
-	self:Register(xml:Init3tButton("button_close", self), "button_close")
+	self.editBox = self.xml:InitEditBox("edit_box", self)
+	self:Register(self.xml:Init3tButton("button_send", self), "button_send")
+	self:Register(self.xml:Init3tButton("button_close", self), "button_close")
 	self:AddCallback("button_send", ui_events.BUTTON_CLICKED, self.Send, self)
 	self:AddCallback("button_close", ui_events.BUTTON_CLICKED, self.Cancel, self)
+	self.users = {}
+	self:UpdateUsers()
+	self.messages = {}
+	self:UpdateMessages()
 	self.focus = false
-	
-	for index, logEntry in ipairs(messageLog) do
-		local message = xml:InitStatic("log_entry", self)
-		message:SetWndPos(vector2():set(20, 768 - 100 - (#messageLog - index) * 50))
-		xml:InitStatic("log_entry:log_icon", message):InitTexture(logEntry.icon)
-		xml:InitStatic("log_entry:log_title", message):TextControl():SetText(logEntry.title)
-		xml:InitStatic("log_entry:log_message", message):TextControl():SetText(logEntry.text)
-	end
 end
 
 function ChatBox:OnKeyboard(dik, keyboard_action)
@@ -185,13 +238,46 @@ function ChatBox:OnKeyboard(dik, keyboard_action)
 	return true
 end
 
+function ChatBox:UpdateUsers()
+	for _, user in ipairs(self.users) do
+		self:DetachChild(user)
+	end
+	self.users = {}
+	for index, name in ipairs(users) do
+		local user = self.xml:InitStatic("user", self)
+		local newPos = vector2():set(0, user:GetWndPos().y + (index - 1) * user:GetHeight())
+		user:SetWndPos(newPos)
+		self.xml:InitStatic("user:icon", user):InitTexture(knownIcons[name] or crc_icons.unknown)
+		self.xml:InitStatic("user:name", user):TextControl():SetText(name)
+		table.insert(self.users, user)
+	end
+end
+
+function ChatBox:UpdateMessages()
+	for _, message in ipairs(self.messages) do
+		self:DetachChild(message)
+	end
+	self.messages = {}
+	for index, messageData in ipairs(messageLog) do
+		local message = self.xml:InitStatic("message", self)
+		local newPos = vector2():set(0, 768 - 100 - (#messageLog - index) * message:GetHeight())
+		message:SetWndPos(newPos)
+		self.xml:InitStatic("message:icon", message):InitTexture(messageData.icon)
+		self.xml:InitStatic("message:title", message):TextControl():SetText(messageData.title)
+		self.xml:InitStatic("message:message_text", message):TextControl():SetText(messageData.text)
+		table.insert(self.messages, message)
+	end
+end
+
 function ChatBox:Send()
 	local input = self.editBox:GetText()
 	if input and input ~= "" then
 		self.editBox:SetText("")
 		send("Message/%s/%s", db.actor:character_community(), input)
 	end
-	self:Cancel()
+	if option.closeChat then
+		self:Cancel()
+	end
 end
 
 function ChatBox:Cancel()

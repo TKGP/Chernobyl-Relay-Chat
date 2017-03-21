@@ -168,7 +168,6 @@ namespace Chernobyl_Relay_Chat
 
         public void UpdateUsers(List<string> users)
         {
-            users.Sort();
             Invoke(() =>
                 textBoxUsers.Text = string.Join("\r\n", users
                 ));

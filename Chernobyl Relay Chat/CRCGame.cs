@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Security;
@@ -116,6 +117,7 @@ namespace Chernobyl_Relay_Chat
                     if (type == "Settings")
                     {
                         UpdateSettings();
+                        UpdateUsers();
                     }
                     else if (type == "Message")
                     {
@@ -179,6 +181,11 @@ namespace Chernobyl_Relay_Chat
             SendToGame("Setting/ChatKey/DIK_" + CRCOptions.ChatKey);
         }
 
+        public static void UpdateUsers()
+        {
+            SendToGame("Users/" + string.Join("/", CRCClient.Users));
+        }
+
         private static void SendToGame(string line)
         {
             if (disable || processID == -1) return;
@@ -228,12 +235,12 @@ namespace Chernobyl_Relay_Chat
 
         public static void OnHighlightMessage(string nick, string faction, string message)
         {
-            SendToGame("Highlight/" + faction + "/" + nick + "/" + message);
+            SendToGame("Message/" + faction + "/" + nick + "/True/" + message);
         }
 
         public static void OnChannelMessage(string nick, string faction, string message)
         {
-            SendToGame("Message/" + faction + "/" + nick + "/" + message);
+            SendToGame("Message/" + faction + "/" + nick + "/False/" + message);
         }
 
         public static void OnQueryMessage(string from, string to, string faction, string message)

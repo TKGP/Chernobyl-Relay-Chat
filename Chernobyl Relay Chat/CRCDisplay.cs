@@ -9,7 +9,6 @@ namespace Chernobyl_Relay_Chat
     class CRCDisplay
     {
         private static ClientDisplay clientDisplay;
-        private static List<string> users;
 
         public static void Start()
         {
@@ -30,10 +29,9 @@ namespace Chernobyl_Relay_Chat
             clientDisplay?.AddInformation("You are now connected to the network");
         }
 
-        public static void OnChannelActiveSynced(List<string> usersOnJoin)
+        public static void UpdateUsers()
         {
-            users = usersOnJoin;
-            clientDisplay?.UpdateUsers(users);
+            clientDisplay?.UpdateUsers(CRCClient.Users);
         }
 
         public static void OnHighlightMessage(string nick, string message)
@@ -59,46 +57,32 @@ namespace Chernobyl_Relay_Chat
 
         public static void OnJoin(string nick)
         {
-            users.Add(nick);
-            clientDisplay?.UpdateUsers(users);
             clientDisplay?.AddInformation(nick + " has logged on");
         }
 
         public static void OnPart(string nick)
         {
-            users.Remove(nick);
-            clientDisplay?.UpdateUsers(users);
             clientDisplay?.AddInformation(nick + " has logged off");
         }
 
         public static void OnKick(string victim, string reason)
         {
-            users.Remove(victim);
-            clientDisplay?.UpdateUsers(users);
             clientDisplay?.AddInformation(victim + " has been kicked for: " + reason);
         }
 
         public static void OnGotKicked(string reason)
         {
-            users.Clear();
-            clientDisplay?.UpdateUsers(users);
             clientDisplay?.AddError("You have been kicked for: " + reason);
             clientDisplay?.Disable();
         }
 
         public static void OnNickChange(string oldNick, string newNick)
         {
-            users.Remove(oldNick);
-            users.Add(newNick);
-            clientDisplay?.UpdateUsers(users);
             clientDisplay?.AddInformation(oldNick + " is now known as " + newNick);
         }
 
-        public static void OnOwnNickChange(string oldNick, string newNick)
+        public static void OnOwnNickChange(string newNick)
         {
-            users.Remove(oldNick);
-            users.Add(newNick);
-            clientDisplay?.UpdateUsers(users);
             clientDisplay?.AddInformation("You are now known as " + newNick);
         }
 

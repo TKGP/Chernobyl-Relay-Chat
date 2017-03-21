@@ -19,10 +19,12 @@ namespace Chernobyl_Relay_Chat
         private static readonly Regex deathRx = new Regex("^(.*?)" + FAKE_DELIM + "(.*)$");
         private static readonly Regex commandArgsRx = new Regex(@"\S+");
 
-        private static readonly IrcClient client = new IrcClient();
+        private static IrcClient client = new IrcClient();
         private static DateTime lastDeath = new DateTime();
         private static string lastQuery;
         private static bool retry = false;
+
+        public static List<string> Users = new List<string>();
 
 #if DEBUG
         private static DebugDisplay debug = new DebugDisplay();
@@ -151,6 +153,13 @@ namespace Chernobyl_Relay_Chat
 
 
 
+        private static void OnRawMessage(object sender, IrcEventArgs e)
+        {
+#if DEBUG
+            debug?.AddRaw(e.Data.RawMessage);
+#endif
+        }
+
         private static void OnConnection(object sender, EventArgs e)
         {
             client.Login(CRCOptions.Name, "Chernobyl Relay Chat " + Application.ProductVersion);
@@ -159,27 +168,22 @@ namespace Chernobyl_Relay_Chat
 
         private static void OnChannelActiveSynced(object sender, IrcEventArgs e)
         {
-            List<string> users = new List<string>();
             foreach (ChannelUser user in client.GetChannel(CRCOptions.Channel).Users.Values)
-                users.Add(user.Nick);
-            CRCDisplay.OnChannelActiveSynced(users);
+                Users.Add(user.Nick);
+            Users.Sort();
+            CRCDisplay.UpdateUsers();
+            CRCGame.UpdateUsers();
         }
 
         private static void OnDisconnected(object sender, EventArgs e)
         {
+            Users.Clear();
             if (retry)
             {
                 CRCDisplay.OnReconnecting();
                 CRCGame.OnReconnecting();
                 client.Connect(CRCOptions.Server, 6667);
             }
-        }
-
-        private static void OnRawMessage(object sender, IrcEventArgs e)
-        {
-#if DEBUG
-            debug?.AddRaw(e.Data.RawMessage);
-#endif
         }
 
         private static void OnChannelMessage(object sender, IrcEventArgs e)
@@ -226,11 +230,14 @@ namespace Chernobyl_Relay_Chat
 
         private static void OnJoin(object sender, JoinEventArgs e)
         {
-            string nick = e.Who;
-            if (nick != CRCOptions.Name)
+            if (e.Who != CRCOptions.Name)
             {
-                CRCDisplay.OnJoin(nick);
-                CRCGame.OnJoin(nick);
+                Users.Add(e.Who);
+                Users.Sort();
+                CRCDisplay.UpdateUsers();
+                CRCGame.UpdateUsers();
+                CRCDisplay.OnJoin(e.Who);
+                CRCGame.OnJoin(e.Who);
             }
             else
             {
@@ -241,16 +248,22 @@ namespace Chernobyl_Relay_Chat
 
         private static void OnPart(object sender, PartEventArgs e)
         {
-            string nick = e.Who;
-            CRCDisplay.OnPart(nick);
-            CRCGame.OnPart(nick);
+            Users.Remove(e.Who);
+            Users.Sort();
+            CRCDisplay.UpdateUsers();
+            CRCGame.UpdateUsers();
+            CRCDisplay.OnPart(e.Who);
+            CRCGame.OnPart(e.Who);
         }
 
         private static void OnQuit(object sender, QuitEventArgs e)
         {
-            string nick = e.Who;
-            CRCDisplay.OnPart(nick);
-            CRCGame.OnPart(nick);
+            Users.Remove(e.Who);
+            Users.Sort();
+            CRCDisplay.UpdateUsers();
+            CRCGame.UpdateUsers();
+            CRCDisplay.OnPart(e.Who);
+            CRCGame.OnPart(e.Who);
         }
 
         private static void OnKick(object sender, KickEventArgs e)
@@ -258,20 +271,30 @@ namespace Chernobyl_Relay_Chat
             string victim = e.Whom;
             if (victim == CRCOptions.Name)
             {
+                Users.Clear();
                 CRCDisplay.OnGotKicked(e.KickReason);
                 CRCGame.OnGotKicked(e.KickReason);
             }
             else
             {
+                Users.Remove(victim);
+                Users.Sort();
                 CRCDisplay.OnKick(victim, e.KickReason);
                 CRCGame.OnKick(victim, e.KickReason);
             }
+            CRCDisplay.UpdateUsers();
+            CRCGame.UpdateUsers();
         }
 
         private static void OnNickChange(object sender, NickChangeEventArgs e)
         {
             string oldNick = e.OldNickname;
             string newNick = e.NewNickname;
+            Users.Remove(oldNick);
+            Users.Add(newNick);
+            Users.Sort();
+            CRCDisplay.UpdateUsers();
+            CRCGame.UpdateUsers();
             if (newNick != CRCOptions.Name)
             {
                 CRCDisplay.OnNickChange(oldNick, newNick);
@@ -279,7 +302,7 @@ namespace Chernobyl_Relay_Chat
             }
             else
             {
-                CRCDisplay.OnOwnNickChange(oldNick, newNick);
+                CRCDisplay.OnOwnNickChange(newNick);
                 CRCGame.OnOwnNickChange(newNick);
             }
         }
