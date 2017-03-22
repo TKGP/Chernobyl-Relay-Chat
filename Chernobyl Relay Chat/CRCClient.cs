@@ -87,12 +87,12 @@ namespace Chernobyl_Relay_Chat
                 client.RfcNick(CRCOptions.Name);
                 lastName = CRCOptions.Name;
             }
-            if (CRCOptions.Channel != lastChannel)
+            if (CRCOptions.ChannelProxy() != lastChannel)
             {
                 Users.Clear();
                 client.RfcPart(lastChannel);
-                client.RfcJoin(CRCOptions.Channel);
-                lastChannel = CRCOptions.Channel;
+                client.RfcJoin(CRCOptions.ChannelProxy());
+                lastChannel = CRCOptions.ChannelProxy();
             }
         }
 
@@ -105,7 +105,7 @@ namespace Chernobyl_Relay_Chat
 
         public static void Send(string message)
         {
-            client.SendMessage(SendType.Message, CRCOptions.Channel, CRCOptions.GetFaction() + META_DELIM + message);
+            client.SendMessage(SendType.Message, CRCOptions.ChannelProxy(), CRCOptions.GetFaction() + META_DELIM + message);
             CRCDisplay.OnOwnChannelMessage(CRCOptions.Name, message);
             CRCGame.OnChannelMessage(CRCOptions.Name, CRCOptions.GetFaction(), message);
         }
@@ -113,7 +113,7 @@ namespace Chernobyl_Relay_Chat
         public static void SendDeath(string message)
         {
             string nick = CRCStrings.RandomName(CRCOptions.GameFaction);
-            client.SendMessage(SendType.Message, CRCOptions.Channel, nick + FAKE_DELIM + CRCOptions.GetFaction() + META_DELIM + message);
+            client.SendMessage(SendType.Message, CRCOptions.ChannelProxy(), nick + FAKE_DELIM + CRCOptions.GetFaction() + META_DELIM + message);
             CRCDisplay.OnChannelMessage(nick, message);
             CRCGame.OnChannelMessage(nick, CRCOptions.GameFaction, message);
         }
@@ -174,14 +174,14 @@ namespace Chernobyl_Relay_Chat
         private static void OnConnection(object sender, EventArgs e)
         {
             lastName = CRCOptions.Name;
-            lastChannel = CRCOptions.Channel;
+            lastChannel = CRCOptions.ChannelProxy();
             client.Login(CRCOptions.Name, "Chernobyl Relay Chat " + Application.ProductVersion);
-            client.RfcJoin(CRCOptions.Channel);
+            client.RfcJoin(CRCOptions.ChannelProxy());
         }
 
         private static void OnChannelActiveSynced(object sender, IrcEventArgs e)
         {
-            foreach (ChannelUser user in client.GetChannel(CRCOptions.Channel).Users.Values)
+            foreach (ChannelUser user in client.GetChannel(CRCOptions.ChannelProxy()).Users.Values)
                 Users.Add(user.Nick);
             Users.Sort();
             CRCDisplay.UpdateUsers();

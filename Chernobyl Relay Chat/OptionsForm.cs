@@ -140,7 +140,8 @@ namespace Chernobyl_Relay_Chat
             ["#crc_english_rp"] = 1,
             ["#crc_english_shitposting"] = 2,
             ["#crc_russian"] = 3,
-            ["#crc_tech_support"] = 4,
+            ["#crc_russian_rp"] = 4,
+            ["#crc_tech_support"] = 5,
         };
 
         private readonly Dictionary<int, string> indexToChannel = new Dictionary<int, string>()
@@ -149,7 +150,8 @@ namespace Chernobyl_Relay_Chat
             [1] = "#crc_english_rp",
             [2] = "#crc_english_shitposting",
             [3] = "#crc_russian",
-            [4] = "#crc_tech_support",
+            [4] = "#crc_russian_rp",
+            [5] = "#crc_tech_support",
         };
 
         private readonly Dictionary<string, int> factionToIndex = new Dictionary<string, int>()

@@ -190,7 +190,7 @@ namespace Chernobyl_Relay_Chat
                 foreach (XmlNode langNode in xml.DocumentElement.ChildNodes)
                 {
                     list[langNode.Name] = new List<string>();
-                    foreach (XmlNode stringNode in xml.DocumentElement.ChildNodes)
+                    foreach (XmlNode stringNode in langNode.ChildNodes)
                     {
                         list[langNode.Name].Add(stringNode.InnerText);
                     }
@@ -211,7 +211,7 @@ namespace Chernobyl_Relay_Chat
                 {
                     string lang = langNode.Name;
                     listDict[lang] = new Dictionary<string, List<string>>();
-                    foreach (XmlNode keyNode in xml.DocumentElement.ChildNodes)
+                    foreach (XmlNode keyNode in langNode.ChildNodes)
                     {
                         string key = keyNode.Name;
                         listDict[lang][key] = new List<string>();

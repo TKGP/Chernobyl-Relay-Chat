@@ -39,6 +39,15 @@ namespace Chernobyl_Relay_Chat
             ["rus"] = "#crc_russian",
         };
 
+        public static string ChannelProxy()
+        {
+#if DEBUG
+            return Channel + "_debug";
+#else
+            return Channel;
+#endif
+        }
+
         public static string GetFaction()
         {
             if (AutoFaction)
@@ -97,6 +106,7 @@ namespace Chernobyl_Relay_Chat
         public static void Save()
         {
             registry.SetValue("Language", Language);
+            registry.SetValue("Channel", Channel);
             registry.SetValue("DisplayLocationX", DisplayLocation.X);
             registry.SetValue("DisplayLocationY", DisplayLocation.Y);
             registry.SetValue("DisplayWidth", DisplaySize.Width);
