@@ -8,7 +8,11 @@ namespace Chernobyl_Relay_Chat
 {
     class CRCOptions
     {
+#if DEBUG
+        private static RegistryKey registry = Registry.CurrentUser.CreateSubKey(@"Software\Chernobyl Relay Chat Debug");
+#else
         private static RegistryKey registry = Registry.CurrentUser.CreateSubKey(@"Software\Chernobyl Relay Chat");
+#endif
 
         public const string Server = "irc.slashnet.org";
         public const string InPath = @"\..\gamedata\configs\crc_input.txt";
