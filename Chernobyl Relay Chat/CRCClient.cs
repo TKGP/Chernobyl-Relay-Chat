@@ -258,7 +258,7 @@ namespace Chernobyl_Relay_Chat
 
         private static void OnJoin(object sender, JoinEventArgs e)
         {
-            if (e.Who != CRCOptions.Name)
+            if (e.Who != client.Nickname)
             {
                 Users.Add(e.Who);
                 Users.Sort();
@@ -270,6 +270,7 @@ namespace Chernobyl_Relay_Chat
             }
             else
             {
+                CRCOptions.Name = e.Who;
                 string message = CRCStrings.Localize("client_connected");
                 CRCDisplay.AddInformation(message);
                 CRCGame.AddInformation(message);
@@ -340,7 +341,7 @@ namespace Chernobyl_Relay_Chat
             Users.Sort();
             CRCDisplay.UpdateUsers();
             CRCGame.UpdateUsers();
-            if (newNick != CRCOptions.Name)
+            if (newNick != client.Nickname)
             {
                 string message = oldNick + CRCStrings.Localize("client_nick_change") + newNick;
                 CRCDisplay.AddInformation(message);
@@ -348,6 +349,7 @@ namespace Chernobyl_Relay_Chat
             }
             else
             {
+                CRCOptions.Name = newNick;
                 string message = CRCStrings.Localize("client_own_nick_change") + newNick;
                 CRCDisplay.AddInformation(message);
                 CRCGame.AddInformation(message);
@@ -356,10 +358,18 @@ namespace Chernobyl_Relay_Chat
 
         private static void OnErrorMessage(object sender, IrcEventArgs e)
         {
+            string message;
             switch (e.Data.ReplyCode)
             {
                 case ReplyCode.ErrorBannedFromChannel:
-                    string message = CRCStrings.Localize("client_banned");
+                    message = CRCStrings.Localize("client_banned");
+                    CRCDisplay.AddError(message);
+                    CRCGame.AddError(message);
+                    break;
+                // What's the difference?
+                case ReplyCode.ErrorNicknameInUse:
+                case ReplyCode.ErrorNicknameCollision:
+                    message = CRCStrings.Localize("client_nick_collision");
                     CRCDisplay.AddError(message);
                     CRCGame.AddError(message);
                     break;

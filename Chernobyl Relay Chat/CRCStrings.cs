@@ -47,6 +47,18 @@ namespace Chernobyl_Relay_Chat
                         localization[lang][id] = langNode.InnerText;
                     }
                 }
+                xml.Load(@"res\localization_machine.xml");
+                foreach (XmlNode keyNode in xml.DocumentElement.ChildNodes)
+                {
+                    string id = keyNode.Attributes["id"].Value;
+                    foreach (XmlNode langNode in keyNode.ChildNodes)
+                    {
+                        string lang = langNode.Name;
+                        if (!localization.ContainsKey(lang))
+                            localization[lang] = new Dictionary<string, string>();
+                        localization[lang][id] = langNode.InnerText;
+                    }
+                }
             }
             catch (Exception ex) when (ex is XmlException || ex is FileNotFoundException)
             {
