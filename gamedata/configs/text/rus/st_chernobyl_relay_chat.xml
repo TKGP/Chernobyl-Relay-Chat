@@ -4,49 +4,49 @@
 		<text>Информация</text>
 	</string>
 	<string id="crc_error">
-		<text>ошибка</text>
+		<text>Ошибка</text>
 	</string>	
 	<string id="crc_ccon">
-		<text>Осознание</text>
+		<text>«О-Сознание»</text>
 	</string>
 	<string id="crc_unknown">
 		<text>Неизвестный</text>
 	</string>
 	<string id="crc_send">
-		<text>послать</text>
+		<text>Отправить</text>
 	</string>
 	<string id="crc_close">
 		<text>Закрыть</text>
 	</string>
 	
 	<string id="crc_actor_bandit">
-		<text>Бандит</text>
+		<text>«Бандиты»</text>
 	</string>
 	<string id="crc_actor_csky">
-		<text>Чистое небо</text>
+		<text>«Чистое Небо»</text>
 	</string>
 	<string id="crc_actor_dolg">
-		<text>долг</text>
+		<text>«Долг»</text>
 	</string>
 	<string id="crc_actor_ecolog">
-		<text>Эколог</text>
+		<text>«Учёные»</text>
 	</string>
 	<string id="crc_actor_freedom">
-		<text>Свобода</text>
+		<text>«Свобода»</text>
 	</string>
 	<string id="crc_actor_stalker">
-		<text>Одиночка</text>
+		<text>«Одиночки»</text>
 	</string>
 	<string id="crc_actor_killer">
-		<text>Наёмник</text>
+		<text>«Наёмники»</text>
 	</string>
 	<string id="crc_actor_army">
-		<text>Военные</text>
+		<text>«Военные»</text>
 	</string>
 	<string id="crc_actor_monolith">
-		<text>Монолит</text>
+		<text>«Монолит»</text>
 	</string>
 	<string id="crc_actor_zombied">
-		<text>зомби</text>
+		<text>Зомбированные</text>
 	</string>
 </string_table>

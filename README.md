@@ -16,3 +16,5 @@ GitHub: Octokit
 Max Hauser: semver  
 Mirco Bauer: SmartIrc4Net  
 nixx quality: GitHubUpdate  
+  
+av661194, OWL, XMODER: Russian translation
