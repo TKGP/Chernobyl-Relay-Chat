@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+	<string id="crc_info">
+		<text>Информация</text>
+	</string>
+	<string id="crc_error">
+		<text>ошибка</text>
+	</string>	
+	<string id="crc_ccon">
+		<text>Осознание</text>
+	</string>
+	<string id="crc_unknown">
+		<text>Неизвестный</text>
+	</string>
+	<string id="crc_send">
+		<text>послать</text>
+	</string>
+	<string id="crc_close">
+		<text>Закрыть</text>
+	</string>
+	
+	<string id="crc_actor_bandit">
+		<text>Бандит</text>
+	</string>
+	<string id="crc_actor_csky">
+		<text>Чистое небо</text>
+	</string>
+	<string id="crc_actor_dolg">
+		<text>долг</text>
+	</string>
+	<string id="crc_actor_ecolog">
+		<text>Эколог</text>
+	</string>
+	<string id="crc_actor_freedom">
+		<text>Свобода</text>
+	</string>
+	<string id="crc_actor_stalker">
+		<text>Одиночка</text>
+	</string>
+	<string id="crc_actor_killer">
+		<text>Наёмник</text>
+	</string>
+	<string id="crc_actor_army">
+		<text>Военные</text>
+	</string>
+	<string id="crc_actor_monolith">
+		<text>Монолит</text>
+	</string>
+	<string id="crc_actor_zombied">
+		<text>зомби</text>
+	</string>
+</string_table>

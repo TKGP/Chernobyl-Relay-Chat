@@ -31,18 +31,14 @@ local showChatBox = false
 local users = {}
 local knownIcons = {}
 
-local factionToText = {
-	actor_bandit = "Bandit",
-	actor_csky = "Clear Sky",
-	actor_dolg = "Duty",
-	actor_ecolog = "Ecologist",
-	actor_freedom = "Freedom",
-	actor_stalker = "Loner",
-	actor_killer = "Mercenary",
-	actor_army = "Military",
-	actor_monolith = "Monolith",
-	actor_zombied = "Zombie",
-	}
+local function gt(id)
+	local result = game.translate_string(id)
+	if result == id then
+		return nil
+	else
+		return result
+	end
+end
 	
 local function addMessage(icon, title, text)
 	table.insert(messageLog, {title = title, text = text, icon = icon})
@@ -58,13 +54,13 @@ end
 local inputActions = {
 	Information = function (body)
 		icon = crc_icons.info
-		title = "Information"
+		title = gt("crc_info")
 		text = body
 		addMessage(icon, title, text)
 	end,
 	Error = function (body)
 		icon = crc_icons.error
-		title = "Error"
+		title = gt("crc_error")
 		text = ERROR_COLOR..body
 		addMessage(icon, title, text)
 	end,
@@ -76,7 +72,8 @@ local inputActions = {
 		if chatBox then
 			chatBox:UpdateUsers()
 		end
-		title = name..", "..(name == "TKGP" and "C-Consciousness" or factionToText[faction] or "Unknown")
+		title = name..", "..(name == "TKGP" and gt("crc_ccon")
+			or gt("crc_"..faction) or gt("crc_unknown"))
 		if highlight then
 			text = HIGHLIGHT_COLOR..message
 		else

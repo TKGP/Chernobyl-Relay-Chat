@@ -11,7 +11,7 @@
 	
 	<button_send x="750" y="668" width="117" height="29">
 		<texture>ui_button_ordinary</texture>
-		<text font="letterica18" align="c">Send</text>
+		<text font="letterica18" align="c">crc_send</text>
 		<text_color>
 			<e r="227" g="199" b="178"/>
 			<t r="180" g="153" b="155"/>
@@ -22,7 +22,7 @@
 	
 	<button_close x="887" y="668" width="117" height="29">
 		<texture>ui_button_ordinary</texture>
-		<text font="letterica18" align="c">Close</text>
+		<text font="letterica18" align="c">crc_close</text>
 		<text_color>
 			<e r="227" g="199" b="178"/>
 			<t r="180" g="153" b="155"/>
