@@ -30,9 +30,7 @@ namespace Chernobyl_Relay_Chat
                 {
                     return (ex is HttpRequestException);
                 });
-                MessageBox.Show("Internet connection failed; CRC will now shut down.\r\n"
-                    + "Try running As Administrator or allowing CRC in your firewall settings.",
-                    "Chernobyl Relay Chat", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(CRCStrings.Localize("update_failed"), CRCStrings.Localize("crc_name"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }
             if (updateType != UpdateType.None)
@@ -75,7 +73,7 @@ namespace Chernobyl_Relay_Chat
             {
                 string releaseNotes = await updateChecker.RenderReleaseNotes();
                 SystemSounds.Asterisk.Play();
-                CRCGame.OnUpdate("A mandatory update for CRC is available. Please check the external client to download it.");
+                CRCGame.OnUpdate(CRCStrings.Localize("update_notice"));
                 using (UpdateForm updateForm = new UpdateForm((updateType == UpdateType.Major || updateType == UpdateType.Minor), releaseNotes))
                 {
                     DialogResult dialogResult = updateForm.ShowDialog();

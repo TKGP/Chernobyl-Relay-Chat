@@ -175,7 +175,7 @@ namespace Chernobyl_Relay_Chat
         {
             lastName = CRCOptions.Name;
             lastChannel = CRCOptions.ChannelProxy();
-            client.Login(CRCOptions.Name, "Chernobyl Relay Chat " + Application.ProductVersion);
+            client.Login(CRCOptions.Name, CRCStrings.Localize("crc_name") + " " + Application.ProductVersion);
             client.RfcJoin(CRCOptions.ChannelProxy());
         }
 

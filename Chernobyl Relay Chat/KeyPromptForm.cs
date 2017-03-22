@@ -10,7 +10,9 @@ namespace Chernobyl_Relay_Chat
         public KeyPromptForm()
         {
             InitializeComponent();
-            label1.Hide();
+            labelHelp.Text = CRCStrings.Localize("keyprompt_help") + "\r\n\r\n";
+            labelError.Text = CRCStrings.Localize("keyprompt_error");
+            labelError.Hide();
         }
 
         private void KeyPromptForm_KeyDown(object sender, KeyEventArgs e)
@@ -28,7 +30,7 @@ namespace Chernobyl_Relay_Chat
                 Close();
             }
             else
-                label1.Show();
+                labelError.Show();
         }
 
         private static Dictionary<Keys, string> keyToDik = new Dictionary<Keys, string>()

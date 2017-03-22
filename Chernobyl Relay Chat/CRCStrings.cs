@@ -130,20 +130,20 @@ namespace Chernobyl_Relay_Chat
         public static string ValidateNick(string nick)
         {
             if (nick.Length < 1)
-                return "Nicks must be at least 1 character long.";
+                return Localize("strings_nick_short");
             if (nick.Length > 30)
-                return "Nicks must be at most 30 characters long.";
+                return Localize("strings_nick_long");
             if (invalidNickRx.Match(nick).Success)
-                return @"Nicks may only contain letters, numbers, and these characters: _-\^{}|";
+                return Localize("strings_nick_illegal");
             if (invalidNickFirstCharRx.Match(nick).Success)
-                return "Nicks may not begin with a number or -";
+                return Localize("strings_nick_first");
             return null;
         }
 
         public static string DeathMessage(string name, string level, string xrClass, string section)
         {
             string lang = channelLangs[CRCOptions.Channel];
-            string levelText = deathLevels[lang].ContainsKey(level) ? PickRandom(deathLevels[lang][level]) : ("somewhere in the Zone (" + level + ")");
+            string levelText = deathLevels[lang].ContainsKey(level) ? PickRandom(deathLevels[lang][level]) : (Localize("strings_level_unknown") + " (" + level + ")");
             string deathText;
             if (rand.Next(101) < GENERIC_CHANCE)
                 deathText = PickRandom(deathGeneric[lang]);
@@ -152,7 +152,7 @@ namespace Chernobyl_Relay_Chat
             else if (deathClasses[lang].ContainsKey(xrClass))
                 deathText = PickRandom(deathClasses[lang][xrClass]);
             else
-                deathText = "died of unknown causes (" + xrClass + "|" + section + ")";
+                deathText = Localize("strings_death_unknown") + " (" + xrClass + "|" + section + ")";
 
             string message = PickRandom(deathFormats[lang]);
             message = message.Replace("$when", PickRandom(deathTimes[lang]));

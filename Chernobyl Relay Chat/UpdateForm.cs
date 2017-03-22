@@ -10,10 +10,14 @@ namespace Chernobyl_Relay_Chat
         public UpdateForm(bool gamedataRequired, string releaseNotes)
         {
             InitializeComponent();
+            labelDescription.Text = CRCStrings.Localize("update_description");
             if (gamedataRequired)
-                label2.Text = "This update requires reinstallation of gamedata after downloading.";
+                labelGamedata.Text = CRCStrings.Localize("update_gamedata");
             else
-                label2.Text = "";
+                labelGamedata.Text = "";
+            labelReleaseNotes.Text = CRCStrings.Localize("update_notes");
+            buttonDownload.Text = CRCStrings.Localize("update_download");
+            buttonClose.Text = CRCStrings.Localize("update_close");
             webBrowser1.DocumentText = lineBreakRx.Replace(releaseNotes, new MatchEvaluator(addBr));
         }
 

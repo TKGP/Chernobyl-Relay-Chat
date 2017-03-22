@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateForm));
             this.buttonDownload = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelDescription = new System.Windows.Forms.Label();
+            this.labelGamedata = new System.Windows.Forms.Label();
+            this.labelReleaseNotes = new System.Windows.Forms.Label();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
@@ -57,32 +57,32 @@
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // labelDescription
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(447, 39);
-            this.label1.TabIndex = 2;
-            this.label1.Text = resources.GetString("label1.Text");
+            this.labelDescription.AutoSize = true;
+            this.labelDescription.Location = new System.Drawing.Point(12, 9);
+            this.labelDescription.Name = "labelDescription";
+            this.labelDescription.Size = new System.Drawing.Size(447, 39);
+            this.labelDescription.TabIndex = 2;
+            this.labelDescription.Text = resources.GetString("labelDescription.Text");
             // 
-            // label2
+            // labelGamedata
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
+            this.labelGamedata.AutoSize = true;
+            this.labelGamedata.Location = new System.Drawing.Point(12, 57);
+            this.labelGamedata.Name = "labelGamedata";
+            this.labelGamedata.Size = new System.Drawing.Size(78, 13);
+            this.labelGamedata.TabIndex = 3;
+            this.labelGamedata.Text = "labelGamedata";
             // 
-            // label3
+            // labelReleaseNotes
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Release notes";
+            this.labelReleaseNotes.AutoSize = true;
+            this.labelReleaseNotes.Location = new System.Drawing.Point(12, 79);
+            this.labelReleaseNotes.Name = "labelReleaseNotes";
+            this.labelReleaseNotes.Size = new System.Drawing.Size(75, 13);
+            this.labelReleaseNotes.TabIndex = 4;
+            this.labelReleaseNotes.Text = "Release notes";
             // 
             // webBrowser1
             // 
@@ -100,9 +100,9 @@
             this.CancelButton = this.buttonClose;
             this.ClientSize = new System.Drawing.Size(516, 637);
             this.Controls.Add(this.webBrowser1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelReleaseNotes);
+            this.Controls.Add(this.labelGamedata);
+            this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonDownload);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -119,9 +119,9 @@
 
         private System.Windows.Forms.Button buttonDownload;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelDescription;
+        private System.Windows.Forms.Label labelGamedata;
+        private System.Windows.Forms.Label labelReleaseNotes;
         private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
