@@ -61,9 +61,7 @@ namespace Chernobyl_Relay_Chat
             }
             catch (CouldNotConnectException)
             {
-                MessageBox.Show("Could not connect to the IRC server; CRC will now shut down.\r\n"
-                    + "Try running As Administrator or allowing CRC in your firewall.",
-                    "Chernobyl Relay Chat", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(CRCStrings.Localize("client_connection_error"), CRCStrings.Localize("crc_name"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 CRCDisplay.Stop();
             }
 #if DEBUG
@@ -180,8 +178,9 @@ namespace Chernobyl_Relay_Chat
             Users.Clear();
             if (retry)
             {
-                CRCDisplay.OnReconnecting();
-                CRCGame.OnReconnecting();
+                string message = CRCStrings.Localize("client_reconnecting");
+                CRCDisplay.AddInformation(message);
+                CRCGame.AddInformation(message);
                 client.Connect(CRCOptions.Server, 6667);
             }
         }
@@ -236,13 +235,16 @@ namespace Chernobyl_Relay_Chat
                 Users.Sort();
                 CRCDisplay.UpdateUsers();
                 CRCGame.UpdateUsers();
-                CRCDisplay.OnJoin(e.Who);
-                CRCGame.OnJoin(e.Who);
+                string message = e.Who + CRCStrings.Localize("client_join");
+                CRCDisplay.AddInformation(message);
+                CRCGame.AddInformation(message);
             }
             else
             {
+                string message = CRCStrings.Localize("client_connected");
+                CRCDisplay.AddInformation(message);
+                CRCGame.AddInformation(message);
                 CRCDisplay.OnConnected();
-                CRCGame.OnConnected();
             }
         }
 
@@ -252,8 +254,9 @@ namespace Chernobyl_Relay_Chat
             Users.Sort();
             CRCDisplay.UpdateUsers();
             CRCGame.UpdateUsers();
-            CRCDisplay.OnPart(e.Who);
-            CRCGame.OnPart(e.Who);
+            string message = e.Who + CRCStrings.Localize("client_part");
+            CRCDisplay.AddInformation(message);
+            CRCGame.AddInformation(message);
         }
 
         private static void OnQuit(object sender, QuitEventArgs e)
@@ -262,8 +265,9 @@ namespace Chernobyl_Relay_Chat
             Users.Sort();
             CRCDisplay.UpdateUsers();
             CRCGame.UpdateUsers();
-            CRCDisplay.OnPart(e.Who);
-            CRCGame.OnPart(e.Who);
+            string message = e.Who + CRCStrings.Localize("client_part");
+            CRCDisplay.AddInformation(message);
+            CRCGame.AddInformation(message);
         }
 
         private static void OnKick(object sender, KickEventArgs e)
@@ -272,15 +276,18 @@ namespace Chernobyl_Relay_Chat
             if (victim == CRCOptions.Name)
             {
                 Users.Clear();
-                CRCDisplay.OnGotKicked(e.KickReason);
-                CRCGame.OnGotKicked(e.KickReason);
+                string message = CRCStrings.Localize("client_got_kicked") + e.KickReason;
+                CRCDisplay.AddError(message);
+                CRCGame.AddError(message);
+                CRCDisplay.OnGotKicked();
             }
             else
             {
                 Users.Remove(victim);
                 Users.Sort();
-                CRCDisplay.OnKick(victim, e.KickReason);
-                CRCGame.OnKick(victim, e.KickReason);
+                string message = victim + CRCStrings.Localize("client_kicked") + e.KickReason;
+                CRCDisplay.AddInformation(message);
+                CRCGame.AddInformation(message);
             }
             CRCDisplay.UpdateUsers();
             CRCGame.UpdateUsers();
@@ -297,13 +304,15 @@ namespace Chernobyl_Relay_Chat
             CRCGame.UpdateUsers();
             if (newNick != CRCOptions.Name)
             {
-                CRCDisplay.OnNickChange(oldNick, newNick);
-                CRCGame.OnNickChange(oldNick, newNick);
+                string message = oldNick + CRCStrings.Localize("client_nick_change") + newNick;
+                CRCDisplay.AddInformation(message);
+                CRCGame.AddInformation(message);
             }
             else
             {
-                CRCDisplay.OnOwnNickChange(newNick);
-                CRCGame.OnOwnNickChange(newNick);
+                string message = CRCStrings.Localize("client_own_nick_change") + newNick;
+                CRCDisplay.AddInformation(message);
+                CRCGame.AddInformation(message);
             }
         }
 
@@ -312,15 +321,17 @@ namespace Chernobyl_Relay_Chat
             switch (e.Data.ReplyCode)
             {
                 case ReplyCode.ErrorBannedFromChannel:
-                    CRCDisplay.OnBanned();
-                    CRCGame.OnBanned();
+                    string message = CRCStrings.Localize("client_banned");
+                    CRCDisplay.AddError(message);
+                    CRCGame.AddError(message);
                     break;
+                // Don't care
                 case ReplyCode.ErrorNoMotd:
                 case ReplyCode.ErrorNotRegistered:
                     break;
                 default:
-                    CRCDisplay.OnError(e.Data.Message);
-                    CRCGame.OnError(e.Data.Message);
+                    CRCDisplay.AddError(e.Data.Message);
+                    CRCGame.AddError(e.Data.Message);
                     break;
             }
         }

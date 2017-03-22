@@ -30,9 +30,7 @@ namespace Chernobyl_Relay_Chat
             bool optionsLoaded = CRCOptions.Load();
             if (!optionsLoaded)
             {
-                MessageBox.Show("CRC was unable to access the registry, which is needed to preserve settings.\r\n"
-                    + "Please try running the application As Administrator.",
-                    "Chernobyl Relay Chat", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(CRCStrings.Localize("registry_error"), CRCStrings.Localize("crc_name"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

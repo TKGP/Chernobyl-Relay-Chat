@@ -18,8 +18,10 @@ namespace Chernobyl_Relay_Chat
         public const string InPath = @"\..\gamedata\configs\crc_input.txt";
         public const string OutPath = @"\..\gamedata\configs\crc_output.txt";
 
+        public static string Language = "eng";
         public static Point DisplayLocation;
         public static Size DisplaySize;
+
         public static bool AutoFaction;
         public static string GameFaction;
         public static string ManualFaction;
@@ -46,10 +48,12 @@ namespace Chernobyl_Relay_Chat
         {
             try
             {
+                Language = (string)registry.GetValue("Language", "eng");
                 DisplayLocation = new Point((int)registry.GetValue("DisplayLocationX", 0),
                     (int)registry.GetValue("DisplayLocationY", 0));
                 DisplaySize = new Size((int)registry.GetValue("DisplayWidth", 0),
                     (int)registry.GetValue("DisplayHeight", 0));
+
                 AutoFaction = Convert.ToBoolean((string)registry.GetValue("AutoFaction", "True"));
                 GameFaction = (string)registry.GetValue("GameFaction", "actor_stalker");
                 ManualFaction = (string)registry.GetValue("ManualFaction", "actor_stalker");
@@ -75,10 +79,12 @@ namespace Chernobyl_Relay_Chat
 
         public static void Save()
         {
+            registry.SetValue("Language", Language);
             registry.SetValue("DisplayLocationX", DisplayLocation.X);
             registry.SetValue("DisplayLocationY", DisplayLocation.Y);
             registry.SetValue("DisplayWidth", DisplaySize.Width);
             registry.SetValue("DisplayHeight", DisplaySize.Height);
+
             registry.SetValue("AutoFaction", AutoFaction);
             registry.SetValue("GameFaction", GameFaction);
             registry.SetValue("ManualFaction", ManualFaction);

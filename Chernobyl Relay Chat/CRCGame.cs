@@ -38,10 +38,7 @@ namespace Chernobyl_Relay_Chat
         private static void Disable()
         {
             disable = true;
-            MessageBox.Show("CRC was unable to read or write files needed to communicate with the game.\r\n"
-                + "You may continue using the built-in client for now.\r\n"
-                + "Please try running the program As Administrator.",
-                "Chernobyl Relay Chat", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(CRCStrings.Localize("game_file_error"), CRCStrings.Localize("crc_name"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static void GameCheck()
@@ -119,8 +116,8 @@ namespace Chernobyl_Relay_Chat
                     {
                         if (Convert.ToInt16(typeMatch.Groups[2].Value) < SCRIPT_VERSION)
                         {
-                            OnError("Script version out of date; please exit the game and install the latest CRC gamedata.");
-                            CRCDisplay.OnError("Script version out of date; please exit the game and install the latest CRC gamedata.");
+                            AddError(CRCStrings.Localize("game_script_version_error"));
+                            CRCDisplay.AddError(CRCStrings.Localize("game_script_version_error"));
                         }
                         UpdateSettings();
                         UpdateUsers();
@@ -216,29 +213,9 @@ namespace Chernobyl_Relay_Chat
 
 
 
-        public static void OnBanned()
-        {
-            AddError("Woops, you're banned!");
-        }
-
-        public static void OnReconnecting()
-        {
-            AddInformation("Reconnecting...");
-        }
-
-        public static void OnError(string message)
-        {
-            AddError(message);
-        }
-
         public static void OnUpdate(string message)
         {
             AddInformation(message);
-        }
-
-        public static void OnConnected()
-        {
-            AddInformation("You are now connected to the network");
         }
 
         public static void OnHighlightMessage(string nick, string faction, string message)
@@ -254,36 +231,6 @@ namespace Chernobyl_Relay_Chat
         public static void OnQueryMessage(string from, string to, string faction, string message)
         {
             SendToGame("Query/" + faction + "/" + from + "/" + to + "/" + message);
-        }
-
-        public static void OnJoin(string nick)
-        {
-            AddInformation(nick + " has logged on");
-        }
-
-        public static void OnPart(string nick)
-        {
-            AddInformation(nick + " has logged off");
-        }
-
-        public static void OnKick(string victim, string reason)
-        {
-            AddInformation(victim + " has been kicked for: " + reason);
-        }
-
-        public static void OnGotKicked(string reason)
-        {
-            AddInformation("You have been kicked for: " + reason);
-        }
-
-        public static void OnNickChange(string oldNick, string newNick)
-        {
-            AddInformation(oldNick + " is now known as " + newNick);
-        }
-
-        public static void OnOwnNickChange(string newNick)
-        {
-            AddInformation("You are now known as " + newNick);
         }
     }
 }

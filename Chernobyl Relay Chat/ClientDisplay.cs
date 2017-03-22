@@ -13,6 +13,9 @@ namespace Chernobyl_Relay_Chat
         public ClientDisplay()
         {
             InitializeComponent();
+            Text = CRCStrings.Localize("crc_name") + " " + Application.ProductVersion;
+            buttonSend.Text = CRCStrings.Localize("display_send");
+            buttonOptions.Text = CRCStrings.Localize("display_options");
         }
 
         private void ClientDisplay_Load(object sender, EventArgs e)
@@ -20,14 +23,13 @@ namespace Chernobyl_Relay_Chat
             mainFont = richTextBoxMessages.Font;
             boldFont = new Font(mainFont, FontStyle.Bold);
             timeFont = new Font("Courier New", mainFont.SizeInPoints, FontStyle.Regular);
-            Text = "Chernobyl Relay Chat " + Application.ProductVersion;
             if (CRCOptions.DisplaySize != new Size(0, 0))
             {
                 Location = CRCOptions.DisplayLocation;
                 Size = CRCOptions.DisplaySize;
             }
 
-            AddInformation("Connecting...");
+            AddInformation(CRCStrings.Localize("display_connecting"));
         }
 
         private void ClientDisplay_FormClosing(object sender, FormClosingEventArgs e)

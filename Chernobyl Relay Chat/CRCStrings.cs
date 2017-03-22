@@ -15,12 +15,34 @@ namespace Chernobyl_Relay_Chat
         private static readonly Random rand = new Random();
         private static List<string> deathFormats, deathTimes, deathObservances, deathRemarks, deathGeneric;
         private static Dictionary<string, List<string>> deathLevels, deathSections, deathClasses, fNames, sNames;
+        private static Dictionary<string, Dictionary<string, string>> localization = new Dictionary<string, Dictionary<string, string>>();
 
         private static readonly Regex invalidNickRx = new Regex(@"[^a-zA-Z0-9_\-\\^{}|]");
         private static readonly Regex invalidNickFirstCharRx = new Regex(@"^[^a-zA-Z_\\^{}|]");
 
         public static void Load()
         {
+            XmlDocument xml = new XmlDocument();
+            try
+            {
+                xml.Load(@"res\localization.xml");
+                foreach (XmlNode keyNode in xml.DocumentElement.ChildNodes)
+                {
+                    string id = keyNode.Attributes["id"].Value;
+                    foreach (XmlNode langNode in keyNode.ChildNodes)
+                    {
+                        string lang = langNode.Name;
+                        if (!localization.ContainsKey(lang))
+                            localization[lang] = new Dictionary<string, string>();
+                        localization[lang][id] = langNode.InnerText;
+                    }
+                }
+            }
+            catch (Exception ex) when (ex is XmlException || ex is FileNotFoundException)
+            {
+                // Problems
+            }
+
             deathFormats = loadXmlList(@"res\death_formats.xml");
             deathTimes = loadXmlList(@"res\death_times.xml");
             deathObservances = loadXmlList(@"res\death_observances.xml");
@@ -46,6 +68,14 @@ namespace Chernobyl_Relay_Chat
             sNames["actor_killer"] = MergeLists(sNames, "actor_stalker", "actor_bandit", "actor_ecolog");
             sNames["actor_monolith"] = MergeLists(sNames, "actor_stalker", "actor_bandit", "actor_ecolog");
             sNames["actor_zombied"] = MergeLists(sNames, "actor_stalker", "actor_bandit", "actor_ecolog", "actor_army");
+        }
+
+        public static string Localize(string id)
+        {
+            if (localization[CRCOptions.Language].ContainsKey(id)
+                && localization[CRCOptions.Language][id] != string.Empty)
+                return localization[CRCOptions.Language][id];
+            return id;
         }
 
         private static string PickRandom(List<string> list)
@@ -128,7 +158,6 @@ namespace Chernobyl_Relay_Chat
 
         private static List<string> loadXmlList(string path)
         {
-
             List<string> list = new List<string>();
             XmlDocument xml = new XmlDocument();
             try

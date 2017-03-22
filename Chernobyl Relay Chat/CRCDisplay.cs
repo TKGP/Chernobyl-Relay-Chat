@@ -23,10 +23,21 @@ namespace Chernobyl_Relay_Chat
                 );
         }
 
+        public static void AddInformation(string message)
+        {
+            clientDisplay?.AddInformation(message);
+        }
+
+        public static void AddError(string message)
+        {
+            clientDisplay?.AddError(message);
+        }
+
+
+
         public static void OnConnected()
         {
             clientDisplay?.Enable();
-            clientDisplay?.AddInformation("You are now connected to the network");
         }
 
         public static void UpdateUsers()
@@ -55,50 +66,9 @@ namespace Chernobyl_Relay_Chat
             clientDisplay?.AddMessage(from + " -> " + to, message, Color.DeepPink);
         }
 
-        public static void OnJoin(string nick)
+        public static void OnGotKicked()
         {
-            clientDisplay?.AddInformation(nick + " has logged on");
-        }
-
-        public static void OnPart(string nick)
-        {
-            clientDisplay?.AddInformation(nick + " has logged off");
-        }
-
-        public static void OnKick(string victim, string reason)
-        {
-            clientDisplay?.AddInformation(victim + " has been kicked for: " + reason);
-        }
-
-        public static void OnGotKicked(string reason)
-        {
-            clientDisplay?.AddError("You have been kicked for: " + reason);
             clientDisplay?.Disable();
-        }
-
-        public static void OnNickChange(string oldNick, string newNick)
-        {
-            clientDisplay?.AddInformation(oldNick + " is now known as " + newNick);
-        }
-
-        public static void OnOwnNickChange(string newNick)
-        {
-            clientDisplay?.AddInformation("You are now known as " + newNick);
-        }
-
-        public static void OnBanned()
-        {
-            clientDisplay?.AddError("Woops, you're banned!");
-        }
-
-        public static void OnError(string message)
-        {
-            clientDisplay?.AddError("Error: " + message);
-        }
-
-        public static void OnReconnecting()
-        {
-            clientDisplay?.AddInformation("Reconnecting...");
         }
     }
 }

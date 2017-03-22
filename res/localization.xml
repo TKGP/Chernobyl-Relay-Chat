@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<string id="">
+		<eng></eng>
+		<rus></rus>
+	</string>
+	
+	<string id="crc_name">
+		<eng>Chernobyl Relay Chat</eng>
+		<rus></rus>
+	</string>
+	<string id="crc_seconds">
+		<eng>seconds</eng>
+		<rus></rus>
+	</string>
+	<string id="crc_error">
+		<eng>Error</eng>
+		<rus></rus>
+	</string>
+	<string id="crc_information">
+		<eng>Information</eng>
+		<rus></rus>
+	</string>
+	<string id="registry_error">
+		<eng>CRC was unable to access the registry, which is needed to preserve settings.\r\n
+			Please try running the application As Administrator.</eng>
+		<rus></rus>
+	</string>
+	
+	<string id="client_connection_error">
+		<eng>Could not connect to the IRC server; CRC will now shut down.\r\n
+			Try running As Administrator or allowing CRC in your firewall.</eng>
+		<rus></rus>
+	</string>
+	<string id="client_connected">
+		<eng>You are now connected to the network</eng>
+		<rus></rus>
+	</string>
+	<string id="client_join">
+		<eng> has logged on</eng>
+		<rus></rus>
+	</string>
+	<string id="client_part">
+		<eng> has logged off</eng>
+		<rus></rus>
+	</string>
+	<string id="client_nick_change">
+		<eng> is now known as </eng>
+		<rus></rus>
+	</string>
+	<string id="client_own_nick_change">
+		<eng>You are now known as </eng>
+		<rus></rus>
+	</string>
+	<string id="client_kicked">
+		<eng> has been kicked for: </eng>
+		<rus></rus>
+	</string>
+	<string id="client_got_kicked">
+		<eng>You have been kicked for: </eng>
+		<rus></rus>
+	</string>
+	<string id="client_banned">
+		<eng>Woops, you're banned!</eng>
+		<rus></rus>
+	</string>
+	<string id="client_reconnecting">
+		<eng>Reconnecting...</eng>
+		<rus></rus>
+	</string>
+	
+	<string id="game_file_error">
+		<eng>CRC was unable to read or write files needed to communicate with the game.\r\n
+			You may continue using the built-in client for now.\r\n
+			Please try running the program As Administrator.</eng>
+		<rus></rus>
+	</string>
+	<string id="game_script_version_error">
+		<eng>Script version out of date; please exit the game and install the latest CRC gamedata.</eng>
+		<rus></rus>
+	</string>
+	
+	<string id="display_send">
+		<eng>Send</eng>
+		<rus></rus>
+	</string>
+	<string id="display_options">
+		<eng>Options</eng>
+		<rus></rus>
+	</string>
+	<string id="display_connecting">
+		<eng>Connecting...</eng>
+		<rus></rus>
+	</string>
+	
+	<string id="options_title">
+		<eng>CRC Options</eng>
+		<rus></rus>
+	</string>
+	<string id="options_ok">
+		<eng>OK</eng>
+		<rus></rus>
+	</string>
+	<string id="options_cancel">
+		<eng>Cancel</eng>
+		<rus></rus>
+	</string>
+	<string id="options_tab_client">
+		<eng>Client</eng>
+		<rus></rus>
+	</string>
+	<string id="options_tab_game">
+		<eng>In-game</eng>
+		<rus></rus>
+	</string>
+	<string id="options_language">
+		<eng>Language</eng>
+		<rus></rus>
+	</string>
+	<string id="options_language_restart">
+		<eng>CRC must be restarted for language changes to take full effect.</eng>
+		<rus></rus>
+	</string>
+	<string id="options_auto_faction">
+		<eng>Sync game faction</eng>
+		<rus></rus>
+	</string>
+	<string id="options_manual_faction">
+		<eng>Static faction</eng>
+		<rus></rus>
+	</string>
+	<string id="options_name">
+		<eng>Name</eng>
+		<rus></rus>
+	</string>
+	<string id="options_name_random">
+		<eng>Random</eng>
+		<rus></rus>
+	</string>
+	<string id="options_timestamps">
+		<eng>Show timestamps</eng>
+		<rus></rus>
+	</string>
+	<string id="options_send_deaths">
+		<eng>Send death messages</eng>
+		<rus></rus>
+	</string>
+	<string id="options_receive_deaths">
+		<eng>Receive death messages</eng>
+		<rus></rus>
+	</string>
+	<string id="options_death_interval">
+		<eng>Minimum time between death messages</eng>
+		<rus></rus>
+	</string>
+	<string id="options_news_duration">
+		<eng>Duration of news messages</eng>
+		<rus></rus>
+	</string>
+	<string id="options_chat_key">
+		<eng>Chat key</eng>
+		<rus></rus>
+	</string>
+	<string id="options_chat_key_change">
+		<eng>Change</eng>
+		<rus></rus>
+	</string>
+	<string id="options_news_sound">
+		<eng>Play message sound</eng>
+		<rus></rus>
+	</string>
+	<string id="options_close_chat">
+		<eng>Close chat after sending</eng>
+		<rus></rus>
+	</string>
+	
+	
+</root>
