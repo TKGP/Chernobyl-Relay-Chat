@@ -54,7 +54,7 @@ namespace Chernobyl_Relay_Chat
                 AutoFaction = Convert.ToBoolean((string)registry.GetValue("AutoFaction", "True"));
                 GameFaction = (string)registry.GetValue("GameFaction", "actor_stalker");
                 ManualFaction = (string)registry.GetValue("ManualFaction", "actor_stalker");
-                Name = ((string)registry.GetValue("Name", CRCStrings.RandomName(GetFaction()))).Replace(' ', '_');
+                Name = (string)registry.GetValue("Name", CRCStrings.RandomIrcName(GetFaction()));
                 SendDeath = Convert.ToBoolean((string)registry.GetValue("SendDeath", "True"));
                 ReceiveDeath = Convert.ToBoolean((string)registry.GetValue("ReceiveDeath", "True"));
                 DeathInterval = (int)registry.GetValue("DeathInterval", 0);

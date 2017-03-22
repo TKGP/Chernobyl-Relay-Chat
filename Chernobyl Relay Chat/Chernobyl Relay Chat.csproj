@@ -123,6 +123,9 @@
     <EmbeddedResource Include="ClientDisplay.resx">
       <DependentUpon>ClientDisplay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ClientDisplay.ru-RU.resx">
+      <DependentUpon>ClientDisplay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DebugDisplay.resx">
       <DependentUpon>DebugDisplay.cs</DependentUpon>
     </EmbeddedResource>

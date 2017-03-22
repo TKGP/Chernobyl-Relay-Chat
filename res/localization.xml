@@ -16,12 +16,6 @@
 		<eng>Information</eng>
 		<rus>Информация</rus>
 	</string>
-	<string id="registry_error">
-		<eng>CRC was unable to access the registry, which is needed to preserve settings.\r\n
-			Please try running the application As Administrator.</eng>
-		<rus>CRC не смог получить доступ к реестру, который необходим для сохранения настроек.\r\n
-			Попробуйте запустить приложение «Как администратор».</rus>
-	</string>
 	
 	<string id="client_connection_error">
 		<eng>Could not connect to the IRC server; CRC will now shut down.\r\n

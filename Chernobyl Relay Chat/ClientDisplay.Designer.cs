@@ -42,38 +42,22 @@
             // 
             // richTextBoxMessages
             // 
-            this.richTextBoxMessages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.richTextBoxMessages, "richTextBoxMessages");
             this.richTextBoxMessages.HideSelection = false;
-            this.richTextBoxMessages.Location = new System.Drawing.Point(12, 12);
             this.richTextBoxMessages.Name = "richTextBoxMessages";
             this.richTextBoxMessages.ReadOnly = true;
-            this.richTextBoxMessages.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBoxMessages.Size = new System.Drawing.Size(822, 421);
-            this.richTextBoxMessages.TabIndex = 3;
             this.richTextBoxMessages.TabStop = false;
-            this.richTextBoxMessages.Text = "";
             this.richTextBoxMessages.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBoxMessages_LinkClicked);
             // 
             // textBoxInput
             // 
-            this.textBoxInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxInput.Location = new System.Drawing.Point(12, 441);
+            resources.ApplyResources(this.textBoxInput, "textBoxInput");
             this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.Size = new System.Drawing.Size(822, 20);
-            this.textBoxInput.TabIndex = 0;
             // 
             // buttonSend
             // 
-            this.buttonSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSend.Enabled = false;
-            this.buttonSend.Location = new System.Drawing.Point(840, 439);
+            resources.ApplyResources(this.buttonSend, "buttonSend");
             this.buttonSend.Name = "buttonSend";
-            this.buttonSend.Size = new System.Drawing.Size(75, 23);
-            this.buttonSend.TabIndex = 1;
-            this.buttonSend.Text = "Send";
             this.buttonSend.UseVisualStyleBackColor = true;
             this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
             // 
@@ -91,27 +75,16 @@
             // 
             // buttonOptions
             // 
-            this.buttonOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOptions.Enabled = false;
-            this.buttonOptions.Location = new System.Drawing.Point(921, 439);
+            resources.ApplyResources(this.buttonOptions, "buttonOptions");
             this.buttonOptions.Name = "buttonOptions";
-            this.buttonOptions.Size = new System.Drawing.Size(75, 23);
-            this.buttonOptions.TabIndex = 2;
-            this.buttonOptions.Text = "Options";
             this.buttonOptions.UseVisualStyleBackColor = true;
             this.buttonOptions.Click += new System.EventHandler(this.buttonOptions_Click);
             // 
             // textBoxUsers
             // 
-            this.textBoxUsers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxUsers.Location = new System.Drawing.Point(840, 12);
-            this.textBoxUsers.Multiline = true;
+            resources.ApplyResources(this.textBoxUsers, "textBoxUsers");
             this.textBoxUsers.Name = "textBoxUsers";
             this.textBoxUsers.ReadOnly = true;
-            this.textBoxUsers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxUsers.Size = new System.Drawing.Size(156, 421);
-            this.textBoxUsers.TabIndex = 4;
             // 
             // timerCheckUpdate
             // 
@@ -122,17 +95,14 @@
             // ClientDisplay
             // 
             this.AcceptButton = this.buttonSend;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 474);
             this.Controls.Add(this.textBoxUsers);
             this.Controls.Add(this.buttonOptions);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.richTextBoxMessages);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ClientDisplay";
-            this.Text = "Chernobyl Relay Chat <Unknown>";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientDisplay_FormClosing);
             this.Load += new System.EventHandler(this.ClientDisplay_Load);
             this.ResumeLayout(false);

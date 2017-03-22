@@ -99,7 +99,7 @@ namespace Chernobyl_Relay_Chat
         private void buttonRandom_Click(object sender, EventArgs e)
         {
             string faction = radioButtonFactionAuto.Checked ? CRCOptions.GameFaction : indexToFaction[comboBoxFaction.SelectedIndex];
-            textBoxName.Text = CRCStrings.RandomName(faction).Replace(' ', '_');
+            textBoxName.Text = CRCStrings.RandomIrcName(faction);
         }
 
         private void radioButtonFactionManual_CheckedChanged(object sender, EventArgs e)

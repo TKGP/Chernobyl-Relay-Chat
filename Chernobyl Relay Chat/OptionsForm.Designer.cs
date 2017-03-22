@@ -54,13 +54,13 @@
             this.buttonChatKey = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageClient = new System.Windows.Forms.TabPage();
-            this.tabPageGame = new System.Windows.Forms.TabPage();
-            this.checkBoxNewsSound = new System.Windows.Forms.CheckBox();
-            this.checkBoxCloseChat = new System.Windows.Forms.CheckBox();
-            this.labelLanguage = new System.Windows.Forms.Label();
-            this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
-            this.comboBoxChannel = new System.Windows.Forms.ComboBox();
             this.labelChannel = new System.Windows.Forms.Label();
+            this.comboBoxChannel = new System.Windows.Forms.ComboBox();
+            this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
+            this.labelLanguage = new System.Windows.Forms.Label();
+            this.tabPageGame = new System.Windows.Forms.TabPage();
+            this.checkBoxCloseChat = new System.Windows.Forms.CheckBox();
+            this.checkBoxNewsSound = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNewsDuration)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -334,6 +334,52 @@
             this.tabPageClient.Text = "Client";
             this.tabPageClient.UseVisualStyleBackColor = true;
             // 
+            // labelChannel
+            // 
+            this.labelChannel.AutoSize = true;
+            this.labelChannel.Location = new System.Drawing.Point(6, 43);
+            this.labelChannel.Name = "labelChannel";
+            this.labelChannel.Size = new System.Drawing.Size(46, 13);
+            this.labelChannel.TabIndex = 19;
+            this.labelChannel.Text = "Channel";
+            // 
+            // comboBoxChannel
+            // 
+            this.comboBoxChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxChannel.FormattingEnabled = true;
+            this.comboBoxChannel.Items.AddRange(new object[] {
+            "English",
+            "English (Roleplay)",
+            "English (Unmoderated)",
+            "Русский",
+            "Русский (Ролёвка)",
+            "Tech Support"});
+            this.comboBoxChannel.Location = new System.Drawing.Point(6, 59);
+            this.comboBoxChannel.Name = "comboBoxChannel";
+            this.comboBoxChannel.Size = new System.Drawing.Size(280, 21);
+            this.comboBoxChannel.TabIndex = 18;
+            // 
+            // comboBoxLanguage
+            // 
+            this.comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLanguage.FormattingEnabled = true;
+            this.comboBoxLanguage.Items.AddRange(new object[] {
+            "English",
+            "Русский"});
+            this.comboBoxLanguage.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxLanguage.Name = "comboBoxLanguage";
+            this.comboBoxLanguage.Size = new System.Drawing.Size(280, 21);
+            this.comboBoxLanguage.TabIndex = 17;
+            // 
+            // labelLanguage
+            // 
+            this.labelLanguage.AutoSize = true;
+            this.labelLanguage.Location = new System.Drawing.Point(6, 3);
+            this.labelLanguage.Name = "labelLanguage";
+            this.labelLanguage.Size = new System.Drawing.Size(55, 13);
+            this.labelLanguage.TabIndex = 16;
+            this.labelLanguage.Text = "Language";
+            // 
             // tabPageGame
             // 
             this.tabPageGame.Controls.Add(this.checkBoxCloseChat);
@@ -352,16 +398,6 @@
             this.tabPageGame.Text = "In-game";
             this.tabPageGame.UseVisualStyleBackColor = true;
             // 
-            // checkBoxNewsSound
-            // 
-            this.checkBoxNewsSound.AutoSize = true;
-            this.checkBoxNewsSound.Location = new System.Drawing.Point(6, 68);
-            this.checkBoxNewsSound.Name = "checkBoxNewsSound";
-            this.checkBoxNewsSound.Size = new System.Drawing.Size(123, 17);
-            this.checkBoxNewsSound.TabIndex = 25;
-            this.checkBoxNewsSound.Text = "Play message sound";
-            this.checkBoxNewsSound.UseVisualStyleBackColor = true;
-            // 
             // checkBoxCloseChat
             // 
             this.checkBoxCloseChat.AutoSize = true;
@@ -372,50 +408,15 @@
             this.checkBoxCloseChat.Text = "Close chat after sending";
             this.checkBoxCloseChat.UseVisualStyleBackColor = true;
             // 
-            // labelLanguage
+            // checkBoxNewsSound
             // 
-            this.labelLanguage.AutoSize = true;
-            this.labelLanguage.Location = new System.Drawing.Point(6, 3);
-            this.labelLanguage.Name = "labelLanguage";
-            this.labelLanguage.Size = new System.Drawing.Size(55, 13);
-            this.labelLanguage.TabIndex = 16;
-            this.labelLanguage.Text = "Language";
-            // 
-            // comboBoxLanguage
-            // 
-            this.comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxLanguage.FormattingEnabled = true;
-            this.comboBoxLanguage.Items.AddRange(new object[] {
-            "English",
-            "Русский"});
-            this.comboBoxLanguage.Location = new System.Drawing.Point(6, 19);
-            this.comboBoxLanguage.Name = "comboBoxLanguage";
-            this.comboBoxLanguage.Size = new System.Drawing.Size(280, 21);
-            this.comboBoxLanguage.TabIndex = 17;
-            // 
-            // comboBoxChannel
-            // 
-            this.comboBoxChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxChannel.FormattingEnabled = true;
-            this.comboBoxChannel.Items.AddRange(new object[] {
-            "English (General)",
-            "English (Roleplay)",
-            "English (Unmoderated)",
-            "Русский",
-            "Tech Support"});
-            this.comboBoxChannel.Location = new System.Drawing.Point(6, 59);
-            this.comboBoxChannel.Name = "comboBoxChannel";
-            this.comboBoxChannel.Size = new System.Drawing.Size(280, 21);
-            this.comboBoxChannel.TabIndex = 18;
-            // 
-            // labelChannel
-            // 
-            this.labelChannel.AutoSize = true;
-            this.labelChannel.Location = new System.Drawing.Point(6, 43);
-            this.labelChannel.Name = "labelChannel";
-            this.labelChannel.Size = new System.Drawing.Size(46, 13);
-            this.labelChannel.TabIndex = 19;
-            this.labelChannel.Text = "Channel";
+            this.checkBoxNewsSound.AutoSize = true;
+            this.checkBoxNewsSound.Location = new System.Drawing.Point(6, 68);
+            this.checkBoxNewsSound.Name = "checkBoxNewsSound";
+            this.checkBoxNewsSound.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxNewsSound.TabIndex = 25;
+            this.checkBoxNewsSound.Text = "Play message sound";
+            this.checkBoxNewsSound.UseVisualStyleBackColor = true;
             // 
             // OptionsForm
             // 

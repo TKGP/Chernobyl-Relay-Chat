@@ -30,7 +30,12 @@ namespace Chernobyl_Relay_Chat
             bool optionsLoaded = CRCOptions.Load();
             if (!optionsLoaded)
             {
-                MessageBox.Show(CRCStrings.Localize("registry_error"), CRCStrings.Localize("crc_name"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // No point localizing this since localization may not even be loaded
+                MessageBox.Show("CRC was unable to access the registry, which is needed to preserve settings.\r\n"
+                    + "Please try running the application As Administrator.\r\n\r\n"
+                    + "CRC не смог получить доступ к реестру, который необходим для сохранения настроек.\r\n"
+                    + "Попробуйте запустить приложение «Как администратор».",
+                    CRCStrings.Localize("crc_name"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

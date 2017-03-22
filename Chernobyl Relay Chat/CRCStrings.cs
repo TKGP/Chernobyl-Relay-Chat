@@ -13,12 +13,22 @@ namespace Chernobyl_Relay_Chat
         private const int REMARK_CHANCE = 25;
 
         private static readonly Random rand = new Random();
-        private static List<string> deathFormats, deathTimes, deathObservances, deathRemarks, deathGeneric;
-        private static Dictionary<string, List<string>> deathLevels, deathSections, deathClasses, fNames, sNames;
+        private static Dictionary<string, List<string>> deathFormats, deathTimes, deathObservances, deathRemarks, deathGeneric;
+        private static Dictionary<string, Dictionary<string, List<string>>> deathLevels, deathSections, deathClasses, fNames, sNames;
         private static Dictionary<string, Dictionary<string, string>> localization = new Dictionary<string, Dictionary<string, string>>();
 
         private static readonly Regex invalidNickRx = new Regex(@"[^a-zA-Z0-9_\-\\^{}|]");
         private static readonly Regex invalidNickFirstCharRx = new Regex(@"^[^a-zA-Z_\\^{}|]");
+
+        private static readonly Dictionary<string, string> channelLangs = new Dictionary<string, string>()
+        {
+            ["#crc_english"] = "eng",
+            ["#crc_english_rp"] = "eng",
+            ["#crc_english_shitposting"] = "eng",
+            ["#crc_tech_support"] = "eng",
+            ["#crc_russian"] = "rus",
+            ["#crc_russian_rp"] = "rus",
+        };
 
         public static void Load()
         {
@@ -41,6 +51,7 @@ namespace Chernobyl_Relay_Chat
             catch (Exception ex) when (ex is XmlException || ex is FileNotFoundException)
             {
                 // Problems
+                throw ex;
             }
 
             deathFormats = loadXmlList(@"res\death_formats.xml");
@@ -55,19 +66,19 @@ namespace Chernobyl_Relay_Chat
             fNames = loadXmlListDict(@"res\fnames.xml");
             sNames = loadXmlListDict(@"res\snames.xml");
 
-            fNames["actor_csky"] = MergeLists(fNames, "actor_stalker", "actor_ecolog");
-            fNames["actor_dolg"] = MergeLists(fNames, "actor_stalker", "actor_army");
-            fNames["actor_freedom"] = MergeLists(fNames, "actor_stalker", "actor_bandit");
-            fNames["actor_killer"] = MergeLists(fNames, "actor_stalker", "actor_bandit", "actor_ecolog");
-            fNames["actor_monolith"] = MergeLists(fNames, "actor_stalker", "actor_bandit", "actor_ecolog");
-            fNames["actor_zombied"] = MergeLists(fNames, "actor_stalker", "actor_bandit", "actor_ecolog", "actor_army");
+            MergeLists(fNames, "actor_csky", "actor_stalker", "actor_ecolog");
+            MergeLists(fNames, "actor_dolg", "actor_stalker", "actor_army");
+            MergeLists(fNames, "actor_freedom", "actor_stalker", "actor_bandit");
+            MergeLists(fNames, "actor_killer", "actor_stalker", "actor_bandit", "actor_ecolog");
+            MergeLists(fNames, "actor_monolith", "actor_stalker", "actor_bandit", "actor_ecolog");
+            MergeLists(fNames, "actor_zombied", "actor_stalker", "actor_bandit", "actor_ecolog", "actor_army");
 
-            sNames["actor_csky"] = MergeLists(sNames, "actor_stalker", "actor_ecolog");
-            sNames["actor_dolg"] = MergeLists(sNames, "actor_stalker", "actor_army");
-            sNames["actor_freedom"] = MergeLists(sNames, "actor_stalker", "actor_bandit");
-            sNames["actor_killer"] = MergeLists(sNames, "actor_stalker", "actor_bandit", "actor_ecolog");
-            sNames["actor_monolith"] = MergeLists(sNames, "actor_stalker", "actor_bandit", "actor_ecolog");
-            sNames["actor_zombied"] = MergeLists(sNames, "actor_stalker", "actor_bandit", "actor_ecolog", "actor_army");
+            MergeLists(sNames, "actor_csky", "actor_stalker", "actor_ecolog");
+            MergeLists(sNames, "actor_dolg", "actor_stalker", "actor_army");
+            MergeLists(sNames, "actor_freedom", "actor_stalker", "actor_bandit");
+            MergeLists(sNames, "actor_killer", "actor_stalker", "actor_bandit", "actor_ecolog");
+            MergeLists(sNames, "actor_monolith", "actor_stalker", "actor_bandit", "actor_ecolog");
+            MergeLists(sNames, "actor_zombied", "actor_stalker", "actor_bandit", "actor_ecolog", "actor_army");
         }
 
         public static string Localize(string id)
@@ -83,20 +94,32 @@ namespace Chernobyl_Relay_Chat
             return list[rand.Next(list.Count)];
         }
 
-        private static List<string> MergeLists(Dictionary<string, List<string>> listDict, params string[] keys)
+        private static void MergeLists(Dictionary<string, Dictionary<string, List<string>>> listDict, string target, params string[] sources)
         {
-            List<string> list = new List<string>();
-            foreach (string key in keys)
+            foreach (string lang in listDict.Keys)
             {
-                list = list.Concat(listDict[key]).ToList();
+                listDict[lang][target] = new List<string>();
+                foreach (string source in sources)
+                {
+                    listDict[lang][target] = listDict[lang][target].Concat(listDict[lang][source]).ToList();
+                }
             }
-            return list;
+        }
+
+        public static string RandomIrcName(string faction)
+        {
+            return RandomName("eng", faction).Replace(' ', '_');
         }
 
         public static string RandomName(string faction)
         {
+            return RandomName(channelLangs[CRCOptions.Channel], faction).Replace(' ', '_');
+        }
+
+        private static string RandomName(string lang, string faction)
+        {
             faction = ValidateFaction(faction);
-            return PickRandom(fNames[faction]) + " " + PickRandom(sNames[faction]);
+            return PickRandom(fNames[lang][faction]) + " " + PickRandom(sNames[lang][faction]);
         }
 
         public static string ValidateFaction(string faction)
@@ -119,26 +142,27 @@ namespace Chernobyl_Relay_Chat
 
         public static string DeathMessage(string name, string level, string xrClass, string section)
         {
-            string levelText = deathLevels.ContainsKey(level) ? PickRandom(deathLevels[level]) : ("somewhere in the Zone (" + level + ")");
+            string lang = channelLangs[CRCOptions.Channel];
+            string levelText = deathLevels[lang].ContainsKey(level) ? PickRandom(deathLevels[lang][level]) : ("somewhere in the Zone (" + level + ")");
             string deathText;
             if (rand.Next(101) < GENERIC_CHANCE)
-                deathText = PickRandom(deathGeneric);
-            else if (deathSections.ContainsKey(section))
-                deathText = PickRandom(deathSections[section]);
-            else if (deathClasses.ContainsKey(xrClass))
-                deathText = PickRandom(deathClasses[xrClass]);
+                deathText = PickRandom(deathGeneric[lang]);
+            else if (deathSections[lang].ContainsKey(section))
+                deathText = PickRandom(deathSections[lang][section]);
+            else if (deathClasses[lang].ContainsKey(xrClass))
+                deathText = PickRandom(deathClasses[lang][xrClass]);
             else
                 deathText = "died of unknown causes (" + xrClass + "|" + section + ")";
 
-            string message = PickRandom(deathFormats);
-            message = message.Replace("$when", PickRandom(deathTimes));
+            string message = PickRandom(deathFormats[lang]);
+            message = message.Replace("$when", PickRandom(deathTimes[lang]));
             message = message.Replace("$level", levelText);
-            message = message.Replace("$saw", PickRandom(deathObservances));
+            message = message.Replace("$saw", PickRandom(deathObservances[lang]));
             message = message.Replace("$name", name);
             message = message.Replace("$death", deathText);
             message = message[0].ToString().ToUpper() + message.Substring(1);
             if (rand.Next(101) < REMARK_CHANCE)
-                message += ' ' + PickRandom(deathRemarks);
+                message += ' ' + PickRandom(deathRemarks[lang]);
             return message;
         }
 
@@ -156,43 +180,52 @@ namespace Chernobyl_Relay_Chat
             "actor_zombied",
         };
 
-        private static List<string> loadXmlList(string path)
+        private static Dictionary<string, List<string>> loadXmlList(string path)
         {
-            List<string> list = new List<string>();
+            Dictionary<string, List<string>> list = new Dictionary<string, List<string>>();
             XmlDocument xml = new XmlDocument();
             try
             {
                 xml.Load(path);
-                foreach (XmlNode stringNode in xml.DocumentElement.ChildNodes)
+                foreach (XmlNode langNode in xml.DocumentElement.ChildNodes)
                 {
-                    list.Add(stringNode.InnerText);
+                    list[langNode.Name] = new List<string>();
+                    foreach (XmlNode stringNode in xml.DocumentElement.ChildNodes)
+                    {
+                        list[langNode.Name].Add(stringNode.InnerText);
+                    }
                 }
             }
             catch (Exception ex) when (ex is XmlException || ex is FileNotFoundException) { }
             return list;
         }
 
-        private static Dictionary<string, List<string>> loadXmlListDict(string path)
+        private static Dictionary<string, Dictionary<string, List<string>>> loadXmlListDict(string path)
         {
-            Dictionary<string, List<string>> listDict = new Dictionary<string, List<string>>();
+            Dictionary<string, Dictionary<string, List<string>>> listDict = new Dictionary<string, Dictionary<string, List<string>>>();
             XmlDocument xml = new XmlDocument();
             try
             {
                 xml.Load(path);
-                foreach (XmlNode keyNode in xml.DocumentElement.ChildNodes)
+                foreach (XmlNode langNode in xml.DocumentElement.ChildNodes)
                 {
-                    string key = keyNode.Name;
-                    listDict[key] = new List<string>();
-                    XmlNode clone = keyNode.Attributes["clone"];
-                    if (clone != null)
+                    string lang = langNode.Name;
+                    listDict[lang] = new Dictionary<string, List<string>>();
+                    foreach (XmlNode keyNode in xml.DocumentElement.ChildNodes)
                     {
-                        listDict[key] = listDict[clone.Value];
-                    }
-                    else
-                    {
-                        foreach (XmlNode stringNode in keyNode.ChildNodes)
+                        string key = keyNode.Name;
+                        listDict[lang][key] = new List<string>();
+                        XmlNode clone = keyNode.Attributes["clone"];
+                        if (clone != null)
                         {
-                            listDict[key].Add(stringNode.InnerText);
+                            listDict[lang][key] = listDict[lang][clone.Value];
+                        }
+                        else
+                        {
+                            foreach (XmlNode stringNode in keyNode.ChildNodes)
+                            {
+                                listDict[lang][key].Add(stringNode.InnerText);
+                            }
                         }
                     }
                 }
