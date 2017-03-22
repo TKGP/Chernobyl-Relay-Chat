@@ -347,7 +347,7 @@
             this.tabPageGame.Location = new System.Drawing.Point(4, 22);
             this.tabPageGame.Name = "tabPageGame";
             this.tabPageGame.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGame.Size = new System.Drawing.Size(230, 228);
+            this.tabPageGame.Size = new System.Drawing.Size(230, 307);
             this.tabPageGame.TabIndex = 1;
             this.tabPageGame.Text = "In-game";
             this.tabPageGame.UseVisualStyleBackColor = true;
@@ -401,7 +401,8 @@
             "English (General)",
             "English (Roleplay)",
             "English (Unmoderated)",
-            "Русский"});
+            "Русский",
+            "Tech Support"});
             this.comboBoxChannel.Location = new System.Drawing.Point(6, 59);
             this.comboBoxChannel.Name = "comboBoxChannel";
             this.comboBoxChannel.Size = new System.Drawing.Size(216, 21);
