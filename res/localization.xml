@@ -36,12 +36,24 @@
 		<eng>You are now connected to the network</eng>
 		<rus></rus>
 	</string>
+	<string id="client_topic">
+		<eng>Channel rules: </eng>
+		<rus></rus>
+	</string>
+	<string id="client_topic_change">
+		<eng>Updated channel rules: </eng>
+		<rus></rus>
+	</string>
 	<string id="client_join">
 		<eng> has logged on</eng>
 		<rus></rus>
 	</string>
 	<string id="client_part">
 		<eng> has logged off</eng>
+		<rus></rus>
+	</string>
+	<string id="client_own_part">
+		<eng>Switching channel...</eng>
 		<rus></rus>
 	</string>
 	<string id="client_nick_change">
@@ -115,6 +127,10 @@
 	</string>
 	<string id="options_language">
 		<eng>Language</eng>
+		<rus></rus>
+	</string>
+	<string id="options_channel">
+		<eng>Channel</eng>
 		<rus></rus>
 	</string>
 	<string id="options_language_restart">

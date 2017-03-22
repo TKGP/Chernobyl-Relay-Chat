@@ -16,6 +16,7 @@ namespace Chernobyl_Relay_Chat
             tabControl1.TabPages[1].Text = CRCStrings.Localize("options_tab_game");
 
             labelLanguage.Text = CRCStrings.Localize("options_language");
+            labelChannel.Text = CRCStrings.Localize("options_channel");
             radioButtonFactionAuto.Text = CRCStrings.Localize("options_auto_faction");
             radioButtonFactionManual.Text = CRCStrings.Localize("options_manual_faction");
             labelName.Text = CRCStrings.Localize("options_name");
@@ -37,6 +38,7 @@ namespace Chernobyl_Relay_Chat
         private void OptionsForm_Load(object sender, EventArgs e)
         {
             comboBoxLanguage.SelectedIndex = languageToIndex[CRCOptions.Language];
+            comboBoxChannel.SelectedIndex = channelToIndex[CRCOptions.Channel];
             radioButtonFactionAuto.Checked = CRCOptions.AutoFaction;
             radioButtonFactionManual.Checked = !CRCOptions.AutoFaction;
             textBoxName.Text = CRCOptions.Name;
@@ -68,6 +70,8 @@ namespace Chernobyl_Relay_Chat
                 CRCOptions.Language = lang;
                 MessageBox.Show(CRCStrings.Localize("options_language_restart"), CRCStrings.Localize("crc_name"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+            
+            CRCOptions.Channel = indexToChannel[comboBoxChannel.SelectedIndex];
             CRCOptions.AutoFaction = radioButtonFactionAuto.Checked;
             CRCOptions.ManualFaction = indexToFaction[comboBoxFaction.SelectedIndex];
             CRCOptions.Name = name;
@@ -80,8 +84,10 @@ namespace Chernobyl_Relay_Chat
             CRCOptions.ChatKey = textBoxChatKey.Text;
             CRCOptions.NewsSound = checkBoxNewsSound.Checked;
             CRCOptions.CloseChat = checkBoxCloseChat.Checked;
+
             CRCOptions.Save();
             CRCClient.UpdateSettings();
+            CRCGame.UpdateSettings();
             this.Close();
         }
 
@@ -126,6 +132,22 @@ namespace Chernobyl_Relay_Chat
         {
             [0] = "eng",
             [1] = "rus",
+        };
+
+        private readonly Dictionary<string, int> channelToIndex = new Dictionary<string, int>()
+        {
+            ["#crc_english"] = 0,
+            ["#crc_english_rp"] = 1,
+            ["#crc_english_shitposting"] = 2,
+            ["#crc_russian"] = 3,
+        };
+
+        private readonly Dictionary<int, string> indexToChannel = new Dictionary<int, string>()
+        {
+            [0] = "#crc_english",
+            [1] = "#crc_english_rp",
+            [2] = "#crc_english_shitposting",
+            [3] = "#crc_russian",
         };
 
         private readonly Dictionary<string, int> factionToIndex = new Dictionary<string, int>()

@@ -10,15 +10,11 @@ namespace Chernobyl_Relay_Chat
         private static RegistryKey registry = Registry.CurrentUser.CreateSubKey(@"Software\Chernobyl Relay Chat");
 
         public const string Server = "irc.slashnet.org";
-#if DEBUG
-        public const string Channel = "#crc_debug";
-#else
-        public const string Channel = "#crc_beta";
-#endif
         public const string InPath = @"\..\gamedata\configs\crc_input.txt";
         public const string OutPath = @"\..\gamedata\configs\crc_output.txt";
 
         public static string Language = "eng";
+        public static string Channel;
         public static Point DisplayLocation;
         public static Size DisplaySize;
 
@@ -49,6 +45,7 @@ namespace Chernobyl_Relay_Chat
             try
             {
                 Language = (string)registry.GetValue("Language", "eng");
+                Channel = (string)registry.GetValue("Channel", "#crc_english");
                 DisplayLocation = new Point((int)registry.GetValue("DisplayLocationX", 0),
                     (int)registry.GetValue("DisplayLocationY", 0));
                 DisplaySize = new Size((int)registry.GetValue("DisplayWidth", 0),

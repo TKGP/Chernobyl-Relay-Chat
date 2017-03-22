@@ -21,7 +21,7 @@ namespace Chernobyl_Relay_Chat
 
         private static IrcClient client = new IrcClient();
         private static DateTime lastDeath = new DateTime();
-        private static string lastQuery;
+        private static string lastName, lastChannel, lastQuery;
         private static bool retry = false;
 
         public static List<string> Users = new List<string>();
@@ -53,6 +53,8 @@ namespace Chernobyl_Relay_Chat
             client.OnErrorMessage += new IrcEventHandler(OnErrorMessage);
             client.OnKick += new KickEventHandler(OnKick);
             client.OnDisconnected += new EventHandler(OnDisconnected);
+            client.OnTopic += new TopicEventHandler(OnTopic);
+            client.OnTopicChange += new TopicChangeEventHandler(OnTopicChange);
 
             try
             {
@@ -80,13 +82,24 @@ namespace Chernobyl_Relay_Chat
 
         public static void UpdateSettings()
         {
-            client.RfcNick(CRCOptions.Name);
-            CRCGame.UpdateSettings();
+            if (CRCOptions.Name != lastName)
+            {
+                client.RfcNick(CRCOptions.Name);
+                lastName = CRCOptions.Name;
+            }
+            if (CRCOptions.Channel != lastChannel)
+            {
+                Users.Clear();
+                client.RfcPart(lastChannel);
+                client.RfcJoin(CRCOptions.Channel);
+                lastChannel = CRCOptions.Channel;
+            }
         }
 
         public static void ChangeNick(string nick)
         {
             CRCOptions.Name = nick;
+            lastName = nick;
             client.RfcNick(nick);
         }
 
@@ -160,6 +173,8 @@ namespace Chernobyl_Relay_Chat
 
         private static void OnConnection(object sender, EventArgs e)
         {
+            lastName = CRCOptions.Name;
+            lastChannel = CRCOptions.Channel;
             client.Login(CRCOptions.Name, "Chernobyl Relay Chat " + Application.ProductVersion);
             client.RfcJoin(CRCOptions.Channel);
         }
@@ -183,6 +198,20 @@ namespace Chernobyl_Relay_Chat
                 CRCGame.AddInformation(message);
                 client.Connect(CRCOptions.Server, 6667);
             }
+        }
+
+        private static void OnTopic(object sender, TopicEventArgs e)
+        {
+            string message = CRCStrings.Localize("client_topic") + e.Topic;
+            CRCDisplay.AddInformation(message);
+            CRCGame.AddInformation(message);
+        }
+
+        private static void OnTopicChange(object sender, TopicChangeEventArgs e)
+        {
+            string message = CRCStrings.Localize("client_topic_change") + e.NewTopic;
+            CRCDisplay.AddInformation(message);
+            CRCGame.AddInformation(message);
         }
 
         private static void OnChannelMessage(object sender, IrcEventArgs e)
@@ -250,13 +279,22 @@ namespace Chernobyl_Relay_Chat
 
         private static void OnPart(object sender, PartEventArgs e)
         {
-            Users.Remove(e.Who);
-            Users.Sort();
-            CRCDisplay.UpdateUsers();
-            CRCGame.UpdateUsers();
-            string message = e.Who + CRCStrings.Localize("client_part");
-            CRCDisplay.AddInformation(message);
-            CRCGame.AddInformation(message);
+            if (e.Who != CRCOptions.Name)
+            {
+                Users.Remove(e.Who);
+                Users.Sort();
+                CRCDisplay.UpdateUsers();
+                CRCGame.UpdateUsers();
+                string message = e.Who + CRCStrings.Localize("client_part");
+                CRCDisplay.AddInformation(message);
+                CRCGame.AddInformation(message);
+            }
+            else
+            {
+                string message = CRCStrings.Localize("client_own_part");
+                CRCDisplay.AddInformation(message);
+                CRCGame.AddInformation(message);
+            }
         }
 
         private static void OnQuit(object sender, QuitEventArgs e)
