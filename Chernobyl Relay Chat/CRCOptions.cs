@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Security;
 
@@ -32,6 +33,12 @@ namespace Chernobyl_Relay_Chat
         public static bool NewsSound;
         public static bool CloseChat;
 
+        private static readonly Dictionary<string, string> defaultChannel = new Dictionary<string, string>()
+        {
+            ["eng"] = "#crc_english",
+            ["rus"] = "#crc_russian",
+        };
+
         public static string GetFaction()
         {
             if (AutoFaction)
@@ -44,8 +51,21 @@ namespace Chernobyl_Relay_Chat
         {
             try
             {
-                Language = (string)registry.GetValue("Language", "eng");
-                Channel = (string)registry.GetValue("Channel", "#crc_english");
+                Language = (string)registry.GetValue("Language", null);
+                Channel = (string)registry.GetValue("Channel", null);
+                if (Language == null)
+                {
+                    using (LanguagePrompt languagePrompt = new LanguagePrompt())
+                    {
+                        languagePrompt.ShowDialog();
+                        Language = languagePrompt.Result;
+                    }
+                }
+                if (Channel == null)
+                {
+                    Channel = defaultChannel[Language];
+                }
+
                 DisplayLocation = new Point((int)registry.GetValue("DisplayLocationX", 0),
                     (int)registry.GetValue("DisplayLocationY", 0));
                 DisplaySize = new Size((int)registry.GetValue("DisplayWidth", 0),

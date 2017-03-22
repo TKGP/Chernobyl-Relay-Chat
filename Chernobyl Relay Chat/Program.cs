@@ -23,9 +23,6 @@ namespace Chernobyl_Relay_Chat
                 return;
 #endif
 
-            if (CRCUpdate.CheckFirstUpdate())
-                return;
-
             CRCStrings.Load();
             bool optionsLoaded = CRCOptions.Load();
             if (!optionsLoaded)
@@ -38,6 +35,9 @@ namespace Chernobyl_Relay_Chat
                     CRCStrings.Localize("crc_name"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            if (CRCUpdate.CheckFirstUpdate())
+                return;
 
             displayThread = new Thread(CRCDisplay.Start);
             displayThread.Start();

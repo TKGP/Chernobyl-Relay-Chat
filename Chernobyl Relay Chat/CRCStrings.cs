@@ -85,7 +85,7 @@ namespace Chernobyl_Relay_Chat
         {
             if (localization[CRCOptions.Language].ContainsKey(id)
                 && localization[CRCOptions.Language][id] != string.Empty)
-                return localization[CRCOptions.Language][id];
+                return localization[CRCOptions.Language][id].Replace(@"\n", "\r\n");
             return id;
         }
 

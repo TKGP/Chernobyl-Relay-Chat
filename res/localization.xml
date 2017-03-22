@@ -17,17 +17,13 @@
 		<rus>Информация</rus>
 	</string>
 	<string id="registry_error">
-		<eng>CRC was unable to access the registry, which is needed to preserve settings.\r\n
-			Please try running the application As Administrator.</eng>
-		<rus>CRC не смог получить доступ к реестру, который необходим для сохранения настроек.\r\n
-			Попробуйте запустить приложение с правами администратора.</rus>
+		<eng>CRC was unable to access the registry, which is needed to preserve settings.\nPlease try running the application As Administrator.</eng>
+		<rus>CRC не смог получить доступ к реестру, который необходим для сохранения настроек.\nПопробуйте запустить приложение с правами администратора.</rus>
 	</string>
 	
 	<string id="client_connection_error">
-		<eng>Could not connect to the IRC server; CRC will now shut down.\r\n
-			Try running As Administrator or allowing CRC in your firewall.</eng>
-		<rus>Не удалось подключиться к IRC-серверу; CRC теперь будет закрыт.\r\n
-			Попробуйте запустить с правами администратора или выставить CRC в исключения в брандмауэре.</rus>
+		<eng>Could not connect to the IRC server; CRC will now shut down.\nTry running As Administrator or allowing CRC in your firewall.</eng>
+		<rus>Не удалось подключиться к IRC-серверу; CRC теперь будет закрыт.\nПопробуйте запустить с правами администратора или выставить CRC в исключения в брандмауэре.</rus>
 	</string>
 	<string id="client_connected">
 		<eng>You are now connected to the network</eng>
@@ -79,12 +75,8 @@
 	</string>
 	
 	<string id="game_file_error">
-		<eng>CRC was unable to read or write files needed to communicate with the game.\r\n
-			You may continue using the built-in client for now.\r\n
-			Please try running the program As Administrator.</eng>
-		<rus>CRC не смог прочитать или записать файлы, необходимые для общения с игрой.\r\n
-			На данный момент Вы можете продолжать использовать встроенный клиент.\r\n
-			Попробуйте запустить программу с правами администратора.</rus>
+		<eng>CRC was unable to read or write files needed to communicate with the game.\nYou may continue using the built-in client for now.\nPlease try running the program As Administrator.</eng>
+		<rus>CRC не смог прочитать или записать файлы, необходимые для общения с игрой.\nНа данный момент Вы можете продолжать использовать встроенный клиент.\nПопробуйте запустить программу с правами администратора.</rus>
 	</string>
 	<string id="game_script_version_error">
 		<eng>Script version out of date; please exit the game and install the latest CRC gamedata.</eng>

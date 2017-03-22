@@ -94,6 +94,12 @@
     <Compile Include="KeyPromptForm.Designer.cs">
       <DependentUpon>KeyPromptForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LanguagePrompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LanguagePrompt.Designer.cs">
+      <DependentUpon>LanguagePrompt.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProcessExtension.cs" />
     <Compile Include="CRCGame.cs" />
     <Compile Include="CRCOptions.cs" />
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KeyPromptForm.resx">
       <DependentUpon>KeyPromptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LanguagePrompt.resx">
+      <DependentUpon>LanguagePrompt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
