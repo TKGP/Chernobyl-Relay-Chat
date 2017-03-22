@@ -6,186 +6,186 @@
 	</string>
 	<string id="crc_seconds">
 		<eng>seconds</eng>
-		<rus>Секунды</rus>
+		<rus>РЎРµРєСѓРЅРґС‹</rus>
 	</string>
 	<string id="crc_error">
 		<eng>Error</eng>
-		<rus>ошибка</rus>
+		<rus>РѕС€РёР±РєР°</rus>
 	</string>
 	<string id="crc_information">
 		<eng>Information</eng>
-		<rus>Информация</rus>
+		<rus>РРЅС„РѕСЂРјР°С†РёСЏ</rus>
 	</string>
 	<string id="registry_error">
 		<eng>CRC was unable to access the registry, which is needed to preserve settings.\r\n
 			Please try running the application As Administrator.</eng>
-		<rus>CRC не смог получить доступ к реестру, который необходим для сохранения настроек.\r\n
-			Попробуйте запустить приложение «Как администратор».</rus>
+		<rus>CRC РЅРµ СЃРјРѕРі РїРѕР»СѓС‡РёС‚СЊ РґРѕСЃС‚СѓРї Рє СЂРµРµСЃС‚СЂСѓ, РєРѕС‚РѕСЂС‹Р№ РЅРµРѕР±С…РѕРґРёРј РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РЅР°СЃС‚СЂРѕРµРє.\r\n
+			РџРѕРїСЂРѕР±СѓР№С‚Рµ Р·Р°РїСѓСЃС‚РёС‚СЊ РїСЂРёР»РѕР¶РµРЅРёРµ В«РљР°Рє Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂВ».</rus>
 	</string>
 	
 	<string id="client_connection_error">
 		<eng>Could not connect to the IRC server; CRC will now shut down.\r\n
 			Try running As Administrator or allowing CRC in your firewall.</eng>
-		<rus>Не удалось подключиться к IRC-серверу; CRC теперь будет закрыт.\r\n
-			Попробуйте запустить в качестве администратора или разрешить CRC в вашем брандмауэре.</rus>
+		<rus>РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє IRC-СЃРµСЂРІРµСЂСѓ; CRC С‚РµРїРµСЂСЊ Р±СѓРґРµС‚ Р·Р°РєСЂС‹С‚.\r\n
+			РџРѕРїСЂРѕР±СѓР№С‚Рµ Р·Р°РїСѓСЃС‚РёС‚СЊ РІ РєР°С‡РµСЃС‚РІРµ Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР° РёР»Рё СЂР°Р·СЂРµС€РёС‚СЊ CRC РІ РІР°С€РµРј Р±СЂР°РЅРґРјР°СѓСЌСЂРµ.</rus>
 	</string>
 	<string id="client_connected">
 		<eng>You are now connected to the network</eng>
-		<rus>Теперь вы подключены к сети</rus>
+		<rus>РўРµРїРµСЂСЊ РІС‹ РїРѕРґРєР»СЋС‡РµРЅС‹ Рє СЃРµС‚Рё</rus>
 	</string>
 	<string id="client_topic">
 		<eng>Channel rules: </eng>
-		<rus>Правила канала: </rus>
+		<rus>РџСЂР°РІРёР»Р° РєР°РЅР°Р»Р°: </rus>
 	</string>
 	<string id="client_topic_change">
 		<eng>Updated channel rules: </eng>
-		<rus>Обновленные правила канала: </rus>
+		<rus>РћР±РЅРѕРІР»РµРЅРЅС‹Рµ РїСЂР°РІРёР»Р° РєР°РЅР°Р»Р°: </rus>
 	</string>
 	<string id="client_join">
 		<eng> has logged on</eng>
-		<rus> Вошел в систему</rus>
+		<rus> Р’РѕС€РµР» РІ СЃРёСЃС‚РµРјСѓ</rus>
 	</string>
 	<string id="client_part">
 		<eng> has logged off</eng>
-		<rus> Отключился</rus>
+		<rus> РћС‚РєР»СЋС‡РёР»СЃСЏ</rus>
 	</string>
 	<string id="client_own_part">
 		<eng>Switching channel...</eng>
-		<rus>Коммутационный канал ...</rus>
+		<rus>РљРѕРјРјСѓС‚Р°С†РёРѕРЅРЅС‹Р№ РєР°РЅР°Р» ...</rus>
 	</string>
 	<string id="client_nick_change">
 		<eng> is now known as </eng>
-		<rus> Теперь известен как </rus>
+		<rus> РўРµРїРµСЂСЊ РёР·РІРµСЃС‚РµРЅ РєР°Рє </rus>
 	</string>
 	<string id="client_own_nick_change">
 		<eng>You are now known as </eng>
-		<rus>Теперь вы известны как </rus>
+		<rus>РўРµРїРµСЂСЊ РІС‹ РёР·РІРµСЃС‚РЅС‹ РєР°Рє </rus>
 	</string>
 	<string id="client_kicked">
 		<eng> has been kicked for: </eng>
-		<rus> выбит на: </rus>
+		<rus> РІС‹Р±РёС‚ РЅР°: </rus>
 	</string>
 	<string id="client_got_kicked">
 		<eng>You have been kicked for: </eng>
-		<rus>Вас выгнали за: </rus>
+		<rus>Р’Р°СЃ РІС‹РіРЅР°Р»Рё Р·Р°: </rus>
 	</string>
 	<string id="client_banned">
 		<eng>Woops, you're banned!</eng>
-		<rus>Ой, вы забанены!</rus>
+		<rus>РћР№, РІС‹ Р·Р°Р±Р°РЅРµРЅС‹!</rus>
 	</string>
 	<string id="client_reconnecting">
 		<eng>Reconnecting...</eng>
-		<rus>Повторное подключение ...</rus>
+		<rus>РџРѕРІС‚РѕСЂРЅРѕРµ РїРѕРґРєР»СЋС‡РµРЅРёРµ ...</rus>
 	</string>
 	
 	<string id="game_file_error">
 		<eng>CRC was unable to read or write files needed to communicate with the game.\r\n
 			You may continue using the built-in client for now.\r\n
 			Please try running the program As Administrator.</eng>
-		<rus>CRC не смог прочитать или записать файлы, необходимые для общения с игрой.\r\n
-			На данный момент вы можете продолжать использовать встроенный клиент.\r\n
-			Попробуйте запустить программу «Как администратор».</rus>
+		<rus>CRC РЅРµ СЃРјРѕРі РїСЂРѕС‡РёС‚Р°С‚СЊ РёР»Рё Р·Р°РїРёСЃР°С‚СЊ С„Р°Р№Р»С‹, РЅРµРѕР±С…РѕРґРёРјС‹Рµ РґР»СЏ РѕР±С‰РµРЅРёСЏ СЃ РёРіСЂРѕР№.\r\n
+			РќР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚ РІС‹ РјРѕР¶РµС‚Рµ РїСЂРѕРґРѕР»Р¶Р°С‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІСЃС‚СЂРѕРµРЅРЅС‹Р№ РєР»РёРµРЅС‚.\r\n
+			РџРѕРїСЂРѕР±СѓР№С‚Рµ Р·Р°РїСѓСЃС‚РёС‚СЊ РїСЂРѕРіСЂР°РјРјСѓ В«РљР°Рє Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂВ».</rus>
 	</string>
 	<string id="game_script_version_error">
 		<eng>Script version out of date; please exit the game and install the latest CRC gamedata.</eng>
-		<rus>Версия скрипта устарела; Выйдите из игры и установите последнюю версию игры.</rus>
+		<rus>Р’РµСЂСЃРёСЏ СЃРєСЂРёРїС‚Р° СѓСЃС‚Р°СЂРµР»Р°; Р’С‹Р№РґРёС‚Рµ РёР· РёРіСЂС‹ Рё СѓСЃС‚Р°РЅРѕРІРёС‚Рµ РїРѕСЃР»РµРґРЅСЋСЋ РІРµСЂСЃРёСЋ РёРіСЂС‹.</rus>
 	</string>
 	
 	<string id="display_send">
 		<eng>Send</eng>
-		<rus>послать</rus>
+		<rus>РїРѕСЃР»Р°С‚СЊ</rus>
 	</string>
 	<string id="display_options">
 		<eng>Options</eng>
-		<rus>Опции</rus>
+		<rus>РћРїС†РёРё</rus>
 	</string>
 	<string id="display_connecting">
 		<eng>Connecting...</eng>
-		<rus>Подключение ...</rus>
+		<rus>РџРѕРґРєР»СЋС‡РµРЅРёРµ ...</rus>
 	</string>
 	
 	<string id="options_title">
 		<eng>CRC Options</eng>
-		<rus>Параметры CRC</rus>
+		<rus>РџР°СЂР°РјРµС‚СЂС‹ CRC</rus>
 	</string>
 	<string id="options_ok">
 		<eng>OK</eng>
-		<rus>ОК</rus>
+		<rus>РћРљ</rus>
 	</string>
 	<string id="options_cancel">
 		<eng>Cancel</eng>
-		<rus>Отмена</rus>
+		<rus>РћС‚РјРµРЅР°</rus>
 	</string>
 	<string id="options_tab_client">
 		<eng>Client</eng>
-		<rus>Клиент</rus>
+		<rus>РљР»РёРµРЅС‚</rus>
 	</string>
 	<string id="options_tab_game">
 		<eng>In-game</eng>
-		<rus>В игре</rus>
+		<rus>Р’ РёРіСЂРµ</rus>
 	</string>
 	<string id="options_language">
-		<eng>Language</eng>
-		<rus>Язык</rus>
+		<eng>Language (РЇР·С‹Рє)</eng>
+		<rus>РЇР·С‹Рє (Language)</rus>
 	</string>
 	<string id="options_channel">
 		<eng>Channel</eng>
-		<rus>Канал</rus>
+		<rus>РљР°РЅР°Р»</rus>
 	</string>
 	<string id="options_language_restart">
 		<eng>CRC must be restarted for language changes to take full effect.</eng>
-		<rus>CRC должен быть перезапущен, чтобы изменения языка вступили в силу.</rus>
+		<rus>CRC РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РїРµСЂРµР·Р°РїСѓС‰РµРЅ, С‡С‚РѕР±С‹ РёР·РјРµРЅРµРЅРёСЏ СЏР·С‹РєР° РІСЃС‚СѓРїРёР»Рё РІ СЃРёР»Сѓ.</rus>
 	</string>
 	<string id="options_auto_faction">
 		<eng>Sync game faction</eng>
-		<rus>Синхронизация игровой фракции</rus>
+		<rus>РЎРёРЅС…СЂРѕРЅРёР·Р°С†РёСЏ РёРіСЂРѕРІРѕР№ С„СЂР°РєС†РёРё</rus>
 	</string>
 	<string id="options_manual_faction">
 		<eng>Static faction</eng>
-		<rus>Статическая фракция</rus>
+		<rus>РЎС‚Р°С‚РёС‡РµСЃРєР°СЏ С„СЂР°РєС†РёСЏ</rus>
 	</string>
 	<string id="options_name">
 		<eng>Name</eng>
-		<rus>имя</rus>
+		<rus>РёРјСЏ</rus>
 	</string>
 	<string id="options_name_random">
 		<eng>Random</eng>
-		<rus>Случайная</rus>
+		<rus>РЎР»СѓС‡Р°Р№РЅР°СЏ</rus>
 	</string>
 	<string id="options_timestamps">
 		<eng>Show timestamps</eng>
-		<rus>Показывать временные метки</rus>
+		<rus>РџРѕРєР°Р·С‹РІР°С‚СЊ РІСЂРµРјРµРЅРЅС‹Рµ РјРµС‚РєРё</rus>
 	</string>
 	<string id="options_send_deaths">
 		<eng>Send death messages</eng>
-		<rus>Отправить сообщения о смерти</rus>
+		<rus>РћС‚РїСЂР°РІРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёСЏ Рѕ СЃРјРµСЂС‚Рё</rus>
 	</string>
 	<string id="options_receive_deaths">
 		<eng>Receive death messages</eng>
-		<rus>Получать сообщения о смерти</rus>
+		<rus>РџРѕР»СѓС‡Р°С‚СЊ СЃРѕРѕР±С‰РµРЅРёСЏ Рѕ СЃРјРµСЂС‚Рё</rus>
 	</string>
 	<string id="options_death_interval">
 		<eng>Minimum time between death messages</eng>
-		<rus>Минимальное время между сообщениями о смерти</rus>
+		<rus>РњРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РјРµР¶РґСѓ СЃРѕРѕР±С‰РµРЅРёСЏРјРё Рѕ СЃРјРµСЂС‚Рё</rus>
 	</string>
 	<string id="options_news_duration">
 		<eng>Duration of news messages</eng>
-		<rus>Длительность сообщений новостей</rus>
+		<rus>Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ СЃРѕРѕР±С‰РµРЅРёР№ РЅРѕРІРѕСЃС‚РµР№</rus>
 	</string>
 	<string id="options_chat_key">
 		<eng>Chat key</eng>
-		<rus>Клавиша чата</rus>
+		<rus>РљР»Р°РІРёС€Р° С‡Р°С‚Р°</rus>
 	</string>
 	<string id="options_chat_key_change">
 		<eng>Change</eng>
-		<rus>Изменить</rus>
+		<rus>РР·РјРµРЅРёС‚СЊ</rus>
 	</string>
 	<string id="options_news_sound">
 		<eng>Play message sound</eng>
-		<rus>Воспроизвести звук сообщений</rus>
+		<rus>Р’РѕСЃРїСЂРѕРёР·РІРµСЃС‚Рё Р·РІСѓРє СЃРѕРѕР±С‰РµРЅРёР№</rus>
 	</string>
 	<string id="options_close_chat">
 		<eng>Close chat after sending</eng>
-		<rus>Закрыть чат после отправки</rus>
+		<rus>Р—Р°РєСЂС‹С‚СЊ С‡Р°С‚ РїРѕСЃР»Рµ РѕС‚РїСЂР°РІРєРё</rus>
 	</string>
 </root>

@@ -70,7 +70,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(94, 351);
+            this.buttonOK.Location = new System.Drawing.Point(156, 372);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 0;
@@ -81,7 +81,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(175, 351);
+            this.buttonCancel.Location = new System.Drawing.Point(237, 372);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 1;
@@ -92,7 +92,7 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(6, 133);
+            this.labelName.Location = new System.Drawing.Point(6, 156);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(35, 13);
             this.labelName.TabIndex = 2;
@@ -100,14 +100,14 @@
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(6, 149);
+            this.textBoxName.Location = new System.Drawing.Point(6, 172);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(135, 20);
+            this.textBoxName.Size = new System.Drawing.Size(199, 20);
             this.textBoxName.TabIndex = 3;
             // 
             // buttonRandom
             // 
-            this.buttonRandom.Location = new System.Drawing.Point(147, 147);
+            this.buttonRandom.Location = new System.Drawing.Point(211, 170);
             this.buttonRandom.Name = "buttonRandom";
             this.buttonRandom.Size = new System.Drawing.Size(75, 23);
             this.buttonRandom.TabIndex = 4;
@@ -130,15 +130,15 @@
             "Mercenary",
             "Military",
             "Monolith"});
-            this.comboBoxFaction.Location = new System.Drawing.Point(6, 109);
+            this.comboBoxFaction.Location = new System.Drawing.Point(6, 132);
             this.comboBoxFaction.Name = "comboBoxFaction";
-            this.comboBoxFaction.Size = new System.Drawing.Size(216, 21);
+            this.comboBoxFaction.Size = new System.Drawing.Size(280, 21);
             this.comboBoxFaction.TabIndex = 6;
             // 
             // checkBoxDeathSend
             // 
             this.checkBoxDeathSend.AutoSize = true;
-            this.checkBoxDeathSend.Location = new System.Drawing.Point(6, 221);
+            this.checkBoxDeathSend.Location = new System.Drawing.Point(6, 242);
             this.checkBoxDeathSend.Name = "checkBoxDeathSend";
             this.checkBoxDeathSend.Size = new System.Drawing.Size(131, 17);
             this.checkBoxDeathSend.TabIndex = 7;
@@ -148,7 +148,7 @@
             // checkBoxDeathReceive
             // 
             this.checkBoxDeathReceive.AutoSize = true;
-            this.checkBoxDeathReceive.Location = new System.Drawing.Point(6, 244);
+            this.checkBoxDeathReceive.Location = new System.Drawing.Point(6, 265);
             this.checkBoxDeathReceive.Name = "checkBoxDeathReceive";
             this.checkBoxDeathReceive.Size = new System.Drawing.Size(146, 17);
             this.checkBoxDeathReceive.TabIndex = 8;
@@ -170,7 +170,7 @@
             // radioButtonFactionManual
             // 
             this.radioButtonFactionManual.AutoSize = true;
-            this.radioButtonFactionManual.Location = new System.Drawing.Point(125, 86);
+            this.radioButtonFactionManual.Location = new System.Drawing.Point(6, 109);
             this.radioButtonFactionManual.Name = "radioButtonFactionManual";
             this.radioButtonFactionManual.Size = new System.Drawing.Size(87, 17);
             this.radioButtonFactionManual.TabIndex = 10;
@@ -181,7 +181,7 @@
             // 
             // numericUpDownDeath
             // 
-            this.numericUpDownDeath.Location = new System.Drawing.Point(6, 280);
+            this.numericUpDownDeath.Location = new System.Drawing.Point(6, 301);
             this.numericUpDownDeath.Maximum = new decimal(new int[] {
             3600,
             0,
@@ -195,7 +195,7 @@
             // labelDeathInterval
             // 
             this.labelDeathInterval.AutoSize = true;
-            this.labelDeathInterval.Location = new System.Drawing.Point(6, 264);
+            this.labelDeathInterval.Location = new System.Drawing.Point(6, 285);
             this.labelDeathInterval.Name = "labelDeathInterval";
             this.labelDeathInterval.Size = new System.Drawing.Size(194, 13);
             this.labelDeathInterval.TabIndex = 12;
@@ -204,7 +204,7 @@
             // labelDeathSeconds
             // 
             this.labelDeathSeconds.AutoSize = true;
-            this.labelDeathSeconds.Location = new System.Drawing.Point(58, 282);
+            this.labelDeathSeconds.Location = new System.Drawing.Point(58, 303);
             this.labelDeathSeconds.Name = "labelDeathSeconds";
             this.labelDeathSeconds.Size = new System.Drawing.Size(47, 13);
             this.labelDeathSeconds.TabIndex = 13;
@@ -213,15 +213,15 @@
             // label4
             // 
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label4.Location = new System.Drawing.Point(6, 184);
+            this.label4.Location = new System.Drawing.Point(6, 205);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(216, 2);
+            this.label4.Size = new System.Drawing.Size(280, 2);
             this.label4.TabIndex = 14;
             // 
             // checkBoxTimestamps
             // 
             this.checkBoxTimestamps.AutoSize = true;
-            this.checkBoxTimestamps.Location = new System.Drawing.Point(6, 198);
+            this.checkBoxTimestamps.Location = new System.Drawing.Point(6, 219);
             this.checkBoxTimestamps.Name = "checkBoxTimestamps";
             this.checkBoxTimestamps.Size = new System.Drawing.Size(108, 17);
             this.checkBoxTimestamps.TabIndex = 15;
@@ -231,7 +231,7 @@
             // labelNewsDuration
             // 
             this.labelNewsDuration.AutoSize = true;
-            this.labelNewsDuration.Location = new System.Drawing.Point(6, 3);
+            this.labelNewsDuration.Location = new System.Drawing.Point(6, 88);
             this.labelNewsDuration.Name = "labelNewsDuration";
             this.labelNewsDuration.Size = new System.Drawing.Size(137, 13);
             this.labelNewsDuration.TabIndex = 17;
@@ -239,7 +239,7 @@
             // 
             // numericUpDownNewsDuration
             // 
-            this.numericUpDownNewsDuration.Location = new System.Drawing.Point(6, 19);
+            this.numericUpDownNewsDuration.Location = new System.Drawing.Point(6, 104);
             this.numericUpDownNewsDuration.Maximum = new decimal(new int[] {
             60,
             0,
@@ -264,7 +264,7 @@
             // labelNewsSeconds
             // 
             this.labelNewsSeconds.AutoSize = true;
-            this.labelNewsSeconds.Location = new System.Drawing.Point(58, 21);
+            this.labelNewsSeconds.Location = new System.Drawing.Point(58, 106);
             this.labelNewsSeconds.Name = "labelNewsSeconds";
             this.labelNewsSeconds.Size = new System.Drawing.Size(47, 13);
             this.labelNewsSeconds.TabIndex = 19;
@@ -273,7 +273,7 @@
             // labelChatKey
             // 
             this.labelChatKey.AutoSize = true;
-            this.labelChatKey.Location = new System.Drawing.Point(6, 42);
+            this.labelChatKey.Location = new System.Drawing.Point(6, 3);
             this.labelChatKey.Name = "labelChatKey";
             this.labelChatKey.Size = new System.Drawing.Size(49, 13);
             this.labelChatKey.TabIndex = 22;
@@ -281,15 +281,15 @@
             // 
             // textBoxChatKey
             // 
-            this.textBoxChatKey.Location = new System.Drawing.Point(6, 58);
+            this.textBoxChatKey.Location = new System.Drawing.Point(6, 19);
             this.textBoxChatKey.Name = "textBoxChatKey";
             this.textBoxChatKey.ReadOnly = true;
-            this.textBoxChatKey.Size = new System.Drawing.Size(135, 20);
+            this.textBoxChatKey.Size = new System.Drawing.Size(199, 20);
             this.textBoxChatKey.TabIndex = 23;
             // 
             // buttonChatKey
             // 
-            this.buttonChatKey.Location = new System.Drawing.Point(147, 56);
+            this.buttonChatKey.Location = new System.Drawing.Point(211, 17);
             this.buttonChatKey.Name = "buttonChatKey";
             this.buttonChatKey.Size = new System.Drawing.Size(75, 23);
             this.buttonChatKey.TabIndex = 24;
@@ -304,7 +304,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(238, 333);
+            this.tabControl1.Size = new System.Drawing.Size(300, 354);
             this.tabControl1.TabIndex = 25;
             // 
             // tabPageClient
@@ -329,7 +329,7 @@
             this.tabPageClient.Location = new System.Drawing.Point(4, 22);
             this.tabPageClient.Name = "tabPageClient";
             this.tabPageClient.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageClient.Size = new System.Drawing.Size(230, 307);
+            this.tabPageClient.Size = new System.Drawing.Size(292, 328);
             this.tabPageClient.TabIndex = 0;
             this.tabPageClient.Text = "Client";
             this.tabPageClient.UseVisualStyleBackColor = true;
@@ -347,7 +347,7 @@
             this.tabPageGame.Location = new System.Drawing.Point(4, 22);
             this.tabPageGame.Name = "tabPageGame";
             this.tabPageGame.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGame.Size = new System.Drawing.Size(230, 307);
+            this.tabPageGame.Size = new System.Drawing.Size(292, 328);
             this.tabPageGame.TabIndex = 1;
             this.tabPageGame.Text = "In-game";
             this.tabPageGame.UseVisualStyleBackColor = true;
@@ -355,7 +355,7 @@
             // checkBoxNewsSound
             // 
             this.checkBoxNewsSound.AutoSize = true;
-            this.checkBoxNewsSound.Location = new System.Drawing.Point(6, 84);
+            this.checkBoxNewsSound.Location = new System.Drawing.Point(6, 68);
             this.checkBoxNewsSound.Name = "checkBoxNewsSound";
             this.checkBoxNewsSound.Size = new System.Drawing.Size(123, 17);
             this.checkBoxNewsSound.TabIndex = 25;
@@ -365,7 +365,7 @@
             // checkBoxCloseChat
             // 
             this.checkBoxCloseChat.AutoSize = true;
-            this.checkBoxCloseChat.Location = new System.Drawing.Point(6, 107);
+            this.checkBoxCloseChat.Location = new System.Drawing.Point(6, 45);
             this.checkBoxCloseChat.Name = "checkBoxCloseChat";
             this.checkBoxCloseChat.Size = new System.Drawing.Size(140, 17);
             this.checkBoxCloseChat.TabIndex = 26;
@@ -390,7 +390,7 @@
             "Русский"});
             this.comboBoxLanguage.Location = new System.Drawing.Point(6, 19);
             this.comboBoxLanguage.Name = "comboBoxLanguage";
-            this.comboBoxLanguage.Size = new System.Drawing.Size(216, 21);
+            this.comboBoxLanguage.Size = new System.Drawing.Size(280, 21);
             this.comboBoxLanguage.TabIndex = 17;
             // 
             // comboBoxChannel
@@ -405,7 +405,7 @@
             "Tech Support"});
             this.comboBoxChannel.Location = new System.Drawing.Point(6, 59);
             this.comboBoxChannel.Name = "comboBoxChannel";
-            this.comboBoxChannel.Size = new System.Drawing.Size(216, 21);
+            this.comboBoxChannel.Size = new System.Drawing.Size(280, 21);
             this.comboBoxChannel.TabIndex = 18;
             // 
             // labelChannel
@@ -423,7 +423,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(262, 386);
+            this.ClientSize = new System.Drawing.Size(324, 406);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
