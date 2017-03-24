@@ -125,7 +125,7 @@ namespace Chernobyl_Relay_Chat
 
         public static string RandomName(string faction)
         {
-            return RandomName(channelLangs[CRCOptions.Channel], faction).Replace(' ', '_');
+            return RandomName(channelLangs[CRCOptions.Channel], faction);
         }
 
         private static string RandomName(string lang, string faction)
