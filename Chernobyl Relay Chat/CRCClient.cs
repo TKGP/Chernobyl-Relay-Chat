@@ -20,8 +20,9 @@ namespace Chernobyl_Relay_Chat
         private static readonly Regex commandArgsRx = new Regex(@"\S+");
 
         private static IrcClient client = new IrcClient();
+        private static Dictionary<string, string> crcNicks = new Dictionary<string, string>();
         private static DateTime lastDeath = new DateTime();
-        private static string lastName, lastChannel, lastQuery;
+        private static string lastName, lastChannel, lastQuery, lastFaction;
         private static bool retry = false;
 
         public static List<string> Users = new List<string>();
@@ -41,7 +42,7 @@ namespace Chernobyl_Relay_Chat
             client.SendDelay = 200;
             client.ActiveChannelSyncing = true;
 
-            client.OnConnected += new EventHandler(OnConnection);
+            client.OnConnected += new EventHandler(OnConnected);
             client.OnChannelActiveSynced += new IrcEventHandler(OnChannelActiveSynced);
             client.OnRawMessage += new IrcEventHandler(OnRawMessage);
             client.OnChannelMessage += new IrcEventHandler(OnChannelMessage);
@@ -55,6 +56,8 @@ namespace Chernobyl_Relay_Chat
             client.OnDisconnected += new EventHandler(OnDisconnected);
             client.OnTopic += new TopicEventHandler(OnTopic);
             client.OnTopicChange += new TopicChangeEventHandler(OnTopicChange);
+            client.OnCtcpRequest += new CtcpEventHandler(OnCtcpRequest);
+            client.OnCtcpReply += new CtcpEventHandler(OnCtcpReply);
 
             try
             {
@@ -94,6 +97,14 @@ namespace Chernobyl_Relay_Chat
                 client.RfcJoin(CRCOptions.ChannelProxy());
                 lastChannel = CRCOptions.ChannelProxy();
             }
+            if (CRCOptions.GetFaction() != lastFaction)
+            {
+                foreach (string nick in crcNicks.Keys)
+                {
+                    client.SendMessage(SendType.CtcpReply, nick, CRCOptions.GetFaction());
+                }
+                lastFaction = CRCOptions.GetFaction();
+            }
         }
 
         public static void ChangeNick(string nick)
@@ -105,7 +116,7 @@ namespace Chernobyl_Relay_Chat
 
         public static void Send(string message)
         {
-            client.SendMessage(SendType.Message, CRCOptions.ChannelProxy(), CRCOptions.GetFaction() + META_DELIM + message);
+            client.SendMessage(SendType.Message, CRCOptions.ChannelProxy(), message);
             CRCDisplay.OnOwnChannelMessage(CRCOptions.Name, message);
             CRCGame.OnChannelMessage(CRCOptions.Name, CRCOptions.GetFaction(), message);
         }
@@ -171,26 +182,72 @@ namespace Chernobyl_Relay_Chat
 #endif
         }
 
-        private static void OnConnection(object sender, EventArgs e)
+        private static void OnCtcpRequest(object sender, CtcpEventArgs e)
         {
+            string from = e.Data.Nick;
+            switch(e.CtcpCommand.ToUpper())
+            {
+                case "CLIENTINFO":
+                    client.SendMessage(SendType.CtcpReply, from, "CLIENTINFO Supported CTCP commands: CLIENTINFO FACTION PING VERSION");
+                    break;
+                case "FACTION":
+                    if(!crcNicks.ContainsKey(from))
+                    {
+                        crcNicks[from] = "actor_stalker";
+                        client.SendMessage(SendType.CtcpRequest, from, "FACTION");
+                    }
+                    client.SendMessage(SendType.CtcpReply, from, "FACTION " + CRCOptions.GetFaction());
+                    break;
+                case "PING":
+                    client.SendMessage(SendType.CtcpReply, from, "PING " + e.CtcpParameter);
+                    break;
+                case "VERSION":
+                    client.SendMessage(SendType.CtcpReply, from, "VERSION Chernobyl Relay Chat " + Application.ProductVersion);
+                    break;
+            }
+        }
+
+        private static void OnCtcpReply(object sender, CtcpEventArgs e)
+        {
+            string from = e.Data.Nick;
+            switch(e.CtcpCommand.ToUpper())
+            {
+                case "CLIENTINFO":
+                    if(e.CtcpParameter.Contains("FACTION"))
+                    {
+                        crcNicks[from] = "actor_stalker";
+                        client.SendMessage(SendType.CtcpRequest, from, "FACTION");
+                    }
+                    break;
+                case "FACTION":
+                    crcNicks[from] = CRCStrings.ValidateFaction(e.CtcpParameter);
+                    break;
+            }
+        }
+
+        private static void OnConnected(object sender, EventArgs e)
+        {
+            Users.Clear();
+            crcNicks.Clear();
             lastName = CRCOptions.Name;
             lastChannel = CRCOptions.ChannelProxy();
+            lastFaction = CRCOptions.GetFaction();
             client.Login(CRCOptions.Name, CRCStrings.Localize("crc_name") + " " + Application.ProductVersion);
             client.RfcJoin(CRCOptions.ChannelProxy());
         }
 
         private static void OnChannelActiveSynced(object sender, IrcEventArgs e)
         {
-            foreach (ChannelUser user in client.GetChannel(CRCOptions.ChannelProxy()).Users.Values)
+            foreach (ChannelUser user in client.GetChannel(e.Data.Channel).Users.Values)
                 Users.Add(user.Nick);
             Users.Sort();
             CRCDisplay.UpdateUsers();
             CRCGame.UpdateUsers();
+            client.SendMessage(SendType.CtcpRequest, e.Data.Channel, "CLIENTINFO");
         }
 
         private static void OnDisconnected(object sender, EventArgs e)
         {
-            Users.Clear();
             if (retry)
             {
                 string message = CRCStrings.Localize("client_reconnecting");
@@ -223,7 +280,10 @@ namespace Chernobyl_Relay_Chat
             {
                 string nick;
                 if (fakeNick == null)
+                {
                     nick = e.Data.Nick;
+                    faction = crcNicks.ContainsKey(nick) ? crcNicks[nick] : "actor_stalker";
+                }
                 else if (CRCOptions.ReceiveDeath && (DateTime.Now - lastDeath).TotalSeconds > CRCOptions.DeathInterval)
                 {
                     lastDeath = DateTime.Now;
@@ -248,10 +308,11 @@ namespace Chernobyl_Relay_Chat
         private static void OnQueryMessage(object sender, IrcEventArgs e)
         {
             lastQuery = e.Data.Nick;
+            // Metadata should not be used in queries, just throw it out
             string fakeNick, faction;
             string message = GetMetadata(e.Data.Message, out fakeNick, out faction);
-            // Never use fakeNick for query
             string nick = e.Data.Nick;
+            faction = crcNicks.ContainsKey(nick) ? crcNicks[nick] : "actor_stalker";
             CRCDisplay.OnQueryMessage(nick, CRCOptions.Name, message);
             CRCGame.OnQueryMessage(nick, CRCOptions.Name, faction, message);
         }
@@ -282,6 +343,7 @@ namespace Chernobyl_Relay_Chat
         {
             if (e.Who != CRCOptions.Name)
             {
+                crcNicks.Remove(e.Who);
                 Users.Remove(e.Who);
                 Users.Sort();
                 CRCDisplay.UpdateUsers();
@@ -300,6 +362,7 @@ namespace Chernobyl_Relay_Chat
 
         private static void OnQuit(object sender, QuitEventArgs e)
         {
+            crcNicks.Remove(e.Who);
             Users.Remove(e.Who);
             Users.Sort();
             CRCDisplay.UpdateUsers();
@@ -322,6 +385,7 @@ namespace Chernobyl_Relay_Chat
             }
             else
             {
+                crcNicks.Remove(e.Who);
                 Users.Remove(victim);
                 Users.Sort();
                 string message = victim + CRCStrings.Localize("client_kicked") + e.KickReason;
@@ -343,6 +407,11 @@ namespace Chernobyl_Relay_Chat
             CRCGame.UpdateUsers();
             if (newNick != client.Nickname)
             {
+                if (crcNicks.ContainsKey(oldNick))
+                {
+                    crcNicks[newNick] = crcNicks[oldNick];
+                    crcNicks.Remove(oldNick);
+                }
                 string message = oldNick + CRCStrings.Localize("client_nick_change") + newNick;
                 CRCDisplay.AddInformation(message);
                 CRCGame.AddInformation(message);

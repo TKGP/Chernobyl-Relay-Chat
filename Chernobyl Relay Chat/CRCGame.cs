@@ -132,6 +132,7 @@ namespace Chernobyl_Relay_Chat
                         else
                         {
                             CRCOptions.GameFaction = CRCStrings.ValidateFaction(faction);
+                            CRCClient.UpdateSettings();
                             if (CRCOptions.GameFaction == "actor_zombied")
                                 CRCClient.Send(CRCZombie.Generate());
                             else
@@ -146,6 +147,7 @@ namespace Chernobyl_Relay_Chat
                         string xrClass = deathMatch.Groups[3].Value;
                         string section = deathMatch.Groups[4].Value;
                         CRCOptions.GameFaction = CRCStrings.ValidateFaction(faction);
+                        CRCClient.UpdateSettings();
                         if (CRCOptions.GameFaction != "actor_zombied")
                         {
                             string message = CRCStrings.DeathMessage(CRCOptions.Name, level, xrClass, section);
