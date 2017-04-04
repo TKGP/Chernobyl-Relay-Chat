@@ -24,7 +24,7 @@ namespace Chernobyl_Relay_Chat
         {
             [CRCChannelNames.ENGLISH_NORMAL] = "eng",
             [CRCChannelNames.ENGLISH_RP] = "eng",
-            [CRCChannelNames.ENGLISH_SHITPOSTING] = "eng",
+            ["#crc_english_shitposting"] = "eng",
             [CRCChannelNames.TECH_SUPPORT] = "eng",
             [CRCChannelNames.RUSSIAN_NORMAL] = "rus",
             [CRCChannelNames.RUSSIAN_RP] = "rus",
