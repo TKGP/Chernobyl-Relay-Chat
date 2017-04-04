@@ -116,9 +116,9 @@ namespace Chernobyl_Relay_Chat
 
         public static void Send(string message)
         {
-                client.SendMessage(SendType.Message, CRCOptions.ChannelProxy(), message);
-                CRCDisplay.OnOwnChannelMessage(CRCOptions.Name, message);
-                CRCGame.OnChannelMessage(CRCOptions.Name, CRCOptions.GetFaction(), message);
+            client.SendMessage(SendType.Message, CRCOptions.ChannelProxy(), message);
+            CRCDisplay.OnOwnChannelMessage(CRCOptions.Name, message);
+            CRCGame.OnChannelMessage(CRCOptions.Name, CRCOptions.GetFaction(), message);
         }
 
         public static void SendDeath(string message)
