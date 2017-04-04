@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<eng>
+		<string>recently</string>
+		<string>a few minutes ago</string>
+		<string>just now</string>
+		<string>a moment ago</string>
+		<string>just a moment ago</string>
+		<string>a couple minutes ago</string>
+		<string>a couple of minutes ago</string>
+		<string>a short time ago</string>
+		<string>just recently</string>
+	</eng>
+	
+	<rus>
+		<string>Буквально, сейчас</string>
+		<string>Несколько минут назад</string>
+		<string>Вот только что</string>
+		<string>Пару сек назад</string>
+		<string>Только что</string>
+		<string>Пару минут назад</string>
+		<string>Минуту назад</string>
+		<string>Недавно</string>
+		<string>Прямо сейчас</string>
+	</rus>
+</root>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<eng>
+		<string>was killed</string>
+		<string>died</string>
+		<string>kicked the bucket</string>
+		<string>bought the farm</string>
+		<string>was lost to the Zone</string>
+		<string>ate it</string>
+		<string>met their maker</string>
+		<string>passed away</string>
+	</eng>
+	
+	<rus>
+		<string>был убит</string>
+		<string>погиб</string>
+		<string>умер</string>
+		<string>сыграл в ящик</string>
+		<string>сгинул</string>
+		<string>отдал концы</string>
+		<string>представился</string>
+		<string>скончался</string>
+	</rus>
+</root>

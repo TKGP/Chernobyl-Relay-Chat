@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<string id="crc_name">
+		<eng>Chernobyl Relay Chat</eng>
+		<rus>Chernobyl Relay Chat</rus>
+	</string>
+	<string id="crc_seconds">
+		<eng>seconds</eng>
+		<rus>сек</rus>
+	</string>
+	<string id="crc_error">
+		<eng>Error</eng>
+		<rus>Ошибка</rus>
+	</string>
+	<string id="crc_information">
+		<eng>Information</eng>
+		<rus>Информация</rus>
+	</string>
+	<string id="registry_error">
+		<eng>CRC was unable to access the registry, which is needed to preserve settings.\nPlease try running the application As Administrator.</eng>
+		<rus>CRC не смог получить доступ к реестру, который необходим для сохранения настроек.\nПопробуйте запустить приложение с правами администратора.</rus>
+	</string>
+	
+	<string id="client_connection_error">
+		<eng>Could not connect to the IRC server; CRC will now shut down.\nTry running As Administrator or allowing CRC in your firewall.</eng>
+		<rus>Не удалось подключиться к IRC-серверу; CRC теперь будет закрыт.\nПопробуйте запустить с правами администратора или выставить CRC в исключения в брандмауэре.</rus>
+	</string>
+	<string id="client_connected">
+		<eng>You are now connected to the network</eng>
+		<rus>Теперь Вы подключены к сети</rus>
+	</string>
+	<string id="client_topic">
+		<eng>Channel rules: </eng>
+		<rus>Правила канала: </rus>
+	</string>
+	<string id="client_topic_change">
+		<eng>Updated channel rules: </eng>
+		<rus>Обновлённые правила: </rus>
+	</string>
+	<string id="client_join">
+		<eng> has logged on</eng>
+		<rus> вошёл в систему</rus>
+	</string>
+	<string id="client_part">
+		<eng> has logged off</eng>
+		<rus> отключился</rus>
+	</string>
+	<string id="client_own_part">
+		<eng>Switching channel...</eng>
+		<rus>Коммутационный канал ...</rus>
+	</string>
+	<string id="client_nick_change">
+		<eng> is now known as </eng>
+		<rus> теперь известен, как </rus>
+	</string>
+	<string id="client_own_nick_change">
+		<eng>You are now known as </eng>
+		<rus>Теперь Вы известны, как </rus>
+	</string>
+	<string id="client_kicked">
+		<eng> has been kicked for: </eng>
+		<rus> изгнан за: </rus>
+	</string>
+	<string id="client_got_kicked">
+		<eng>You have been kicked for: </eng>
+		<rus>Вас выгнали за: </rus>
+	</string>
+	<string id="client_banned">
+		<eng>Woops, you're banned!</eng>
+		<rus>Вас забанили. Такие дела.</rus>
+	</string>
+	<string id="client_reconnecting">
+		<eng>Reconnecting...</eng>
+		<rus>Повторное подключение...</rus>
+	</string>
+	
+	<string id="game_file_error">
+		<eng>CRC was unable to read or write files needed to communicate with the game.\nYou may continue using the built-in client for now.\nPlease try running the program As Administrator.</eng>
+		<rus>CRC не смог прочитать или записать файлы, необходимые для общения с игрой.\nНа данный момент Вы можете продолжать использовать встроенный клиент.\nПопробуйте запустить программу с правами администратора.</rus>
+	</string>
+	<string id="game_script_version_error">
+		<eng>Script version out of date; please exit the game and install the latest CRC gamedata.</eng>
+		<rus>Версия скрипта устарела; Выйдите из игры и установите последнюю версию.</rus>
+	</string>
+	
+	<string id="display_send">
+		<eng>Send</eng>
+		<rus>Отправить</rus>
+	</string>
+	<string id="display_options">
+		<eng>Options</eng>
+		<rus>Опции</rus>
+	</string>
+	<string id="display_connecting">
+		<eng>Connecting...</eng>
+		<rus>Подключение...</rus>
+	</string>
+	
+	<string id="options_title">
+		<eng>CRC Options</eng>
+		<rus>Параметры CRC</rus>
+	</string>
+	<string id="options_ok">
+		<eng>OK</eng>
+		<rus>ОК</rus>
+	</string>
+	<string id="options_cancel">
+		<eng>Cancel</eng>
+		<rus>Отмена</rus>
+	</string>
+	<string id="options_tab_client">
+		<eng>Client</eng>
+		<rus>Клиент</rus>
+	</string>
+	<string id="options_tab_game">
+		<eng>In-game</eng>
+		<rus>В игре</rus>
+	</string>
+	<string id="options_language">
+		<eng>Language (Язык)</eng>
+		<rus>Язык (Language)</rus>
+	</string>
+	<string id="options_channel">
+		<eng>Channel</eng>
+		<rus>Канал</rus>
+	</string>
+	<string id="options_language_restart">
+		<eng>CRC must be restarted for language changes to take full effect.</eng>
+		<rus>Перезапустите CRC, чтобы изменения языка вступили в силу.</rus>
+	</string>
+	<string id="options_auto_faction">
+		<eng>Sync game faction</eng>
+		<rus>Синхронизация группировки</rus>
+	</string>
+	<string id="options_manual_faction">
+		<eng>Static faction</eng>
+		<rus>Постоянная группировка</rus>
+	</string>
+	<string id="options_name">
+		<eng>Name</eng>
+		<rus>Имя</rus>
+	</string>
+	<string id="options_name_random">
+		<eng>Random</eng>
+		<rus>Случайно</rus>
+	</string>
+	<string id="options_timestamps">
+		<eng>Show timestamps</eng>
+		<rus>Показывать временные метки</rus>
+	</string>
+	<string id="options_send_deaths">
+		<eng>Send death messages</eng>
+		<rus>Отправлять сообщения о смерти</rus>
+	</string>
+	<string id="options_receive_deaths">
+		<eng>Receive death messages</eng>
+		<rus>Получать сообщения о смерти</rus>
+	</string>
+	<string id="options_death_interval">
+		<eng>Minimum time between death messages</eng>
+		<rus>Промежуток между сообщениями о смерти</rus>
+	</string>
+	<string id="options_news_duration">
+		<eng>Duration of news messages</eng>
+		<rus>Длительность сообщений</rus>
+	</string>
+	<string id="options_chat_key">
+		<eng>Chat key</eng>
+		<rus>Клавиша чата</rus>
+	</string>
+	<string id="options_chat_key_change">
+		<eng>Change</eng>
+		<rus>Изменить</rus>
+	</string>
+	<string id="options_news_sound">
+		<eng>Play message sound</eng>
+		<rus>Воспродить звук при сообщениях</rus>
+	</string>
+	<string id="options_close_chat">
+		<eng>Close chat after sending</eng>
+		<rus>Закрыть чат после отправки</rus>
+	</string>
+</root>
