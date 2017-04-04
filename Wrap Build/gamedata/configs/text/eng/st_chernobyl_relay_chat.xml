@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+	<string id="crc_info">
+		<text>Information</text>
+	</string>
+	<string id="crc_error">
+		<text>Error</text>
+	</string>	
+	<string id="crc_ccon">
+		<text>C-Consciousness</text>
+	</string>
+	<string id="crc_unknown">
+		<text>Unknown</text>
+	</string>
+	<string id="crc_send">
+		<text>Send</text>
+	</string>
+	<string id="crc_close">
+		<text>Close</text>
+	</string>
+	
+	<string id="crc_actor_bandit">
+		<text>Bandit</text>
+	</string>
+	<string id="crc_actor_csky">
+		<text>Clear Sky</text>
+	</string>
+	<string id="crc_actor_dolg">
+		<text>Duty</text>
+	</string>
+	<string id="crc_actor_ecolog">
+		<text>Ecologist</text>
+	</string>
+	<string id="crc_actor_freedom">
+		<text>Freedom</text>
+	</string>
+	<string id="crc_actor_stalker">
+		<text>Loner</text>
+	</string>
+	<string id="crc_actor_killer">
+		<text>Mercenary</text>
+	</string>
+	<string id="crc_actor_army">
+		<text>Military</text>
+	</string>
+	<string id="crc_actor_monolith">
+		<text>Monolith</text>
+	</string>
+	<string id="crc_actor_zombied">
+		<text>Zombie</text>
+	</string>
+</string_table>

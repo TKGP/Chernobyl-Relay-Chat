@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<eng>
+		<string>I saw</string>
+		<string>I noticed</string>
+		<string>it seems</string>
+		<string>someone told me</string>
+		<string>word is</string>
+		<string>I've seen</string>
+		<string>I've noticed</string>
+		<string>seems</string>
+		<string>it looks like</string>
+		<string>looks like</string>
+		<string>apparently</string>
+	</eng>
+	
+	<rus>
+		<string>Видел, как</string>
+		<string>Рассказали мне такое -</string>
+		<string>Кажется, что</string>
+		<string>Мне сказали, что</string>
+		<string>Говорили, что</string>
+		<string>Я видел, как</string>
+		<string>Наблюдал, как</string>
+		<string>Вроде, как</string>
+		<string>Вот это, да!</string>
+		<string>Похоже, что</string>
+		<string>По всей видимости,</string>
+	</rus>
+</root>

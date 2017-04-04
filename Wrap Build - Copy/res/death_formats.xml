@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<eng>
+		<string>$when $level $saw $name $death.</string>
+		<string>$level $when $saw $name $death.</string>
+		<string>$level $name $death.</string>
+		<string>$when $level $name $death.</string>
+		<string>$saw $level $name $death.</string>
+		<string>$when $saw $name $death.</string>
+		<string>$name $death $when $level.</string>
+		<string>$name $death $level $when.</string>
+		<string>$when $name $death $level.</string>
+		<string>$when $name $death.</string>
+		<string>$when $saw $name $death $level.</string>
+		<string>$saw $name $death.</string>
+		<string>$saw $name $death $when $level.</string>
+		<string>$saw $name $death $level.</string>
+	</eng>
+	
+	<rus>
+		<string>$when. $level. $saw $name $death.</string>
+		<string>$level. $when. $saw $name $death.</string>
+		<string>$level. $name $death.</string>
+		<string>$when. $level $name $death.</string>
+		<string>$level. $saw $name $death.</string>
+		<string>$when. $saw $name $death.</string>
+		<string>$name $death. $when. $level.</string>
+		<string>$name $death. $level. $when.</string>
+		<string>$when $name $death. $level.</string>
+		<string>$when $name $death.</string>
+		<string>$when. $saw $name $death. $level.</string>
+		<string>$saw $name $death.</string>
+		<string>$saw $name $death. $when. $level.</string>
+		<string>$saw $name $death. $level.</string>
+	</rus>
+</root>

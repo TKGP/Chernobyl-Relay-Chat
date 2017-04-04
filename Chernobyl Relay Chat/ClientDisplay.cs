@@ -56,15 +56,17 @@ namespace Chernobyl_Relay_Chat
         private void buttonSend_Click(object sender, EventArgs e)
         {
             string trimmed = textBoxInput.Text.Trim();
-            if (trimmed[0] == '/')
-            {
-                CRCCommands.ProcessCommand(trimmed, this);
+            if (trimmed.Length > 0) { 
+                if (trimmed[0] == '/')
+                {
+                    CRCCommands.ProcessCommand(trimmed, this);
+                }
+                else if (trimmed.Length > 0)
+                {
+                    CRCClient.Send(trimmed);
+                }
+                textBoxInput.Clear();
             }
-            else if (trimmed.Length > 0)
-            {
-                CRCClient.Send(trimmed);
-            }
-            textBoxInput.Clear();
         }
 
         private void timerGameCheck_Tick(object sender, EventArgs e)
