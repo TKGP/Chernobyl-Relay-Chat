@@ -22,12 +22,12 @@ namespace Chernobyl_Relay_Chat
 
         private static readonly Dictionary<string, string> channelLangs = new Dictionary<string, string>()
         {
-            ["#crc_english"] = "eng",
-            ["#crc_english_rp"] = "eng",
-            ["#crc_english_shitposting"] = "eng",
-            ["#crc_tech_support"] = "eng",
-            ["#crc_russian"] = "rus",
-            ["#crc_russian_rp"] = "rus",
+            [CRCChannelNames.ENGLISH_NORMAL] = "eng",
+            [CRCChannelNames.ENGLISH_RP] = "eng",
+            [CRCChannelNames.ENGLISH_SHITPOSTING] = "eng",
+            [CRCChannelNames.TECH_SUPPORT] = "eng",
+            [CRCChannelNames.RUSSIAN_NORMAL] = "rus",
+            [CRCChannelNames.RUSSIAN_RP] = "rus",
         };
 
         public static void Load()

@@ -11,9 +11,9 @@ namespace Chernobyl_Relay_Chat
         public static String ENGLISH_NORMAL = "#crc_new_english";
         public static String ENGLISH_RP = "#crc_new_english_rp";
         public static String ENGLISH_SHITPOSTING = "#crc_new_english_shitposting";
-        public static String TECH_SUPPORT = "#crc_new_tech_support";
         public static String RUSSIAN_NORMAL = "#crc_new_russian";
         public static String RUSSIAN_RP = "#crc_new_russian_rp";
+        public static String TECH_SUPPORT = "#crc_new_tech_support";
     }
 
 }
