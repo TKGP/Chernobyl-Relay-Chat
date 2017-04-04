@@ -65,7 +65,8 @@ namespace Chernobyl_Relay_Chat
             try
             {
                 Language = (string)registry.GetValue("Language", null);
-                Channel = (string)registry.GetValue("Channel", null);
+                Channel = CRCChannelNames.ENGLISH_NORMAL;
+                //Channel = (string)registry.GetValue("Channel", null);
                 if (Language == null)
                 {
                     using (LanguagePrompt languagePrompt = new LanguagePrompt())
