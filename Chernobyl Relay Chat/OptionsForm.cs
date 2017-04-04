@@ -136,7 +136,7 @@ namespace Chernobyl_Relay_Chat
 
         private readonly Dictionary<string, int> channelToIndex = new Dictionary<string, int>()
         {
-            ["#crc_english"] = 0,
+            ["#crc_new_english"] = 0,
             ["#crc_english_rp"] = 1,
             ["#crc_english_shitposting"] = 2,
             ["#crc_russian"] = 3,
@@ -146,7 +146,7 @@ namespace Chernobyl_Relay_Chat
 
         private readonly Dictionary<int, string> indexToChannel = new Dictionary<int, string>()
         {
-            [0] = "#crc_english",
+            [0] = "#crc_new_english",
             [1] = "#crc_english_rp",
             [2] = "#crc_english_shitposting",
             [3] = "#crc_russian",

@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CRCChannelNames.cs" />
     <Compile Include="ClientDisplay.cs">
       <SubType>Form</SubType>
     </Compile>
