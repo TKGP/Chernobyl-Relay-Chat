@@ -90,12 +90,12 @@ namespace Chernobyl_Relay_Chat
                 client.RfcNick(CRCOptions.Name);
                 lastName = CRCOptions.Name;
             }
-            if (CRCOptions.ChannelProxy() != lastChannel)
+            if (CRCOptions.getCurrentChannel() != lastChannel)
             {
                 Users.Clear();
                 client.RfcPart(lastChannel);
-                client.RfcJoin(CRCOptions.ChannelProxy());
-                lastChannel = CRCOptions.ChannelProxy();
+                client.RfcJoin(CRCOptions.getCurrentChannel());
+                lastChannel = CRCOptions.getCurrentChannel();
             }
             if (CRCOptions.GetFaction() != lastFaction)
             {
@@ -116,7 +116,7 @@ namespace Chernobyl_Relay_Chat
 
         public static void Send(string message)
         {
-                client.SendMessage(SendType.Message, CRCOptions.ChannelProxy(), message);
+                client.SendMessage(SendType.Message, CRCOptions.getCurrentChannel(), message);
                 CRCDisplay.OnOwnChannelMessage(CRCOptions.Name, message);
                 CRCGame.OnChannelMessage(CRCOptions.Name, CRCOptions.GetFaction(), message);   
         }
@@ -124,7 +124,7 @@ namespace Chernobyl_Relay_Chat
         public static void SendDeath(string message)
         {
             string nick = CRCStrings.RandomName(CRCOptions.GameFaction);
-            client.SendMessage(SendType.Message, CRCOptions.ChannelProxy(), nick + FAKE_DELIM + CRCOptions.GetFaction() + META_DELIM + message);
+            client.SendMessage(SendType.Message, CRCOptions.getCurrentChannel(), nick + FAKE_DELIM + CRCOptions.GetFaction() + META_DELIM + message);
             CRCDisplay.OnChannelMessage(nick, message);
             CRCGame.OnChannelMessage(nick, CRCOptions.GameFaction, message);
         }
@@ -230,10 +230,10 @@ namespace Chernobyl_Relay_Chat
             Users.Clear();
             crcNicks.Clear();
             lastName = CRCOptions.Name;
-            lastChannel = CRCOptions.ChannelProxy();
+            lastChannel = CRCOptions.getCurrentChannel();
             lastFaction = CRCOptions.GetFaction();
             client.Login(CRCOptions.Name, CRCStrings.Localize("crc_name") + " " + Application.ProductVersion);
-            client.RfcJoin(CRCOptions.ChannelProxy());
+            client.RfcJoin(CRCOptions.getCurrentChannel());
         }
 
         private static void OnChannelActiveSynced(object sender, IrcEventArgs e)

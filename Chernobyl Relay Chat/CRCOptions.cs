@@ -43,13 +43,18 @@ namespace Chernobyl_Relay_Chat
             ["rus"] = "#crc_russian",
         };
 
-        public static string ChannelProxy()
+        public static string getChannelProxy()
         {
 #if DEBUG
             return Channel + "_debug";
 #else
             return Channel;
 #endif
+        }
+
+        public static string getCurrentChannel()
+        {
+            return Channel;
         }
 
         public static string GetFaction()
@@ -65,8 +70,8 @@ namespace Chernobyl_Relay_Chat
             try
             {
                 Language = (string)registry.GetValue("Language", null);
-                Channel = CRCChannelNames.ENGLISH_NORMAL;
-                //Channel = (string)registry.GetValue("Channel", null);
+                //Channel = CRCChannelNames.ENGLISH_NORMAL;
+                Channel = (string)registry.GetValue("Channel", null);
                 if (Language == null)
                 {
                     using (LanguagePrompt languagePrompt = new LanguagePrompt())
