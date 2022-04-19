@@ -14,7 +14,11 @@ namespace Chernobyl_Relay_Chat
 
         public static bool CheckFirstUpdate()
         {
-            UpdateChecker updateChecker = new UpdateChecker("TKGP", "Chernobyl-Relay-Chat");
+            UpdateChecker updateChecker = new UpdateChecker("Thom-Rum", "Chernobyl-Relay-Chat");
+            //Github updatechecker is broken with later versions of octokit.
+            //var client = new GitHubClient(new ProductHeaderValue("crc-updater"));
+            //var UpdateChecker = client.Repository.Release.GetAll("octokit", "octokit.net");
+            //var latest = UpdateChecker[0];
             UpdateType updateType;
             try
             {
@@ -50,7 +54,9 @@ namespace Chernobyl_Relay_Chat
 
         public static async Task<bool> CheckUpdate()
         {
-            UpdateChecker updateChecker = new UpdateChecker("TKGP", "Chernobyl-Relay-Chat");
+            UpdateChecker updateChecker = new UpdateChecker("Thom-Rum", "Chernobyl-Relay-Chat");
+            //throws error with later versions of Octokit
+            //Method not found: 'Octokit.IReleasesClient Octokit.GitHubClient.get_Release()
             UpdateType updateType;
             try
             {

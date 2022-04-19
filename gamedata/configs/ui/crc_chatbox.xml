@@ -3,28 +3,32 @@
 	<background x="0" y="0" width="1024" height="768" stretch="1">
 		<texture>ui\crc_log_background</texture>
 	</background>
-	
-	<button_channel x="5" y="5" width="104" height="28" stretch="1">
-		<texture>ui_inGame2_Mp_bigbuttone</texture>
-		<text font="letterica18" align="c"/>
-		<text_color>
-			<e r="200" g="200" b="200"/>
-		</text_color>
-	</button_channel>
-	
-	<edit_box x="10" y="705" width="1004" height="24">
-		<texture>ui_inGame2_edit_box_1</texture>
-		<text x="3" font="letterica18" vert_align="c"/>
+		
+	<edit_box x="20" y="718" width="984" height="30">
+		<texture>ui_linetext_e</texture>
+		<text x="10" font="letterica18" r="240" g="217" b="182"/>
 	</edit_box>
 	
-	<button_send x="837" y="734" width="86" height="24" stretch="1">
-		<texture>ui_inGame2_button</texture>
+	<button_send x="750" y="668" width="117" height="29">
+		<texture>ui_button_ordinary</texture>
 		<text font="letterica18" align="c">crc_send</text>
+		<text_color>
+			<e r="227" g="199" b="178"/>
+			<t r="180" g="153" b="155"/>
+			<d r="106" g=" 95" b=" 91"/>
+			<h r="  0" g="  0" b="  0"/>
+		</text_color>
 	</button_send>
 	
-	<button_close x="928" y="734" width="86" height="24" stretch="1">
-		<texture>ui_inGame2_button</texture>
+	<button_close x="887" y="668" width="117" height="29">
+		<texture>ui_button_ordinary</texture>
 		<text font="letterica18" align="c">crc_close</text>
+		<text_color>
+			<e r="227" g="199" b="178"/>
+			<t r="180" g="153" b="155"/>
+			<d r="106" g=" 95" b=" 91"/>
+			<h r="  0" g="  0" b="  0"/>
+		</text_color>
 	</button_close>
 	
 	<user x="0" y="20" width="1024" height="39">
