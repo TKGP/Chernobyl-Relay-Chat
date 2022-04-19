@@ -351,7 +351,7 @@
             this.comboBoxChannel.Items.AddRange(new object[] {
             "English",
             "English (Roleplay)",
-            "Русский",
+            "Русский"});
             this.comboBoxChannel.Location = new System.Drawing.Point(6, 59);
             this.comboBoxChannel.Name = "comboBoxChannel";
             this.comboBoxChannel.Size = new System.Drawing.Size(280, 21);
