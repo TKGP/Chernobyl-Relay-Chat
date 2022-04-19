@@ -1,7 +1,7 @@
---| Chernobyl Relay Chat
+--| Call of Chernobyl Relay Chat
 --| Version 0.8.1
 --| By Thom-Rum
---| https://github.com/Thom-Rum/Chernobyl-Relay-Chat
+--| https://github.com/Thom-Rum/Call-Of-Chernobyl-Relay-Chat/
 
 
 An integrated chat client for Call of Chernobyl 1.4.12 or later, with any and all addons.
@@ -9,7 +9,6 @@ An integrated chat client for Call of Chernobyl 1.4.12 or later, with any and al
 Bug reports and suggestions should be raised in the Github Repository under issues, or discussions.
 
 Original work was done by TKGP, and all credit and glory goes to them. Uplift to newer dotnet and nuget versions was done by Thom-Rum.
-
 
 
 
