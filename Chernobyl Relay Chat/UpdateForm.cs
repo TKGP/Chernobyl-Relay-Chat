@@ -25,5 +25,10 @@ namespace Chernobyl_Relay_Chat
         {
             return "<br/>\n";
         }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
     }
 }

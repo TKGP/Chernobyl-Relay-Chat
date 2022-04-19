@@ -333,6 +333,7 @@
             this.tabPageClient.TabIndex = 0;
             this.tabPageClient.Text = "Client";
             this.tabPageClient.UseVisualStyleBackColor = true;
+            this.tabPageClient.Click += new System.EventHandler(this.tabPageClient_Click);
             // 
             // labelChannel
             // 
@@ -370,6 +371,7 @@
             this.comboBoxLanguage.Name = "comboBoxLanguage";
             this.comboBoxLanguage.Size = new System.Drawing.Size(280, 21);
             this.comboBoxLanguage.TabIndex = 17;
+            this.comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this.comboBoxLanguage_SelectedIndexChanged);
             // 
             // labelLanguage
             // 

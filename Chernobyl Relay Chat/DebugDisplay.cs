@@ -25,5 +25,10 @@ namespace Chernobyl_Relay_Chat
                 textBoxRaw.ScrollToCaret();
             }));
         }
+
+        private void textBoxRaw_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

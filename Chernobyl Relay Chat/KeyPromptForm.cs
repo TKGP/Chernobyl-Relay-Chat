@@ -89,5 +89,10 @@ namespace Chernobyl_Relay_Chat
             [Keys.Up] = "UP",
             [Keys.Down] = "DOWN",
         };
+
+        private void labelHelp_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

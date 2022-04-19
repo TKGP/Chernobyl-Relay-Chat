@@ -53,6 +53,7 @@
             this.labelHelp.Text = "Press the desired key now to change your in-game chat button.\r\n\r\nModifiers such a" +
     "s Alt, Ctrl, or Shift are not supported.\r\n\r\n";
             this.labelHelp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelHelp.Click += new System.EventHandler(this.labelHelp_Click);
             // 
             // KeyPromptForm
             // 

@@ -43,6 +43,7 @@
             this.textBoxRaw.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxRaw.Size = new System.Drawing.Size(1169, 359);
             this.textBoxRaw.TabIndex = 0;
+            this.textBoxRaw.TextChanged += new System.EventHandler(this.textBoxRaw_TextChanged);
             // 
             // DebugDisplay
             // 
