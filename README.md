@@ -1,5 +1,7 @@
-# Chernobyl Relay Chat
+# Call of Chernobyl Relay Chat
 An IRC-based chat app for Call of Chernobyl. Features an independent client as well as in-game chat, automatic death messages, and compatibility with all other addons.
+Uplifted to a newer version of .NET Framework, as well as newer Nuget packages.
+All credit goes to TKGP.
 
 # Installation
 1. Install the [.NET framework](https://www.microsoft.com/net/download/framework) if you don't have it already  
@@ -12,6 +14,7 @@ Once playing, press Enter (by default) to bring up the chat interface and Enter 
 You may use text commands from the game or client by starting with a /. Use /commands to see all available commands.  
 
 # Credits
+Chernobyl Relay Chat: TKGP
 GitHub: Octokit  
 Max Hauser: semver  
 Mirco Bauer: SmartIrc4Net  
