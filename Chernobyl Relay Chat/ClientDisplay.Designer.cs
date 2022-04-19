@@ -48,6 +48,7 @@
             this.richTextBoxMessages.ReadOnly = true;
             this.richTextBoxMessages.TabStop = false;
             this.richTextBoxMessages.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBoxMessages_LinkClicked);
+            this.richTextBoxMessages.TextChanged += new System.EventHandler(this.richTextBoxMessages_TextChanged);
             // 
             // textBoxInput
             // 

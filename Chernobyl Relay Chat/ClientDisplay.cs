@@ -20,6 +20,7 @@ namespace Chernobyl_Relay_Chat
 
         private void ClientDisplay_Load(object sender, EventArgs e)
         {
+            //note original SoC font was graffiti1CTT
             mainFont = richTextBoxMessages.Font;
             boldFont = new Font(mainFont, FontStyle.Bold);
             timeFont = new Font("Courier New", mainFont.SizeInPoints, FontStyle.Regular);
@@ -169,6 +170,11 @@ namespace Chernobyl_Relay_Chat
                 richTextBoxMessages.Select(0, 0);
                 richTextBoxMessages.SelectionBackColor = Color.White;
             });
+        }
+
+        private void richTextBoxMessages_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         public void UpdateUsers(List<string> users)

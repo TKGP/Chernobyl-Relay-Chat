@@ -136,22 +136,22 @@ namespace Chernobyl_Relay_Chat
 
         private readonly Dictionary<string, int> channelToIndex = new Dictionary<string, int>()
         {
-            ["#crc_english"] = 0,
-            ["#crc_english_rp"] = 1,
-            ["#crc_english_shitposting"] = 2,
-            ["#crc_russian"] = 3,
-            ["#crc_russian_rp"] = 4,
-            ["#crc_tech_support"] = 5,
+            ["#cocrc_english"] = 0,
+            ["#cocrc_english_rp"] = 1,
+            //["#crc_english_shitposting"] = 2,
+            //["#crc_russian"] = 3,
+            //["#crc_russian_rp"] = 4,
+            //["#crc_tech_support"] = 5,
         };
 
         private readonly Dictionary<int, string> indexToChannel = new Dictionary<int, string>()
         {
-            [0] = "#crc_english",
-            [1] = "#crc_english_rp",
-            [2] = "#crc_english_shitposting",
-            [3] = "#crc_russian",
-            [4] = "#crc_russian_rp",
-            [5] = "#crc_tech_support",
+            [0] = "#cocrc_english",
+            [1] = "#cocrc_english_rp",
+            //[2] = "#crc_english_shitposting",
+            //[3] = "#crc_russian",
+            //[4] = "#crc_russian_rp",
+            //[5] = "#crc_tech_support",
         };
 
         private readonly Dictionary<string, int> factionToIndex = new Dictionary<string, int>()
@@ -179,5 +179,15 @@ namespace Chernobyl_Relay_Chat
             [7] = "actor_army",
             [8] = "actor_monolith",
         };
+
+        private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPageClient_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
