@@ -139,7 +139,7 @@ namespace Chernobyl_Relay_Chat
             ["#cocrc_english"] = 0,
             ["#cocrc_english_rp"] = 1,
             //["#crc_english_shitposting"] = 2,
-            //["#crc_russian"] = 3,
+            ["#cocrc_russian"] = 3,
             //["#crc_russian_rp"] = 4,
             //["#crc_tech_support"] = 5,
         };
@@ -148,6 +148,7 @@ namespace Chernobyl_Relay_Chat
         {
             [0] = "#cocrc_english",
             [1] = "#cocrc_english_rp",
+            [3] = "#cocrc_russian",
             //[2] = "#crc_english_shitposting",
             //[3] = "#crc_russian",
             //[4] = "#crc_russian_rp",
@@ -186,6 +187,11 @@ namespace Chernobyl_Relay_Chat
         }
 
         private void tabPageClient_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxFaction_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

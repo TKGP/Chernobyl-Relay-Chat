@@ -134,6 +134,7 @@
             this.comboBoxFaction.Name = "comboBoxFaction";
             this.comboBoxFaction.Size = new System.Drawing.Size(280, 21);
             this.comboBoxFaction.TabIndex = 6;
+            this.comboBoxFaction.SelectedIndexChanged += new System.EventHandler(this.comboBoxFaction_SelectedIndexChanged);
             // 
             // checkBoxDeathSend
             // 
@@ -351,7 +352,7 @@
             this.comboBoxChannel.Items.AddRange(new object[] {
             "English",
             "English (Roleplay)",
-            "Русский",
+            "Русский"});
             this.comboBoxChannel.Location = new System.Drawing.Point(6, 59);
             this.comboBoxChannel.Name = "comboBoxChannel";
             this.comboBoxChannel.Size = new System.Drawing.Size(280, 21);
