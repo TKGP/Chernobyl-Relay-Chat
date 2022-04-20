@@ -134,6 +134,7 @@
             this.comboBoxFaction.Name = "comboBoxFaction";
             this.comboBoxFaction.Size = new System.Drawing.Size(280, 21);
             this.comboBoxFaction.TabIndex = 6;
+            this.comboBoxFaction.SelectedIndexChanged += new System.EventHandler(this.comboBoxFaction_SelectedIndexChanged);
             // 
             // checkBoxDeathSend
             // 
