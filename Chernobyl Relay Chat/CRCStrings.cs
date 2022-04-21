@@ -24,7 +24,7 @@ namespace Chernobyl_Relay_Chat
         {
             ["#cocrc_english"] = "eng",
             ["#cocrc_english_rp"] = "eng",
-            //["#cocrc_russian"] = "rus",
+            ["#cocrc_russian"] = "rus",
         };
 
         public static void Load()
