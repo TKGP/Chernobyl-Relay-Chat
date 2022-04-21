@@ -14,7 +14,7 @@ namespace Chernobyl_Relay_Chat
 
         public static bool CheckFirstUpdate()
         {
-            UpdateChecker updateChecker = new UpdateChecker("Thom-Rum", "Chernobyl-Relay-Chat");
+            UpdateChecker updateChecker = new UpdateChecker("Thom-Rum", "Call-of-Chernobyl-Relay-Chat");
             //Github updatechecker is broken with later versions of octokit.
             //var client = new GitHubClient(new ProductHeaderValue("crc-updater"));
             //var UpdateChecker = client.Repository.Release.GetAll("octokit", "octokit.net");
