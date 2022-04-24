@@ -61,7 +61,7 @@
             this.buttonRussian.Name = "buttonRussian";
             this.buttonRussian.Size = new System.Drawing.Size(75, 23);
             this.buttonRussian.TabIndex = 3;
-            this.buttonRussian.Text = "Русский";
+            this.buttonRussian.Text = "славік"; 
             this.buttonRussian.UseVisualStyleBackColor = true;
             this.buttonRussian.Click += new System.EventHandler(this.buttonRussian_Click);
             // 
