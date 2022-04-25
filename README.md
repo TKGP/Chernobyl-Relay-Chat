@@ -4,8 +4,10 @@ Uplifted to a newer version of .NET Framework, as well as newer Nuget packages.
 All credit goes to TKGP.
 
 # Installation
-1. Install the [.NET framework](https://www.microsoft.com/net/download/framework) if you don't have it already  
-2. Copy the included gamedata folder to your game directory  
+1. Install the [.NET framework](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48) if you don't have it already  
+2. Download CoCRC-0.7.1.7z from the Releases section, and use 7zip or another program to unzip CoCRC-07.1.7z.
+3. Copy the files inside the folder into your Call of Chernobyl directory.
+
 
 # Usage
 Run Chernobyl Relay Chat.exe; the application must be running for in-game chat to work.  
