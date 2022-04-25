@@ -1,5 +1,5 @@
 # Call of Chernobyl Relay Chat (CoCRC)
-An IRC-based chat app for Call of Chernobyl. Features an independent client as well as in-game chat, automatic death messages, and compatibility with all other addons.
+An IRC-based chat app for Call of Chernobyl and Call of the Zone. Features an independent client as well as in-game chat, automatic death messages, and compatibility with all other addons.
 Uplifted to a newer version of .NET Framework, as well as newer Nuget packages.
 All credit goes to TKGP.
 
