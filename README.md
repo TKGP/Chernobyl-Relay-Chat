@@ -3,6 +3,8 @@ An IRC-based chat app for Call of Chernobyl and Call of the Zone. Features an in
 Uplifted to a newer version of .NET Framework, as well as newer Nuget packages.
 All credit goes to TKGP.
 
+![CRC-Screenshot](https://user-images.githubusercontent.com/95293308/166155945-211684c7-6486-4ee0-bc8e-ae56914b62d4.jpg)
+
 # Installation
 1. Install the [.NET framework](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48) if you don't have it already  
 2. Download CoCRC-0.7.1.7z from the Releases section, and use 7zip or another program to unzip CoCRC-07.1.7z.
