@@ -41,7 +41,7 @@ namespace Chernobyl_Relay_Chat
         {
             ["eng"] = "#cocrc_english",
            // ["eng"] = "#cocrc_english_rp",
-            ["rus"] = "#cocrc_russian",
+            ["rus"] = "#cocrc_slavik",
         };
 
         public static string ChannelProxy()
