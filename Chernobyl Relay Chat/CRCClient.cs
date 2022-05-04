@@ -243,7 +243,8 @@ namespace Chernobyl_Relay_Chat
             Users.Sort();
             CRCDisplay.UpdateUsers();
             CRCGame.UpdateUsers();
-            client.SendMessage(SendType.CtcpRequest, e.Data.Channel, "CLIENTINFO");
+            //Temporarily removed the CLIENTINFO command till I figure out what to do about it.
+            //client.SendMessage(SendType.CtcpRequest, e.Data.Channel, "CLIENTINFO");
         }
 
         private static void OnDisconnected(object sender, EventArgs e)

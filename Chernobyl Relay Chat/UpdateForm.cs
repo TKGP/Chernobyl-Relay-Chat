@@ -30,5 +30,10 @@ namespace Chernobyl_Relay_Chat
         {
 
         }
+
+        private void UpdateForm_Load(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
