@@ -161,5 +161,24 @@
 		<texture id="crc_icon_actor_zombied_16" x="1845" y="870" width="123" height="87"/>
 		<texture id="crc_icon_actor_zombied_17" x="1968" y="870" width="123" height="87"/>
 		<texture id="crc_icon_actor_zombied_18" x="2091" y="870" width="123" height="87"/>
+
+		<texture id="crc_icon_actor_renegade_1" x="0" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_2" x="123" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_3" x="246" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_4" x="369" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_5" x="492" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_6" x="615" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_7" x="738" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_8" x="861" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_9" x="984" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_10" x="1107" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_11" x="1230" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_12" x="1353" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_13" x="1476" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_14" x="1599" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_15" x="1722" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_16" x="1845" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_17" x="1968" y="87" width="123" height="87"/>
+		<texture id="crc_icon_actor_renegade_18" x="2091" y="87" width="123" height="87"/>
 	</file>
 </w>

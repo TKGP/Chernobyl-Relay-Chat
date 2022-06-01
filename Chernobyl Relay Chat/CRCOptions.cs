@@ -48,11 +48,11 @@ namespace Chernobyl_Relay_Chat
         {
             return Channel;
 
-            //#if DEBUG
-            //            return Channel + "_debug";
-            //#else
-            //            return Channel;
-            //#endif
+            #if DEBUG
+                        return Channel + "_debug";
+            #else
+                        return Channel;
+            #endif
         }
 
         public static string GetFaction()
@@ -93,7 +93,7 @@ namespace Chernobyl_Relay_Chat
                 Name = (string)registry.GetValue("Name", CRCStrings.RandomIrcName(GetFaction()));
                 SendDeath = Convert.ToBoolean((string)registry.GetValue("SendDeath", "True"));
                 ReceiveDeath = Convert.ToBoolean((string)registry.GetValue("ReceiveDeath", "True"));
-                DeathInterval = (int)registry.GetValue("DeathInterval", 60);
+                DeathInterval = (int)registry.GetValue("DeathInterval", 90);
                 ShowTimestamps = Convert.ToBoolean((string)registry.GetValue("ShowTimestamps", "True"));
 
                 NewsDuration = (int)registry.GetValue("NewsDuration", 10);

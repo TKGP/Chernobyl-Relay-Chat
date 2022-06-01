@@ -129,7 +129,8 @@
             "Loner",
             "Mercenary",
             "Military",
-            "Monolith"});
+            "Monolith",
+            "Renegade"});
             this.comboBoxFaction.Location = new System.Drawing.Point(6, 132);
             this.comboBoxFaction.Name = "comboBoxFaction";
             this.comboBoxFaction.Size = new System.Drawing.Size(280, 21);

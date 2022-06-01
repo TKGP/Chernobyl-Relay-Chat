@@ -48,5 +48,8 @@
 	</string>
 	<string id="crc_actor_zombied">
 		<text>Зомбированные</text>
+	<string id="crc_actor_renegade">
+		<text>ренегат</text>
 	</string>
 </string_table>
+

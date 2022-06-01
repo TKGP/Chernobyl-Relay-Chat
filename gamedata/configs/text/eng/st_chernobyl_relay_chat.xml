@@ -49,4 +49,7 @@
 	<string id="crc_actor_zombied">
 		<text>Zombie</text>
 	</string>
+	<string id="crc_actor_renegade">
+		<text>Renegade</text>
+	</string>
 </string_table>

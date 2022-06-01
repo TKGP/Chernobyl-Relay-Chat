@@ -163,6 +163,7 @@ namespace Chernobyl_Relay_Chat
             ["actor_killer"] = 6,
             ["actor_army"] = 7,
             ["actor_monolith"] = 8,
+            ["actor_renegade"] = 9,
         };
 
         private readonly Dictionary<int, string> indexToFaction = new Dictionary<int, string>()
@@ -176,6 +177,7 @@ namespace Chernobyl_Relay_Chat
             [6] = "actor_killer",
             [7] = "actor_army",
             [8] = "actor_monolith",
+            [9] = "actor_renegade",
         };
 
         private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)

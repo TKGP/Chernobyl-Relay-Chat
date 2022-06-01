@@ -81,6 +81,7 @@ namespace Chernobyl_Relay_Chat
             MergeLists(fNames, "actor_killer", "actor_stalker", "actor_bandit", "actor_ecolog");
             MergeLists(fNames, "actor_monolith", "actor_stalker", "actor_bandit", "actor_ecolog");
             MergeLists(fNames, "actor_zombied", "actor_stalker", "actor_bandit", "actor_ecolog", "actor_army");
+            MergeLists(fNames, "actor_renegade", "actor_stalker", "actor_bandit");
 
             MergeLists(sNames, "actor_csky", "actor_stalker", "actor_ecolog");
             MergeLists(sNames, "actor_dolg", "actor_stalker", "actor_army");
@@ -88,6 +89,7 @@ namespace Chernobyl_Relay_Chat
             MergeLists(sNames, "actor_killer", "actor_stalker", "actor_bandit", "actor_ecolog");
             MergeLists(sNames, "actor_monolith", "actor_stalker", "actor_bandit", "actor_ecolog");
             MergeLists(sNames, "actor_zombied", "actor_stalker", "actor_bandit", "actor_ecolog", "actor_army");
+            MergeLists(sNames, "actor_renegade", "actor_stalker", "actor_bandit");
         }
 
         public static string Localize(string id)
@@ -187,6 +189,7 @@ namespace Chernobyl_Relay_Chat
             "actor_army",
             "actor_monolith",
             "actor_zombied",
+            "actor_renegade",
         };
 
         private static Dictionary<string, List<string>> loadXmlList(string path)
