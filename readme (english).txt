@@ -1,12 +1,12 @@
 --| Call of Chernobyl Relay Chat
---| Version 0.8.1
+--| Version 0.9.0
 --| By Thom-Rum
 --| https://github.com/Thom-Rum/Call-Of-Chernobyl-Relay-Chat/
 
 
 An integrated chat client for Call of Chernobyl 1.4.12 or later, with any and all addons.
-.NET and Nuget packages have been uplifted, and Libera Chat IRC is now used.
-Bug reports and suggestions should be raised in the Github Repository under issues, or discussions.
+.NET and Nuget packages have been uplifted, and Gamesurge IRC is now used.
+Bug reports and suggestions should be raised in the Github Repository under issues.
 
 Original work was done by TKGP, and all credit and glory goes to them. Uplift to newer dotnet and nuget versions was done by Thom-Rum.
 
@@ -14,8 +14,9 @@ Original work was done by TKGP, and all credit and glory goes to them. Uplift to
 
 --| Installation
 
-1. Install the .NET framework if you don't have it already: https://www.microsoft.com/net/download/framework
-2. Copy the included gamedata folder to your game directory
+1. Install the [.NET framework](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48) if you don't have it already  
+2. Download CoCRC-(latest-version).7z from the Releases section, and use 7zip or another program to unzip CoCRC-(latest-version).7z.
+3. Copy the files inside the folder into your Call of Chernobyl directory.
 
 
 --| Usage
@@ -36,8 +37,8 @@ The package GithubUpdate is no longer supported by the owner, and relies on Octo
 
 --| Credits
 
-
 Chernobyl Relay Chat: TKGP
+CoCRC Testers and family: Tolik_Lucky_Bastard, ElekTrick, Pretov, Pogodemon, Manny
 GitHub: Octokit
 Max Hauser: semver
 Mirco Bauer: SmartIrc4Net

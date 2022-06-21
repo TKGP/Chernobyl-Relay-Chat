@@ -14,6 +14,7 @@
 		<AI_STL clone="AI_STL_S"/>
 		<SM_BLOOD>
 			<string>was sucked dry by a bloodsucker</string>
+			<string>got killed by a bloodsucker</string>
 		</SM_BLOOD>
 		<SM_BOARW>
 			<string>was gored by a boar</string>
@@ -42,6 +43,7 @@
 		</SM_DOG_S>
 		<SM_FLESH>
 			<string>somehow died to a pig</string>
+			<string>got killed by a flesh</string>
 		</SM_FLESH>
 		<SM_IZLOM>
 			<string>was smashed by an izlom</string>
@@ -83,6 +85,7 @@
 		<C_HLCP_S>
 			<string>was shot down by a helicopter</string>
 			<string>got shredded by a helicopter</string>
+			<string>got gunned down by a helicopter</string>
 		</C_HLCP_S>
 		<SCRPTCAR>
 			<string>became roadkill</string>
@@ -128,16 +131,21 @@
 		<STALKER>
 			<string>was gunned down by a loner</string>
 			<string>was shot by a loner</string>
+			<string>was shot by a Stalker</string>
 		</STALKER>
 		<BANDIT>
 			<string>was looted by a bandit</string>
 		</BANDIT>
 		<DOLG>
 			<string>was removed by a Dutyer</string>
+			<string>was gunned down by a Dutyer</string>
+			<string>was shot by a Dutyer</string>
 		</DOLG>
 		<FREEDOM>
 			<string>was blazed by a Freedomer</string>
 			<string>got smoked by a Freedomer</string>
+			<string>was gunned down by a Freedomer</string>
+			<string>was shot by a Freedomer</string>
 		</FREEDOM>
 		<ECOLOG>
 			<string>was blind-sided by a scientist</string>
@@ -147,11 +155,16 @@
 		</KILLER>
 		<MONOLITH>
 			<string>was purged by a cultist</string>
-			<string>got shot by some monolithian</string>
+			<string>got shot by some Monolithian</string>
+			<string>got gunned down by a fanatic</string>
 		</MONOLITH>
 		<ZOMBIED>
-			<string>was blown away by a zombified stalker</string>
+			<string>was blown away by a zombified Stalker</string>
 		</ZOMBIED>
+		<RENEGADE>
+			<string>was blown away by a renegade</string>
+			<string>was looted by a renegade</string>
+		</RENEGADE>
 		<ARENA_ENEMY>
 			<string>lost in the Arena</string>
 			<string>died in the Arena</string>

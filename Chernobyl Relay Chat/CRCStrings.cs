@@ -134,7 +134,8 @@ namespace Chernobyl_Relay_Chat
         }
 
         public static string ValidateFaction(string faction)
-        {
+        {   
+            //return validFactions.Contains(faction) ? faction : CRCOptions.GetFaction();
             return validFactions.Contains(faction) ? faction : "actor_stalker";
         }
 

@@ -12,7 +12,8 @@ namespace Chernobyl_Relay_Chat
         private static RegistryKey registry = Registry.CurrentUser.CreateSubKey(@"Software\Chernobyl Relay Chat Debug");
 #else
         private static RegistryKey registry = Registry.CurrentUser.CreateSubKey(@"Software\Chernobyl Relay Chat");
-#endif
+#endif  
+        //irc.gamesurge.net
         //irc.slashnet.org
         public const string Server = "irc.gamesurge.net";
         public const string InPath = @"\..\gamedata\configs\crc_input.txt";
