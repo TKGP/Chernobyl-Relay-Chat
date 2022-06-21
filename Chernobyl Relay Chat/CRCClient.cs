@@ -169,6 +169,7 @@ namespace Chernobyl_Relay_Chat
             {
                 fakeNick = null;
                 faction = "actor_stalker";
+                //faction = CRCOptions.GetFaction()
                 return message;
             }
         }
@@ -243,8 +244,8 @@ namespace Chernobyl_Relay_Chat
             Users.Sort();
             CRCDisplay.UpdateUsers();
             CRCGame.UpdateUsers();
-            //Temporarily removed the CLIENTINFO command till I figure out what to do about it.
-            //client.SendMessage(SendType.CtcpRequest, e.Data.Channel, "CLIENTINFO");
+            //In the past I temporarily removed the CLIENTINFO, as it was raising warnings in Liberachat.
+            client.SendMessage(SendType.CtcpRequest, e.Data.Channel, "CLIENTINFO");
         }
 
         private static void OnDisconnected(object sender, EventArgs e)
@@ -284,11 +285,12 @@ namespace Chernobyl_Relay_Chat
                 {
                     nick = e.Data.Nick;
                     faction = crcNicks.ContainsKey(nick) ? crcNicks[nick] : "actor_stalker";
+                    //faction = crcNicks.ContainsKey(nick) ? crcNicks[nick] : CRCOptions.GetFaction();
                 }
                 else if (CRCOptions.ReceiveDeath && (DateTime.Now - lastDeath).TotalSeconds > CRCOptions.DeathInterval)
                 {
                     lastDeath = DateTime.Now;
-                    nick = e.Data.Nick; //fakeNick;
+                    nick = fakeNick; //fakeNick;
                 }
                 else
                     return;
