@@ -35,3 +35,5 @@ Mirco Bauer: SmartIrc4Net
 nixx quality: GitHubUpdate  
   
 av661194, OWL, XMODER: Russian translation
+
+Join us on our Discord channel for announcements and support with CRC - https://discord.gg/deJxyjU3vB
