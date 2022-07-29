@@ -27,7 +27,7 @@ The package GithubUpdate is no longer supported by the owner, and relies on Octo
 
 # Credits
 Chernobyl Relay Chat: TKGP
-CoCRC Testers and family: Tolik_Lucky_Bastard, ElekTrick, Pretov, Pogodemon, Manny, TwistedLoner
+CoCRC Testers and family: Tolik_Lucky_Bastard, ElekTrick, Pretov, Pogodemon, Manny, TwistedLoner, Dancher743
 Translation by Zweelee
 GitHub: Octokit  
 Max Hauser: semver  
@@ -36,4 +36,4 @@ nixx quality: GitHubUpdate
   
 av661194, OWL, XMODER: Russian translation
 
-Join us on our Discord channel for announcements and support with CRC - https://discord.gg/deJxyjU3vB
+Join us on our Discord channel for announcements and support with CoCRC - https://discord.gg/deJxyjU3vB

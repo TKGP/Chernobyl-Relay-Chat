@@ -1,55 +1,56 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <string_table>
 	<string id="crc_info">
-		<text>Информация</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_error">
-		<text>Ошибка</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>	
 	<string id="crc_ccon">
-		<text>«О-Сознание»</text>
+		<text>пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_unknown">
-		<text>Неизвестный</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_send">
-		<text>Отправить</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_close">
-		<text>Закрыть</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	
 	<string id="crc_actor_bandit">
-		<text>«Бандиты»</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_actor_csky">
-		<text>«Чистое Небо»</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_actor_dolg">
-		<text>«Долг»</text>
+		<text>пїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_actor_ecolog">
-		<text>«Учёные»</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_actor_freedom">
-		<text>«Свобода»</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_actor_stalker">
-		<text>«Одиночки»</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_actor_killer">
-		<text>«Наёмники»</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_actor_army">
-		<text>«Военные»</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_actor_monolith">
-		<text>«Монолит»</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 	<string id="crc_actor_zombied">
-		<text>Зомбированные</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
+	</string>	
 	<string id="crc_actor_renegade">
-		<text>ренегат</text>
+		<text>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</text>
 	</string>
 </string_table>
 

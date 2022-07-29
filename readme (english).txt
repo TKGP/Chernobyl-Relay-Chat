@@ -1,5 +1,5 @@
 --| Call of Chernobyl Relay Chat
---| Version 0.9.0
+--| Version 0.9.1
 --| By Thom-Rum
 --| https://github.com/Thom-Rum/Call-Of-Chernobyl-Relay-Chat/
 
@@ -38,10 +38,12 @@ The package GithubUpdate is no longer supported by the owner, and relies on Octo
 --| Credits
 
 Chernobyl Relay Chat: TKGP
-CoCRC Testers and family: Tolik_Lucky_Bastard, ElekTrick, Pretov, Pogodemon, Manny
+CoCRC Testers and family: Tolik_Lucky_Bastard, ElekTrick, Pretov, Pogodemon, Manny, TwistedLoner, Dancher743
 GitHub: Octokit
 Max Hauser: semver
 Mirco Bauer: SmartIrc4Net
 nixx quality: GitHubUpdate
 
 av661194, OWL, XMODER: Russian translation
+
+Join us on our Discord channel for announcements and support with CoCRC - https://discord.gg/deJxyjU3vB
